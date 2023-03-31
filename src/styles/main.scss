@@ -1,0 +1,46 @@
+html {
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &.dark {
+    background-color: #18181c;
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+
+  &.color-weak {
+    filter: invert(80%);
+  }
+
+  &.gray-mode {
+    filter: grayscale(100%);
+  }
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset !important;
+}
+
+:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+.n-button {
+  background-color: var(--n-color);
+}
+
+textarea {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+}
+

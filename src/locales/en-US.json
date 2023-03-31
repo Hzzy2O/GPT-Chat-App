@@ -1,0 +1,106 @@
+{
+  "siderbar": {
+    "title": "Chat History",
+    "newchat": "New Chat",
+    "delConfirm": "Are you sure to delete this chat?",
+    "clear": "Clear All",
+    "clearConfirm": "Are you sure to clear all chat history?",
+    "total": "Total",
+    "used": "Used",
+    "available": "Available"
+  },
+  "config": {
+    "title": "config",
+    "setApiKey": "set api key",
+    "set_success": "setup successful",
+    "openai_key_placeholder": "please enter openai api key",
+    "bing_key_placeholder": "please paste bing cookie json",
+    "invalid_input": "invalid input",
+    "styleChoose": "prompt style",
+    "modelChoose": "choose model",
+    "baseUrl": "baseURL",
+    "baseURL": "baseURL",
+    "promptStyle": {
+      "balanced": "balanced",
+      "creative": "creative",
+      "precise": "precise"
+    },
+    "sessionParameter": "session parameter",
+    "continuous": "continuous dialogue",
+    "temperature": {
+      "title": "temperature",
+      "desc": "The higher the value (such as 0.8), the more creative the generated reply, and the lower the value (such as 0.2) is more conservative."
+    },
+    "presence_penalty": {
+      "title": "presence_penalty",
+      "desc": "The higher the value, the more likely the generated reply will not repeat the same words."
+    },
+    "frequency_penalty": {
+      "title": "frequency_penalty",
+      "desc": "The higher the value, the more likely the generated reply will not repeat the same topic."
+    },
+    "imageParameter": "image parameter",
+    "size": "size",
+    "img_number": {
+      "title": "image number",
+      "desc": "The number of images generated"
+    }
+  },
+  "main": {
+    "chat": {
+      "link": "references link"
+    }
+  },
+  "footer": {
+    "placeholder": "Enter message...",
+    "wait": "Please wait a moment",
+    "prompt": {
+      "title": "prompt",
+      "confirm": "confirm prompt",
+      "choose": "choose a prompt",
+      "revoke": "revoke change",
+      "duplicate": "duplicate prompt",
+      "backToChoose": "back to choose",
+      "save": "save prompt",
+      "create": "create a new prompt",
+      "titlePlaceholder": "enter prompt title",
+      "contentPlaceholder": "enter prompt content"
+    },
+    "recorder": {
+      "start": "start recording",
+      "noSupport": "Your browser does not support voice recording",
+      "recording": "Recording...",
+      "err": "cannot record voice"
+    },
+    "mode": {
+      "chat": "chat",
+      "img": "generate img",
+      "editImg": "edit img"
+    }
+  },
+  "net": {
+    "error": {
+      "401": "401 unauthorized",
+      "403": "403 forbidden",
+      "404": "404 not found",
+      "500": "500 server error",
+      "timeout": "request timeout",
+      "abort": "request aborted",
+      "parsererror": "parse error",
+      "unknown": "unknown error",
+      "noConnectWs": "cannot connect to websocket server"
+    }
+  },
+  "common": {
+    "all": "all",
+    "zh": "chinese",
+    "en": "english",
+    "delete": "delete",
+    "deleteConfirm": "Are you sure to delete?",
+    "confirm": "confirm",
+    "cancel": "cancel",
+    "send": "send",
+    "speechToTxt": "speech to text",
+    "onlyEN": "only english"
+  }
+}

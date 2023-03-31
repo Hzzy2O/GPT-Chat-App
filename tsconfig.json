@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ES2020",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "jsx": "preserve",
+    "strictFunctionTypes": false,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": false,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "types": ["vite/client", "vite-plugin-pages/client", "naive-ui/volar", "unplugin-fonts/client"],
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    }
+  },
+  "include": [
+    "tests/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "vite.config.ts"
+  ],
+  "exclude": ["dist", "node_modules"]
+}

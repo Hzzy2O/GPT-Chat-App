@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
+    <title>chat web</title>
+  </head>
+  <body class="font-sans dark:text-white">
+    <div id="app" h-100dvh>
+      <style>
+        .loadingBox {
+          display: grid;
+          place-items: center;
+          height: 100vh;
+        }
+
+        .fulfilling-square-spinner,
+        .fulfilling-square-spinner * {
+          box-sizing: border-box;
+        }
+
+        .fulfilling-square-spinner {
+          height: 150px;
+          width: 150px;
+          position: relative;
+          border: 4px solid #ff1d5e;
+          animation: fulfilling-square-spinner-animation 4s infinite ease;
+        }
+
+        .fulfilling-square-spinner .spinner-inner {
+          vertical-align: top;
+          display: inline-block;
+          background-color: #ff1d5e;
+          width: 100%;
+          opacity: 1;
+          animation: fulfilling-square-spinner-inner-animation 4s infinite ease-in;
+        }
+
+        @keyframes fulfilling-square-spinner-animation {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          25% {
+            transform: rotate(180deg);
+          }
+
+          50% {
+            transform: rotate(180deg);
+          }
+
+          75% {
+            transform: rotate(360deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes fulfilling-square-spinner-inner-animation {
+          0% {
+            height: 0%;
+          }
+
+          25% {
+            height: 0%;
+          }
+
+          50% {
+            height: 100%;
+          }
+
+          75% {
+            height: 100%;
+          }
+
+          100% {
+            height: 0%;
+          }
+        }
+      </style>
+      <div class="loadingBox">
+        <div class="fulfilling-square-spinner">
+          <div class="spinner-inner"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

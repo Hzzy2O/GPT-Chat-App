@@ -1,0 +1,6 @@
+
+fastapi
+uvicorn
+asyncio
+python-multipart
+EdgeGPT >= 0.1.13.1

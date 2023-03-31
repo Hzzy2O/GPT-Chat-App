@@ -1,0 +1,77 @@
+{
+  "name": "prompts",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "vue-tsc --noEmit",
+    "preview": "vite preview",
+    "test": "vitest",
+    "up": "taze major -I"
+  },
+  "dependencies": {
+    "@vueuse/core": "9.13.0",
+    "@vueuse/integrations": "^9.13.0",
+    "audio-recorder-polyfill": "^0.4.1",
+    "crypto-js": "^4.1.1",
+    "detect-browser": "^5.3.0",
+    "eventsource-parser": "^0.1.0",
+    "gpt3-tokenizer": "^1.1.5",
+    "highlight.js": "^11.7.0",
+    "iconify-icon": "^1.0.7",
+    "idb": "^7.1.1",
+    "lodash-es": "^4.17.21",
+    "markdown-it": "^13.0.1",
+    "naive-ui": "2.34.3",
+    "pinia": "^2.0.33",
+    "qs": "^6.11.1",
+    "vue": "3.2.47",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "4.1.6"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.36.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/lodash-es": "^4.17.7",
+    "@types/markdown-it": "^12.2.3",
+    "@types/node": "18.7.23",
+    "@types/qs": "^6.9.7",
+    "@unocss/reset": "^0.45.25",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "eslint": "^8.36.0",
+    "ora": "^6.1.2",
+    "pnpm": "^7.12.2",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "sass": "^1.55.0",
+    "taze": "^0.8.2",
+    "terser": "^5.15.1",
+    "typescript": "^4.8.3",
+    "unocss": "^0.45.25",
+    "unocss-preset-scrollbar": "^0.2.1",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-vue-components": "^0.22.7",
+    "vite": "^4.1.4",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-pages": "^0.26.0",
+    "vite-plugin-pwa": "^0.14.4",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vue-tsc": "^0.40.13"
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "eslintConfig": {
+    "extends": "@antfu"
+  }
+}

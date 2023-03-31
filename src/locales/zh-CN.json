@@ -1,0 +1,109 @@
+{
+  "siderbar": {
+    "title": "聊天记录",
+    "newchat": "新建会话",
+    "delConfirm": "确定删除此会话?",
+    "clear": "清空记录",
+    "clearConfirm": "确定删除所有会话?",
+    "total": "总额",
+    "used": "已用",
+    "available": "可用"
+  },
+  "config": {
+    "title": "配置",
+    "setApiKey": "设置API密钥",
+    "set_success": "设置成功",
+    "openai_key_placeholder": "请输入openai密钥",
+    "bing_key_placeholder": "请输入bing密钥",
+    "invalid_input": "无效输入",
+    "styleChoose": "对话风格",
+    "modelChoose": "模型选择",
+    "baseUrl": "服务器地址",
+    "baseURL": "服务器地址",
+    "promptStyle": {
+      "balanced": "平衡",
+      "creative": "灵性",
+      "precise": "精确"
+    },
+    "sessionParameter": "会话参数",
+    "continuous": "连续对话",
+    "temperature": {
+      "title": "温度",
+      "desc": "该值越高如（0.8）则导致生成的回复越有创造性，越低的值（如0.2）则越保守。"
+    },
+    "presence_penalty": {
+      "title": "存在惩罚",
+      "desc": "该值决定重复单词出现的频率,越高则越不会重复。"
+    },
+    "frequency_penalty": {
+      "title": "频率惩罚",
+      "desc": "该值决定重复话题出现的频率,越高则越不会重复。"
+    },
+    "imageParameter": "图像参数",
+    "size": "图像尺寸",
+    "img_number": {
+      "title": "图像数量",
+      "desc": "生成的图像数量"
+    }
+  },
+  "main": {
+    "chat": {
+      "link": "参考链接"
+    }
+  },
+  "footer": {
+    "placeholder": "请输入...",
+    "wait": "请稍等片刻",
+    "prompt": {
+      "title": "设定",
+      "confirm": "确认选择该设定",
+      "choose": "选择一个设定",
+      "revoke": "撤销更改",
+      "duplicate": "设定重复",
+      "backToChoose": "返回选择",
+      "save": "保存设定",
+      "create": "创建一个新的设定",
+      "titlePlaceholder": "请输入标题",
+      "contentPlaceholder": "请输入内容"
+    },
+    "recorder": {
+      "start": "开始录音",
+      "noSupport": "您的浏览器不支持录音功能",
+      "recording": "正在录音...",
+      "err": "无法获取音频流"
+    },
+    "mode": {
+      "chat": "聊天",
+      "img": "生成图片",
+      "editImg": "编辑图片"
+    }
+  },
+  "icon": {
+    "managePrompt": "管理对话"
+  },
+  "net": {
+    "error": {
+      "401": "401 未授权",
+      "403": "403 禁止访问",
+      "404": "404 未找到",
+      "500": "500 服务器错误",
+      "timeout": "请求超时",
+      "abort": "请求被终止",
+      "parsererror": "解析错误",
+      "unknown": "未知错误",
+      "noConnectWs": "无法连接到websocket服务器"
+    }
+  },
+  "common": {
+    "all": "全部",
+    "zh": "中文",
+    "en": "英文",
+    "delete": "删除",
+    "deleteConfirm": "确定删除?",
+    "confirm": "确定",
+    "cancel": "取消",
+    "send": "发送",
+    "speechToTxt": "语音转文字",
+    "onlyEN": "只支持英文"
+  }
+}
