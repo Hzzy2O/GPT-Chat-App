@@ -5,6 +5,8 @@
   <a href="./README.en.md">English</a>
 </div>
 
+[online demo](https://gpt-chat-app-six.vercel.app)
+
 GPT-Chat-App 是一个基于 TypeScript、Vite、Vue 3 和 UnoCSS 构建的前端项目，允许用户与 OpenAI 和 Bing 的 GPT 模型进行交互。
 
 ## ✨ 功能介绍
@@ -28,7 +30,7 @@ GPT-Chat-App 是一个基于 TypeScript、Vite、Vue 3 和 UnoCSS 构建的前�
 ### 克隆项目
 
 ```bash
-git clone https://github.com/yourusername/GPT-Chat-App.git
+git clone https://github.com/Hzzy2O/GPT-Chat-App.git
 ```
 
 ### 安装依赖

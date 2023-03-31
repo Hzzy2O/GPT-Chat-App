@@ -5,6 +5,8 @@
   <a href="./README.en.md">English</a>
 </div>
 
+[online demo](https://gpt-chat-app-six.vercel.app)
+
 GPT-Chat-App is a frontend project built with TypeScript, Vite, Vue 3, and UnoCSS, allowing users to interact with OpenAI and Bing's GPT models.
 
 ## ✨ Features
@@ -28,7 +30,7 @@ GPT-Chat-App is a frontend project built with TypeScript, Vite, Vue 3, and UnoCS
 ### Clone the project
 
 ```bash
-git clone https://github.com/yourusername/GPT-Chat-App.git
+git clone https://github.com/Hzzy2O/GPT-Chat-App.git
 ```
 
 ### Install dependencies
