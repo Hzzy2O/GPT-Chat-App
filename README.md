@@ -59,6 +59,11 @@ pnpm run build
 cd ./services
 ```
 
+### deta space:
+```
+https://deta.space/discovery/r/7n9rpsefbekq3wse
+```
+
 #### 安装
 ```bash
 pip install -r requirements.txt

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: XiaoXinYo
 
+
 from typing import Union, Any, AsyncGenerator
 from fastapi import FastAPI, Request, WebSocket, Response
 from fastapi.responses import StreamingResponse
@@ -15,12 +16,9 @@ import time
 import json
 import re
 
-HOST = '0.0.0.0'
-PORT = 4000
-COOKIE_FILE_PATH = './cookie.json'
+app = FastAPI()
 
-APP = FastAPI()
-APP.add_middleware(
+app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
     allow_credentials=True,
@@ -161,19 +159,19 @@ async def checkToken() -> None:
                 del CHATBOT[token]
         await asyncio.sleep(60)
 
-@APP.on_event('startup')
+@app.on_event('startup')
 async def startup() -> None:
     asyncio.get_event_loop().create_task(checkToken())
 
-@APP.exception_handler(404)
+@app.exception_handler(404)
 def error404(request: Request, exc: Exception) -> Response:
     return GenerateResponse().error(404, '未找到文件')
 
-@APP.exception_handler(500)
+@app.exception_handler(500)
 def error500(request: Request, exc: Exception) -> Response:
     return GenerateResponse().error(500, '未知错误')
 
-@APP.route('/create_image', methods=['POST'])
+@app.post('/create_image')
 async def create_image(request: Request) -> Response:
     tk = getToken(request)
 
@@ -208,9 +206,13 @@ async def create_image(request: Request) -> Response:
     return GenerateResponse().success(res)
  
 
-@APP.route('/api_stream', methods=['GET', 'POST'])
+@app.post('/api_stream')
 async def apiStream(request: Request) -> Response:
-    cookies = json.loads(getToken(request))
+    headers_json = getToken(request)
+    if not headers_json:
+        return GenerateResponse().error(110, 'token不能为空')
+    
+    cookies = json.loads(headers_json)
     parameters = await getrequestParameter(request)
     token = parameters.get('token')
     style = parameters.get('style')
@@ -260,6 +262,12 @@ async def apiStream(request: Request) -> Response:
     
     return StreamingResponse(generator(), media_type='text/plain')
 
+
+@app.get("/")
+def read_root():
+    return {"Hello": "Space!"}
+
+
 if __name__ == '__main__':
-    uvicorn.run(APP, host=HOST, port=PORT)
+    uvicorn.run(app)
 

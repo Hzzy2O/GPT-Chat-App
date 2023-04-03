@@ -58,6 +58,10 @@ After the build is complete, the dist folder will contain the files required for
 ```bash
 cd ./services
 ```
+### deta space 
+```
+https://deta.space/discovery/r/7n9rpsefbekq3wse
+```
 
 #### install
 ```bash
