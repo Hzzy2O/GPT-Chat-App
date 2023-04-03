@@ -32,6 +32,7 @@ function newChat() {
 function clearAll() {
   const history = bot.value.history
   history.clear()
+  history.refresh()
 }
 
 // 删除单条历史记录
@@ -45,8 +46,8 @@ function delHistory(id: string) {
   <div overflow-hidden relative animate-fade-in>
     <div px-10px mt-10px w-full cursor-pointer fic>
       <div p="x-10px y-4px" w-full rd-12px fic>
-        <NInput v-model:value="filterKey" clearable placeholder="" size="small" />
-        <NButton type="primary" ml-8px p-8px fc size="small">
+        <NInput v-model:value="filterKey" rd-8px :autofocus="false" clearable placeholder="" size="small" />
+        <NButton rd-8px type="primary" ml-8px p-8px fc size="small">
           <Icon name="ion:chatbox-outline" :title="t('siderbar.newchat')" :size="18" @click="newChat" />
         </NButton>
       </div>

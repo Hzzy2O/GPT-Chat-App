@@ -21,6 +21,7 @@ const drawWidth = computed(() => {
     lg-display-none
     :on-update:show="closeDrawer"
     :show="showDrawerSidebar"
+    :auto-focus="false"
     :width="drawWidth"
     placement="left"
     content-style="padding: 0;"

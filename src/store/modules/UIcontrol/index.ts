@@ -20,7 +20,7 @@ export const useUIStore = defineStore('UI-store', {
   state: (): UIState => ({
     isGenerating: false,
     showDrawerSidebar: false,
-    fixedRight: ls.get('fixedRight') || false,
+    fixedRight: ls.get('fixedRight') || true,
     showRightDrawer: false,
     showTokenModal: false,
   }),

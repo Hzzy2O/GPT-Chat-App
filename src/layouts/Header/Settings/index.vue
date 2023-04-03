@@ -4,10 +4,10 @@ import MainForm from './MainForm.vue'
 
 <template>
   <n-popover
-    w-255px
+    w-285px
     placement="bottom"
     transition-width
-    style="padding-right: 0"
+    style="padding: 0"
     trigger="click"
   >
     <template #trigger>

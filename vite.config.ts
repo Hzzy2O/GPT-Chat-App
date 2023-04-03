@@ -12,6 +12,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
+// import basicssl from "@vitejs/plugin-basic-ssl"
 
 const pathResolve = (dir: string) => resolve(process.cwd(), '.', dir)
 

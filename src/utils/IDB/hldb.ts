@@ -29,7 +29,9 @@ export class HistoryListDB<T extends Bot> extends BaseDB<Names.historyList> {
 
   async getAll() {
     const data = await this.query({ name: this._name })
-    return data![0].list
+    if (!data || !data.length)
+      return []
+    return data[0].list || []
   }
 
   async getItem(id: string) {
