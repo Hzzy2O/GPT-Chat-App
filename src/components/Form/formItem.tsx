@@ -38,7 +38,7 @@ export default defineComponent({
             const val = ref(value)
             return (
               <NInputGroup>
-                <NInput value={val} onUpdateValue={v => val.value = v} onBlur={() => {
+                <NInput rd-10px value={val.value} onUpdateValue={v => val.value = v} onBlur={() => {
                   handleValueChange(val.value)
                 }} rule="itemrules" />
               </NInputGroup>

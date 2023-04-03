@@ -315,7 +315,7 @@ defineExpose({
     <template #footer>
       <div fic justify-end h-62px>
         <template v-if="input">
-          <NButton v-if="!createMode" round strong secondary type="success" @click="confirm">
+          <NButton v-if="!createMode" round strong secondary type="primary" @click="confirm">
             {{
               t('footer.prompt.confirm')
             }}
@@ -325,7 +325,7 @@ defineExpose({
             round
             strong
             secondary
-            type="success"
+            type="primary"
             @click="save"
           >
             {{ t('footer.prompt.save') }}

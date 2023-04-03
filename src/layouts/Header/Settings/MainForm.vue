@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import Balance from './Balance.vue'
+// import Balance from './Balance.vue'
 import { useUIStore } from '@/store'
 
 const UIStore = useUIStore()
 const { fixedRight } = storeToRefs(UIStore)
 const { setFixedRight, setShowRightDrawer, setShowTokenModal } = UIStore
 
-const scrollCls = computed(() => (fixedRight.value ? 'max-h-96dvh px-20px' : 'max-h-60vh pr-15px'))
+const scrollCls = computed(() => (fixedRight.value ? 'max-h-96dvh ' : 'max-h-60vh pr-15px'))
 
 const config = computed(() => bot.value.config)
 const settingSchema = computed(() => bot.value.settingSchema)
 
-const hasToken = computed(() => bot.value.apiKey)
+// const hasToken = computed(() => bot.value.apiKey)
 function handleChange(key: any, val: string) {
   unref(bot).setConfigByKey(key, val)
 }
@@ -25,12 +25,12 @@ function handleChange(key: any, val: string) {
           {{ t('config.title') }}
         </span>
         <span fc>
-          <Icon title="api-token" ml-6px name="lucide:key" :size="20" @click="setShowTokenModal(true)" />
+          <Icon title="api-token" ml-6px name="lucide:key" :size="18" @click="setShowTokenModal(true)" />
         </span>
       </div>
       <div fc>
         <Icon
-          :size="25"
+          :size="22"
           cursor-pointer
           :name="fixedRight ? 'tabler:arrows-diagonal-minimize' : 'tabler:arrows-diagonal-2'"
           @click="setFixedRight(!fixedRight)"
@@ -41,12 +41,13 @@ function handleChange(key: any, val: string) {
           ml-20px
           cursor-pointer
           name="line-md:menu-fold-right"
-          :size="35"
+          :size="25"
           @click="setShowRightDrawer(false)"
         />
       </div>
     </div>
-    <Balance v-if="hasToken" />
+    <!-- TODO -->
+    <!-- <Balance v-if="hasToken" /> -->
     <Form :form-model="config" :form-items="settingSchema" @handle-change="handleChange" />
   </NScrollbar>
 </template>

@@ -27,12 +27,12 @@ const drawWidth = computed(() => {
   >
     <NDrawerContent body-content-style="padding: 0" :native-scrollbar="false">
       <template #header>
-        <div w-full fic justify-between>
+        <div w-full fic my-2px justify-between>
           <h2>{{ t('siderbar.title') }}</h2>
           <Icon
             cursor-pointer
             name="line-md:menu-to-close-alt-transition"
-            :size="35"
+            :size="22"
             @click="closeDrawer"
           />
         </div>
@@ -42,6 +42,7 @@ const drawWidth = computed(() => {
   </NDrawer>
   <NLayoutSider
     :show-collapsed-content="false"
+    bg2
     display-none
     lg-display-block
     collapse-mode="transform"
@@ -50,7 +51,7 @@ const drawWidth = computed(() => {
     show-trigger="bar"
     bordered
   >
-    <div text-20px pt-20px px-18px pb-10px>
+    <div text-18px pt-20px px-18px pb-10px>
       {{ t('siderbar.title') }}
     </div>
     <HistoryList />

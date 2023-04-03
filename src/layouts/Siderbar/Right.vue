@@ -23,13 +23,14 @@ const drawWidth = computed(() => {
     :show="showRightDrawer"
     :width="drawWidth"
     placement="right"
+    content-style="padding: 0;"
   >
-    <NDrawerContent pt-15px :native-scrollbar="false">
+    <NDrawerContent :native-scrollbar="false">
       <SettingsForm />
     </NDrawerContent>
   </NDrawer>
   <NLayoutSider pt-20px display-none lg-display-block :width="320" b-l="1px solid stone-1 dark:dark-1">
-    <SettingsForm />
+    <SettingsForm px-20px />
   </NLayoutSider>
 </template>
 

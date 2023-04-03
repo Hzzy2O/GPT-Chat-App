@@ -46,4 +46,13 @@ const formModel = props.formModel
   .n-form-item-feedback-wrapper {
     display: none;
   }
+  .n-button {
+    --n-button-border-radius: 10px;
+  }
+
+  .n-base-selection,
+  .n-base-select-menu,
+  .n-base-select-option {
+    border-radius: 10px !important;
+  }
 </style>

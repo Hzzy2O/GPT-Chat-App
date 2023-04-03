@@ -34,5 +34,6 @@ class CopyablePre extends HTMLElement {
 }
 
 export function registerCopyable() {
-  customElements.define('copyable-pre', CopyablePre)
+  if (!customElements.get('copyable-pre'))
+    customElements.define('copyable-pre', CopyablePre)
 }

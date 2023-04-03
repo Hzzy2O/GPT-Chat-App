@@ -13,6 +13,7 @@ interface UIState {
   showRightDrawer: boolean
 
   showTokenModal: boolean
+
 }
 
 export const useUIStore = defineStore('UI-store', {

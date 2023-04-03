@@ -9,8 +9,9 @@ const theme = computed(() => (isDark.value ? darkTheme : lightTheme))
 
 const themeOverrides = {
   common: {
-    // primaryColor: '#BD0800',
-    // primaryColorHover: '#BD0800',
+    // primaryColor: '#cfb0ef',
+    // primaryColorHover: '#d1bdf4',
+    // primaryColorPressed: '#cda0e8',
   },
 }
 // const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })

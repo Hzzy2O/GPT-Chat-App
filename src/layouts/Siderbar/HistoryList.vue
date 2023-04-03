@@ -8,6 +8,13 @@ const recordStore = useRecordStore()
 const { setSessionId, setFlowList } = recordStore
 const { historyList, sessionId } = storeToRefs(recordStore)
 
+const filterKey = ref('')
+
+const currentList = computed(() => historyList.value.filter(item =>
+  item.title.includes(filterKey.value),
+),
+)
+
 // 跳转到历史会话
 function changeSession({ id, flow }: HistoryBlock) {
   setSessionId(id)
@@ -35,15 +42,19 @@ function delHistory(id: string) {
 </script>
 
 <template>
-  <div overflow-hidden relative>
-    <div p="x-20px y-12px" w-full cursor-pointer fic @click="newChat">
-      <Icon name="mdi:card-plus-outline" :size="24" mr-8px />
-      {{ t('siderbar.newchat') }}
+  <div overflow-hidden relative animate-fade-in>
+    <div px-10px mt-10px w-full cursor-pointer fic>
+      <div p="x-10px y-4px" w-full rd-12px fic>
+        <NInput v-model:value="filterKey" clearable placeholder="" size="small" />
+        <NButton type="primary" ml-8px p-8px fc size="small">
+          <Icon name="ion:chatbox-outline" :title="t('siderbar.newchat')" :size="18" @click="newChat" />
+        </NButton>
+      </div>
     </div>
-    <NScrollbar ref="scrollEl" h="[calc(100dvh-280px)]" trigger="none">
-      <NList bg-transparent hoverable :show-divider="false">
-        <NListItem v-for="history in historyList" :key="history.id" relative>
-          <div lg-pr-20px text-16px fic justify-between w-full @click="changeSession(history)">
+    <NScrollbar ref="scrollEl" h="[calc(100dvh-250px)]" trigger="none">
+      <NList bg-transparent hoverable mt-10px :show-divider="false">
+        <NListItem v-for="history in currentList" :key="history.id" relative mt-8px>
+          <div text-16px fic justify-between w-full @click="changeSession(history)">
             <div overflow-hidden fic w-full>
               <Icon name="ci:chat-dots" :size="18" />
               <span cursor-pointer mx-8px truncate>{{ history.title }}</span>
@@ -66,7 +77,7 @@ function delHistory(id: string) {
         </NListItem>
       </NList>
     </NScrollbar>
-    <NDivider class="my-8px!" />
+    <!-- <NDivider class="my-8px!" /> -->
     <ActionArea>
       <n-popconfirm v-if="historyList.length" @positive-click="clearAll">
         <template #trigger>

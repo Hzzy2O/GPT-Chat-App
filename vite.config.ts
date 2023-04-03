@@ -1,5 +1,6 @@
 import { resolve } from 'node:path'
 import type { ConfigEnv, UserConfig } from 'vite'
+import { loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
@@ -11,12 +12,13 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
-import { visualizer } from 'rollup-plugin-visualizer'
 
 const pathResolve = (dir: string) => resolve(process.cwd(), '.', dir)
 
-export default ({ command }: ConfigEnv): UserConfig => {
+export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd()
+
+  loadEnv(mode, root)
 
   return {
     root,

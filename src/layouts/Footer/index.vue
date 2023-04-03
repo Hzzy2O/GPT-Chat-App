@@ -42,7 +42,7 @@ async function patchEvent() {
 </script>
 
 <template>
-  <NLayoutFooter shadow="[0px_-5px_5pxblack]" bg1 w-full h-165px pb-50px pt-25px>
+  <NLayoutFooter shadow="[0px_-5px_5pxblack]" bg2 w-full h-135px pb-50px pt-15px>
     <div animate-bounce-in h-80px w-full flex justify-center>
       <div relative animate-head-shake w="80%">
         <InputBox ref="inputRef" @send="patchEvent" />

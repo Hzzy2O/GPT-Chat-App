@@ -25,7 +25,7 @@ watch(
 </script>
 
 <template>
-  <NLayoutContent h="[calc(100dvh-245px)]" overflow-hidden>
+  <NLayoutContent h="[calc(100dvh-195px)]" bg1 overflow-hidden>
     <NScrollbar ref="scrollEl" trigger="none">
       <NList bg-transparent :show-divider="false">
         <NListItem v-for="flow in flowList" :key="flow.id">

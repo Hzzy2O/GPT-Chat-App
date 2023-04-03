@@ -25,7 +25,7 @@
             cursor-pointer
             color-orange-4
             dark:color-amber-3
-            size={39}
+            size={25}
             onClick={(e: Event) => {
               toggleDark()
               e.stopPropagation()
@@ -45,12 +45,13 @@
             <Icon
               name="line-md:menu-fold-left"
               lg-display-none
+              size={22}
               onClick={() => setShowRightDrawer(true)}
             />
               )
             : (
             <Settings>
-              <Icon size={35} name="line-md:edit" />
+              <Icon size={25} name="line-md:edit" />
             </Settings>
               )
         }
@@ -70,7 +71,7 @@
               scrollable
             >
               <div text-18px fc cursor-pointer>
-                <Icon size={30} name={iconName} />
+                <Icon size={25} name={iconName} />
               </div>
             </NPopselect>
           )
@@ -83,7 +84,7 @@
           const setValue = () => {
             setLocale(locale.value === 'zh-CN' ? 'en-US' : 'zh-CN')
           }
-          return <Icon size={32} name={icon} onClick={() => setValue()} />
+          return <Icon size={22} name={icon} onClick={() => setValue()} />
         }
 
         const rightItems = [LanguageButton, DarkToggle, SettingBtn]
@@ -96,6 +97,7 @@
           return (
             <Icon
               lg-display-none
+              size={22}
               name={name}
               onClick={() => setShowDrawerSidebar(true)}
               cursor-pointer
@@ -105,7 +107,7 @@
 
         const leftItems = [ControlMenu, BotSelect]
         return (
-          <NLayoutHeader bg1 w-full h-80px flex justify-between px-15px shadow>
+          <NLayoutHeader bg2 w-full h-60px flex justify-between px-15px bordered>
             <div fic>
               {leftItems.map(item => (
                 <div h-full flex items-center pr-15px>
@@ -115,7 +117,7 @@
             </div>
             <div fic>
               {rightItems.map(item => (
-                <div h-full flex items-center pr-15px>
+                <div h-full flex items-center pr-15px class={fixedRight.value ? 'lg-last:pr-0' : ''}>
                   {item()}
                 </div>
               ))}

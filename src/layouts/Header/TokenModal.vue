@@ -23,13 +23,6 @@ function onConfirm() {
       if (!Array.isArray(json))
         throw new Error('Invalid JSON')
       bot.value.apiKey = JSON.stringify(json, null, 0)
-      // json.find((item: any) => {
-      //   if (item.name === '_U') {
-      //     bot.value.apiKey = item.value
-      //     return true
-      //   }
-      //   return false
-      // })
     }
     success(t('config.set_success'))
     input.value = ''

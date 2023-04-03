@@ -49,6 +49,7 @@ declare global {
   const isBing: typeof import('../src/bot/index')['isBing']
   const isDark: typeof import('../src/composables/index')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isDev: typeof import('../src/composables/index')['isDev']
   const isOpenai: typeof import('../src/bot/index')['isOpenai']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
@@ -360,6 +361,7 @@ declare module 'vue' {
     readonly isBing: UnwrapRef<typeof import('../src/bot/index')['isBing']>
     readonly isDark: UnwrapRef<typeof import('../src/composables/index')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isDev: UnwrapRef<typeof import('../src/composables/index')['isDev']>
     readonly isOpenai: UnwrapRef<typeof import('../src/bot/index')['isOpenai']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>

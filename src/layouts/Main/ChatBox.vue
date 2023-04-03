@@ -13,7 +13,7 @@ const containerCls = isUser ? 'justify-end' : 'justify-start'
 const toUrl = (url: string) => window.open(url, '_blank')
 const boxCls = isUser
   ? 'bg-green-4 dark:bg-green-7 text-white animate-bounce-in-right'
-  : 'bg-light-1 dark:bg-dark-1 animate-bounce-in-left'
+  : 'bg2 dark:bg-dark-1 animate-bounce-in-left'
 </script>
 
 <template>

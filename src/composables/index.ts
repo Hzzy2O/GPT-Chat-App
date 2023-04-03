@@ -15,4 +15,8 @@ export function useToast() {
   return msg
 }
 
+export function isDev() {
+  return import.meta.env?.DEV
+}
+
 export * from './handler'

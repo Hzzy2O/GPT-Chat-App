@@ -1,3 +1,6 @@
 import createStorage from '@/utils/cache/storage'
 
-export const ls = createStorage()
+export const ls = createStorage({
+
+  hasEncrypt: !isDev(),
+})

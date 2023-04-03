@@ -67,7 +67,7 @@ defineExpose({
         <Icon
           :title="t('footer.prompt.title')"
           name="tabler:prompt"
-          :size="26"
+          :size="22"
           @click="openPrompt"
         />
       </div>
@@ -75,12 +75,12 @@ defineExpose({
         <Icon
           :title="t('common.speechToTxt')"
           name="ic:round-keyboard-voice"
-          :size="26"
+          :size="22"
           @click="toggleshowRecorder(true)"
         />
       </div>
       <div v-if="modeVal === 'editImg'" f-icon pl-0>
-        <Icon name="uil:image-plus" :size="26" />
+        <Icon name="uil:image-plus" :size="22" />
       </div>
     </div>
     <div fc>
@@ -93,7 +93,7 @@ defineExpose({
         <NDivider vertical class="!mr-0" />
       </template>
       <div f-icon p-0>
-        <Icon :title="t('common.send')" :size="25" name="line-md:telegram" @click="emit('send')" />
+        <Icon :title="t('common.send')" :size="22" name="line-md:telegram" @click="emit('send')" />
       </div>
     </div>
     <Transition>
