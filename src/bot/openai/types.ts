@@ -11,6 +11,8 @@ export namespace OpenAI {
     Translation = '/v1/audio/transcriptions',
     CreateImage = '/v1/images/generations',
     EditImage = '/v1/images/edits',
+    Subscriptions = '/v1/dashboard/billing/subscription',
+    Usage = '/v1/dashboard/billing/usage',
 
   }
 

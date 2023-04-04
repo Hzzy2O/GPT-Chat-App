@@ -1,12 +1,16 @@
+import { format } from 'date-fns'
 import { OpenAI } from '../types'
 import { parsePayload, streamParser } from './helper'
-import { usePost } from '@/api/http'
-import { useGet } from '@/api'
+import { useGet, usePost } from '@/api'
 
 type ReadTextStream = (text: string, done: boolean) => void
 
-export const getBalnace = () =>
-  useGet(OpenAI.Api.Balance)
+export const getUsage = () => useGet(OpenAI.Api.Usage, {
+  params: {
+    start_date: format(Date.now() - 90 * 24 * 60 * 60 * 1000, 'yyyy-MM-dd'),
+    end_date: format(Date.now() + 24 * 60 * 60 * 1000, 'yyyy-MM-dd'),
+  },
+})
 
 export const chatCompletion = (
   config: OpenAI.Config,

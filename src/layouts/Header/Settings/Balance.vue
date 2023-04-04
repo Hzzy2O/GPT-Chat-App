@@ -1,8 +1,9 @@
 <script setup lang="ts">
-// 余额展示
-const balance = computed(() => bot.value.getBalance)
-watch(balance, () => {
-  getBalanceMsg()
+// 获取是否实现了余额功能
+const balanceFunc = computed(() => bot.value.getBalance)
+watch([balanceFunc, () => bot.value.apiKey.value], ([balance, apikey]) => {
+  if (balance && apikey)
+    getBalanceMsg()
 }, { immediate: true })
 
 const balanceInfo = reactive({
@@ -10,11 +11,7 @@ const balanceInfo = reactive({
   used: 0,
   available: 0,
 })
-const balanceMsg = computed(() => `<div flex flex-gap-7px flex-wrap text-14px>
-  <span>${t('siderbar.total')}: ${balanceInfo.total}$ </span>
-  <span>${t('siderbar.used')}: ${balanceInfo.used}$ </span>
-  <span>${t('siderbar.available')}: ${balanceInfo.available}$ </span>
-</div>`)
+
 async function getBalanceMsg() {
   const balance = await bot.value.getBalance?.()
   if (balance) {
@@ -23,12 +20,15 @@ async function getBalanceMsg() {
     balanceInfo.available = balance.available
   }
 }
-
-// const balanceMsg = computed(() => balance.value?.().balanceMsg)
 </script>
 
 <template>
-  <template v-if="balance">
-    <div mb-15px v-html="balanceMsg" />
+  <template v-if="balanceFunc">
+    <div v-if="balanceInfo.total" mb-15px flex flex-gap-7px flex-wrap text-13px>
+      <span>{{ t('siderbar.total') }}: {{ balanceInfo.total }} </span>
+      <span>{{ t('siderbar.used') }}: {{ balanceInfo.used }} </span>
+      <span>{{ t('siderbar.available') }}: {{ balanceInfo.available }} </span>
+      <Icon name="line-md:rotate-270" :size="15" @click="getBalanceMsg" />
+    </div>
   </template>
 </template>

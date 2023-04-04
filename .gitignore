@@ -3,5 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
+stats.html
 
 /services/__pycache__

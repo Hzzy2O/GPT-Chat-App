@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-// import Balance from './Balance.vue'
+import Balance from './Balance.vue'
 import { useUIStore } from '@/store'
 
 const UIStore = useUIStore()
 const { fixedRight } = storeToRefs(UIStore)
 const { setFixedRight, setShowRightDrawer, setShowTokenModal } = UIStore
 
-const scrollCls = computed(() => (fixedRight.value ? 'h-[calc(100dvh-70px)] ' : 'max-h-60vh pr-15px'))
+const scrollCls = computed(() => (fixedRight.value ? 'h-[calc(100dvh-90px)] ' : 'max-h-60vh pr-15px'))
 
 const config = computed(() => bot.value.config)
 const settingSchema = computed(() => bot.value.settingSchema)
@@ -52,9 +52,8 @@ function handleChange(key: any, val: string) {
       </div>
     </div>
     <NScrollbar pb-10px px-20px :class="scrollCls" w-full>
-      <Form :form-model="config" :form-items="settingSchema" @handle-change="handleChange" />
-      <!-- TODO -->
       <Balance v-if="hasToken" />
+      <Form :form-model="config" :form-items="settingSchema" @handle-change="handleChange" />
     </NScrollbar>
   </div>
 </template>

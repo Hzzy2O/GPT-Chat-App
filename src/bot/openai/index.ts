@@ -1,8 +1,9 @@
 import { BaseModel } from '../base'
-import type { OpenAI } from './types'
+import { OpenAI } from './types'
 import { config, iconName, settingSchema } from './config'
-import { chatCompletion, completion, generateImage, getBalnace, transcription } from './api'
+import { chatCompletion, completion, generateImage, getUsage, transcription } from './api'
 import { Bot } from '#/index'
+import { useGet } from '@/api'
 
 export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   constructor() {
@@ -41,13 +42,24 @@ export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   }
 
   async getBalance() {
-    const { data } = await getBalnace()
+    try {
+      const { data: subsData } = await useGet(OpenAI.Api.Subscriptions)
 
-    const { total_granted, total_used, total_available } = data.value
-    return {
-      total: total_granted,
-      used: total_used,
-      available: total_available,
+      const total: number = subsData.value.hard_limit_usd
+
+      const { data: usageData } = await getUsage()
+      const used = usageData.value.total_usage / 100
+
+      const available = total - used
+
+      return {
+        total: total.toFixed(2),
+        used: used.toFixed(2),
+        available: available.toFixed(2),
+      }
+    }
+    catch (error) {
+      return null
     }
   }
 }

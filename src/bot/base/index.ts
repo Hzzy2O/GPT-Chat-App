@@ -62,7 +62,7 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
 
   abstract recorder?(file: File): void
 
-  abstract getBalance?(): Promise<{ total: string;used: string;available: string }>
+  abstract getBalance?(): Promise<{ total: string;used: string;available: string } | null>
 
   /**
    * @description: 设置config

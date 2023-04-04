@@ -13,6 +13,7 @@ import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
 // import basicssl from "@vitejs/plugin-basic-ssl"
+// import visualizer from 'rollup-plugin-visualizer'
 
 const pathResolve = (dir: string) => resolve(process.cwd(), '.', dir)
 

@@ -19,20 +19,21 @@ export function parsePayload(type: OpenAI.Api, input: Input, config: OpenAI.Conf
     case OpenAI.Api.ChatCompletion: {
       const basePayload = _completionPayload(config)
       const { flowList } = useRecordStoreWithOut()
-      let messages: any[];
-      if(config.continuous) {
+      let messages: any[]
+      if (config.continuous) {
         messages = flowList
           .filter(i => i.msg)
           .map(item => ({
             role: item.type === Role.user ? 'user' : 'assistant',
             content: item.msg,
           }))
-      } else {
+      }
+      else {
         messages = [
           {
             role: 'user',
             content: input,
-          }
+          },
         ]
       }
 

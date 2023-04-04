@@ -45,7 +45,7 @@
             <Icon
               name="line-md:menu-fold-left"
               lg-display-none
-              size={22}
+              size={25}
               onClick={() => setShowRightDrawer(true)}
             />
               )
@@ -71,7 +71,7 @@
               scrollable
             >
               <div text-18px fc cursor-pointer>
-                <Icon size={25} name={iconName} />
+                <Icon size={28} name={iconName} />
               </div>
             </NPopselect>
           )
@@ -84,7 +84,7 @@
           const setValue = () => {
             setLocale(locale.value === 'zh-CN' ? 'en-US' : 'zh-CN')
           }
-          return <Icon size={22} name={icon} onClick={() => setValue()} />
+          return <Icon size={25} name={icon} onClick={() => setValue()} />
         }
 
         const rightItems = [LanguageButton, DarkToggle, SettingBtn]
@@ -97,7 +97,7 @@
           return (
             <Icon
               lg-display-none
-              size={22}
+              size={25}
               name={name}
               onClick={() => setShowDrawerSidebar(true)}
               cursor-pointer

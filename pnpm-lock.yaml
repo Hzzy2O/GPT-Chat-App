@@ -19,6 +19,7 @@ specifiers:
   '@vueuse/integrations': ^9.13.0
   audio-recorder-polyfill: ^0.4.1
   crypto-js: ^4.1.1
+  date-fns: ^2.29.3
   detect-browser: ^5.3.0
   eslint: ^8.36.0
   eventsource-parser: ^0.1.0
@@ -59,6 +60,7 @@ dependencies:
   '@vueuse/integrations': registry.npmmirror.com/@vueuse/integrations/9.13.0_vue@3.2.47
   audio-recorder-polyfill: registry.npmmirror.com/audio-recorder-polyfill/0.4.1
   crypto-js: registry.npmmirror.com/crypto-js/4.1.1
+  date-fns: registry.npmmirror.com/date-fns/2.29.3
   detect-browser: registry.npmmirror.com/detect-browser/5.3.0
   eventsource-parser: registry.npmmirror.com/eventsource-parser/0.1.0
   gpt3-tokenizer: registry.npmmirror.com/gpt3-tokenizer/1.1.5
