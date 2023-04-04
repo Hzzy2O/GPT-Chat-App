@@ -33,7 +33,7 @@ export function warp<T>(method: Method, url: string, config: FetchConfig) {
   const { config: botConfig } = bot.value
   const { baseURL } = botConfig
 
-  const token = bot.value.apiKey
+  const token = bot.value.apiKey.value
 
   const isFormData = (obj: any): obj is FormData => obj instanceof FormData
 

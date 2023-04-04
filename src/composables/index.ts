@@ -16,7 +16,7 @@ export function useToast() {
 }
 
 export function isDev() {
-  return import.meta.env?.DEV
+  return import.meta.env?.MOdE === 'development'
 }
 
 export * from './handler'

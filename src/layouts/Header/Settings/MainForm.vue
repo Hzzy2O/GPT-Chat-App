@@ -11,7 +11,7 @@ const scrollCls = computed(() => (fixedRight.value ? 'h-[calc(100dvh-70px)] ' : 
 const config = computed(() => bot.value.config)
 const settingSchema = computed(() => bot.value.settingSchema)
 
-const hasToken = computed(() => bot.value.apiKey)
+const hasToken = computed(() => !!bot.value.apiKey.value)
 function handleChange(key: any, val: string) {
   unref(bot).setConfigByKey(key, val)
 }
@@ -53,8 +53,8 @@ function handleChange(key: any, val: string) {
     </div>
     <NScrollbar pb-10px px-20px :class="scrollCls" w-full>
       <Form :form-model="config" :form-items="settingSchema" @handle-change="handleChange" />
-    <!-- TODO -->
-    <!-- <Balance v-if="hasToken" /> -->
+      <!-- TODO -->
+      <Balance v-if="hasToken" />
     </NScrollbar>
   </div>
 </template>

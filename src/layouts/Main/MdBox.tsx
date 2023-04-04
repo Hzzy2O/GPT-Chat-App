@@ -89,7 +89,7 @@ export default defineComponent({
 
       return (
         <>
-          <div ref={mdRef} class={'mdbox'} innerHTML={mdTxt}></div>
+          <div ref={mdRef} class={'mdbox'} drop-shadow innerHTML={mdTxt}></div>
         </>
       )
     }

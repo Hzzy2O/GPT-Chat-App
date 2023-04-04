@@ -1,3 +1,4 @@
+import type { StorageLike } from '@vueuse/core'
 import { decrypt, encrypt } from '../cipher'
 
 export interface CreateStorageParams {
@@ -11,7 +12,7 @@ export default function<T extends Record<string, any>>({
   storage = localStorage,
   hasEncrypt = false,
 }: Partial<CreateStorageParams> = {}) {
-  const WebStorage = class WebStorage {
+  const WebStorage = class WebStorage implements StorageLike {
     private storage: Storage
     private prefixKey?: string
     private hasEncrypt: boolean
@@ -26,7 +27,7 @@ export default function<T extends Record<string, any>>({
       return `${this.prefixKey}${key}`.toUpperCase()
     }
 
-    set<K extends keyof T>(key: K, value: T[K]) {
+    setItem<K extends keyof T>(key: K, value: T[K]) {
       const stringData = JSON.stringify({
         value,
       })
@@ -34,7 +35,7 @@ export default function<T extends Record<string, any>>({
       this.storage.setItem(this.getKey(key as string), stringifyValue)
     }
 
-    get<K extends keyof T>(key: K, def: any = null): any {
+    getItem<K extends keyof T>(key: K, def: any = null): any {
       const val = this.storage.getItem(this.getKey(key as string))
       if (!val)
         return def
@@ -50,7 +51,7 @@ export default function<T extends Record<string, any>>({
       }
     }
 
-    remove(key: keyof T) {
+    removeItem(key: keyof T) {
       this.storage.removeItem(this.getKey(key as string))
     }
 

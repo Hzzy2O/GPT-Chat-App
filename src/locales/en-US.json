@@ -101,6 +101,7 @@
     "cancel": "cancel",
     "send": "send",
     "speechToTxt": "speech to text",
-    "onlyEN": "only english"
+    "onlyEN": "only english",
+    "themeColor": "theme color"
   }
 }

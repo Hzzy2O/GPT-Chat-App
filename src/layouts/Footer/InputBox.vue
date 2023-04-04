@@ -10,7 +10,7 @@ import { useRecordStore, useUIStore } from '@/store'
 //   });
 // }
 const emit = defineEmits(['send'])
-
+const { error } = useMessage()
 const { textarea, input } = useTextareaAutosize()
 function setVal(val: string) {
   input.value = val
@@ -18,7 +18,7 @@ function setVal(val: string) {
 
 // ui状态控制
 const UIStore = useUIStore()
-const { setGenerating } = UIStore
+const { setGenerating, setShowTokenModal } = UIStore
 const { isGenerating } = storeToRefs(UIStore)
 
 // 聊天记录数据处理
@@ -27,6 +27,12 @@ const { prompt } = storeToRefs(recordStore)
 const { pushBlock, setFlowBlock } = recordStore
 
 const sendMsg = () => {
+  if (!bot.value.apiKey.value) {
+    error('请先设置密钥')
+    setShowTokenModal(true)
+    return
+  }
+
   // 判断是否有输入内容和是否正在生成回复
   if (!input.value || isGenerating.value)
     return

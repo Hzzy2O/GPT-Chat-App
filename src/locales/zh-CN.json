@@ -104,6 +104,7 @@
     "cancel": "取消",
     "send": "发送",
     "speechToTxt": "语音转文字",
-    "onlyEN": "只支持英文"
+    "onlyEN": "只支持英文",
+    "themeColor": "主题颜色"
   }
 }

@@ -1,3 +1,4 @@
+import type { RemovableRef } from '@vueuse/core'
 import type { Bot } from '#/index'
 import type { FormConfig } from '@/components/Form/types'
 import { ls } from '@/utils/cache'
@@ -16,6 +17,7 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
   private _ak: string
 
   readonly history: HistoryListDB<U>
+  apiKey: RemovableRef<string>
 
   /**
    * @description: 构造函数
@@ -37,19 +39,9 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
     this.name = name
     this.history = new HistoryListDB(name)
     this.iconName = iconName
-    this.config = reactive(Object.assign(config, ls.get(this._lsCFK) || {}))
+    this.config = reactive(Object.assign(config, ls.getItem(this._lsCFK) || {}))
     this.settingSchema = settingSchema
-
-    if (!this.apiKey)
-      this.apiKey = ''
-  }
-
-  get apiKey() {
-    return ls.get(this._ak)
-  }
-
-  set apiKey(value: string) {
-    ls.set(this._ak, value)
+    this.apiKey = useStorage(this._ak, '', ls)
   }
 
   /**
@@ -79,6 +71,6 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
    **/
   setConfigByKey(key: keyof T, value: T[keyof T]): void {
     this.config[key] = value
-    ls.set(this._lsCFK, this.config)
+    ls.setItem(this._lsCFK, this.config)
   }
 }

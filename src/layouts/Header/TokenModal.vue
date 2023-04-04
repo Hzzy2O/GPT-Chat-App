@@ -16,13 +16,13 @@ function onConfirm() {
     if (!input.value)
       throw new Error('invalid input')
     if (isOpenai(bot.value)) {
-      bot.value.apiKey = input.value
+      bot.value.apiKey.value = input.value
     }
     else {
       const json = JSON.parse(input.value)
       if (!Array.isArray(json))
         throw new Error('Invalid JSON')
-      bot.value.apiKey = JSON.stringify(json, null, 0)
+      bot.value.apiKey.value = JSON.stringify(json, null, 0)
     }
     success(t('config.set_success'))
     input.value = ''

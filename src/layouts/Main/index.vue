@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { NScrollbar } from 'naive-ui'
 import ChatBox from './ChatBox.vue'
+import FloatButton from './FloatButton.vue'
 import { useRecordStore } from '@/store'
 
 const recordStore = useRecordStore()
@@ -35,5 +36,6 @@ watch(
         </NListItem>
       </NList>
     </NScrollbar>
+    <FloatButton />
   </NLayoutContent>
 </template>

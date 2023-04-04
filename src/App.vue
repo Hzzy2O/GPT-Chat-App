@@ -7,13 +7,9 @@ registerCopyable()
 
 const theme = computed(() => (isDark.value ? darkTheme : lightTheme))
 
-const themeOverrides = {
-  common: {
-    // primaryColor: '#cfb0ef',
-    // primaryColorHover: '#d1bdf4',
-    // primaryColorPressed: '#cda0e8',
-  },
-}
+const providerRef = ref<HTMLElement | null>(null)
+// const themeColorVar = useCssVar('--theme-color', providerRef)
+
 // const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
 // const tokens = messages.reduce((acc, cur) => {
 //     const tokens = tokenizer.encode(cur.content).bpe.length
@@ -25,11 +21,13 @@ const themeOverrides = {
 
 <template>
   <NConfigProvider
+    ref="providerRef"
+    :style="`--theme-color: ${themeColor}`"
     h-full
     :locale="zhCN"
     :date-locale="dateZhCN"
     :theme="theme"
-    :theme-overrides="themeOverrides"
+    :theme-overrides="getThemeOverrides"
   >
     <NMessageProvider :container-style="{ top: '66px' }">
       <RouterView />
