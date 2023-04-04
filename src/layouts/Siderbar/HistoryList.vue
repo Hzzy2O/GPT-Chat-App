@@ -33,6 +33,7 @@ function clearAll() {
   const history = bot.value.history
   history.clear()
   history.refresh()
+  newChat()
 }
 
 // 删除单条历史记录

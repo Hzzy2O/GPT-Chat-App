@@ -1,4 +1,4 @@
-# 🚀 GPT-Chat-App 🚀
+# 🧠 GPT-Chat-App
 
 <div>
   <a href="./README.md">中文</a> |

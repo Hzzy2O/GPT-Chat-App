@@ -6,7 +6,7 @@ const UIStore = useUIStore()
 const { fixedRight } = storeToRefs(UIStore)
 const { setFixedRight, setShowRightDrawer, setShowTokenModal } = UIStore
 
-const scrollCls = computed(() => (fixedRight.value ? 'h-[calc(100dvh-60px)] ' : 'max-h-60vh pr-15px'))
+const scrollCls = computed(() => (fixedRight.value ? 'h-[calc(100dvh-70px)] ' : 'max-h-60vh pr-15px'))
 
 const config = computed(() => bot.value.config)
 const settingSchema = computed(() => bot.value.settingSchema)
