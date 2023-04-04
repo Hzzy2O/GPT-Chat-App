@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Actions from '../Actions/index.vue'
 import MdBox from './MdBox'
 import type { Flow } from '#/.'
 import { Role } from '#/.'
@@ -6,6 +7,7 @@ import { Role } from '#/.'
 const { chatData } = defineProps<{
   chatData: Flow
 }>()
+
 const { msg, urls, type, imgs, done } = toRefs(chatData)
 const isUser = type?.value === Role.user
 const containerCls = isUser ? 'justify-end' : 'justify-start'
@@ -14,6 +16,14 @@ const toUrl = (url: string) => window.open(url, '_blank')
 const boxCls = isUser
   ? 'bg-[var(--theme-color)] text-white animate-bounce-in-right'
   : 'bg2 dark:bg-dark-1 animate-bounce-in-left'
+
+const mdRef = ref<typeof MdBox>()
+function setPlayText() {
+  currentSpeechText.value = mdRef.value?.mdTxt
+
+  if (currentSpeechText.value)
+    speechInstance.speak()
+}
 </script>
 
 <template>
@@ -36,7 +46,7 @@ const boxCls = isUser
         border-box
       >
         <!-- 文本展示 -->
-        <MdBox v-if="msg" :text="msg" :is-user="isUser" />
+        <MdBox v-if="msg" ref="mdRef" :text="msg" :is-user="isUser" />
         <!-- 图片展示 -->
         <NImageGroup v-if="imgs">
           <NSpace max-w-210px sm-max-w-412px>
@@ -89,8 +99,7 @@ const boxCls = isUser
             </label>
           </div>
         </div>
-        <!-- TODO -->
-        <!-- <Actions v-if="!isUser && done" /> -->
+        <!-- <Actions v-if="!isUser && done" @play="setPlayText" /> -->
       </div>
     </div>
   </div>

@@ -50,22 +50,19 @@ mdi.renderer.rules.code_inline = function (tokens, idx) {
 
 export default defineComponent({
   props: ['text', 'isUser'],
-  setup(props) {
+  setup(props, { expose }) {
     const mdRef = ref<ElRef>()
-    const md = ref('我是ai')
+    const mdTxt = ref('')
 
-    // onMounted(() => {
+    onMounted(() => {
+      nextTick(() => {
+        mdTxt.value = mdRef.value?.innerText || ''
+      })
+    })
 
-    //   md.value = mdRef.value?.innerText
-    // })
-    // nextTick(() => {
-    // })
-    // const sp = useSpeechSynthesis(md, {
-    //   lang: 'zh-CN',
-    // })
-    // function longPressHandler() {
-    //   sp.speak()
-    // }
+    expose({
+      mdTxt,
+    })
 
     // onLongPress(
     //   mdRef,
@@ -89,7 +86,7 @@ export default defineComponent({
 
       return (
         <>
-          <div ref={mdRef} class={'mdbox'} drop-shadow innerHTML={mdTxt}></div>
+          <div ref={mdRef} class={'mdbox'} innerHTML={mdTxt}></div>
         </>
       )
     }

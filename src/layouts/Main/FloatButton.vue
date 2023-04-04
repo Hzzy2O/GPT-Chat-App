@@ -6,8 +6,8 @@ function updateColor(color: string) {
 
 <template>
   <NPopover
-    trigger="hover"
-    w-285px
+    trigger="click"
+    w-205px
   >
     <template #trigger>
       <NButton

@@ -31,6 +31,7 @@ declare global {
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const curBotType: typeof import('../src/bot/index')['curBotType']
+  const currentSpeechText: typeof import('../src/composables/speech')['currentSpeechText']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
@@ -113,6 +114,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const speechInstance: typeof import('../src/composables/speech')['speechInstance']
   const store: typeof import('../src/store/index')['default']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const syncRef: typeof import('@vueuse/core')['syncRef']
@@ -345,6 +347,7 @@ declare module 'vue' {
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly curBotType: UnwrapRef<typeof import('../src/bot/index')['curBotType']>
+    readonly currentSpeechText: UnwrapRef<typeof import('../src/composables/speech')['currentSpeechText']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
@@ -427,6 +430,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly speechInstance: UnwrapRef<typeof import('../src/composables/speech')['speechInstance']>
     readonly store: UnwrapRef<typeof import('../src/store/index')['default']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
