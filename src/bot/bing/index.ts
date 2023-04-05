@@ -26,11 +26,7 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
 
   async createImage(msg: string) {
     const { error } = useToast()
-    const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
-    if (!reg.test(msg)) {
-      error('只支持英文字符')
-      return
-    }
+
     const { data } = await createImage(msg)
     if (!data.value) {
       error('图片生成失败')

@@ -3,6 +3,10 @@ import { Role } from '#/index'
 import { buildFlowStruct } from '@/composables'
 import { useRecordStore, useUIStore } from '@/store'
 
+const props = defineProps<{
+  mode: string
+}>()
+
 // function clearInput() {
 //   input.value = '';
 //   nextTick(() => {
@@ -31,6 +35,14 @@ const sendMsg = () => {
     error('请先设置密钥')
     setShowTokenModal(true)
     return
+  }
+
+  if (isBing(bot) && props.mode === 'img') {
+    const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
+    if (!reg.test(input.value)) {
+      error('只支持英文字符')
+      return
+    }
   }
 
   // 判断是否有输入内容和是否正在生成回复

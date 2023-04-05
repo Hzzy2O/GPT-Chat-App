@@ -31,6 +31,7 @@ declare global {
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const curBotType: typeof import('../src/bot/index')['curBotType']
+  const currentSpeechId: typeof import('../src/composables/speech')['currentSpeechId']
   const currentSpeechText: typeof import('../src/composables/speech')['currentSpeechText']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
@@ -347,6 +348,7 @@ declare module 'vue' {
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly curBotType: UnwrapRef<typeof import('../src/bot/index')['curBotType']>
+    readonly currentSpeechId: UnwrapRef<typeof import('../src/composables/speech')['currentSpeechId']>
     readonly currentSpeechText: UnwrapRef<typeof import('../src/composables/speech')['currentSpeechText']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>

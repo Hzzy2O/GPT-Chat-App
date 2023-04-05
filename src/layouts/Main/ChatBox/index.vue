@@ -20,10 +20,15 @@ const boxCls = isUser
 const mdRef = ref<typeof MdBox>()
 function setPlayText() {
   currentSpeechText.value = mdRef.value?.mdTxt
+  currentSpeechId.value = chatData.id
 
   if (currentSpeechText.value)
     speechInstance.speak()
 }
+function stopPlay() {
+  speechInstance.stop()
+}
+const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.value === chatData.id)
 </script>
 
 <template>
@@ -99,7 +104,7 @@ function setPlayText() {
             </label>
           </div>
         </div>
-        <!-- <Actions v-if="!isUser && done" @play="setPlayText" /> -->
+        <Actions v-if="!isUser && done" :is-play="isPlay" @play="setPlayText" @stop="stopPlay" />
       </div>
     </div>
   </div>

@@ -2,10 +2,17 @@
 import Recorder from './FunctionalParts/Recorder.vue'
 import Prompt from './FunctionalParts/Prompt.vue'
 
-const emit = defineEmits(['setInput', 'send'])
+const props = defineProps<{
+  mode: string
+}>()
+const emit = defineEmits(['setInput', 'send', 'changeMode'])
 
 function setInput(text: string) {
   emit('setInput', text)
+}
+
+function changeMode(mode: string) {
+  emit('changeMode', mode)
 }
 
 // 录音功能
@@ -40,15 +47,6 @@ const options = computed(() =>
     },
   ].filter(item => !!bot.value[item.match]),
 )
-const modeVal = ref('chat')
-
-watch(curBotType, () => {
-  modeVal.value = 'chat'
-})
-
-defineExpose({
-  mode: modeVal,
-})
 </script>
 
 <template>
@@ -79,15 +77,15 @@ defineExpose({
           @click="toggleshowRecorder(true)"
         />
       </div>
-      <div v-if="modeVal === 'editImg'" f-icon pl-0>
+      <div v-if="props.mode === 'editImg'" f-icon pl-0>
         <Icon name="uil:image-plus" :size="22" />
       </div>
     </div>
     <div fc>
       <template v-if="options.length">
-        <n-popselect v-model:value="modeVal" :options="options" trigger="click">
+        <n-popselect :value="props.mode" :options="options" trigger="click" @update-value="changeMode">
           <div f-icon p-0 fc>
-            <span cursor-pointer>{{ t(`footer.mode.${modeVal}`) }}</span>
+            <span cursor-pointer>{{ t(`footer.mode.${props.mode}`) }}</span>
           </div>
         </n-popselect>
         <NDivider vertical class="!mr-0" />
