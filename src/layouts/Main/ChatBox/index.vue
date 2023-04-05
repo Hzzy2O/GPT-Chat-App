@@ -19,7 +19,7 @@ const boxCls = isUser
 
 const mdRef = ref<typeof MdBox>()
 function setPlayText() {
-  currentSpeechText.value = mdRef.value?.mdTxt
+  currentSpeechText.value = mdRef.value?.elRef.innerText
   currentSpeechId.value = chatData.id
 
   if (currentSpeechText.value)

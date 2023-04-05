@@ -35,7 +35,7 @@ async function patchEvent() {
       setGenerating(false)
     }
   }
-  switch (funcArea.value?.mode) {
+  switch (modeValue.value) {
     case 'chat':
       bot.value.chat(input, end)
       break

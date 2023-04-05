@@ -51,21 +51,14 @@ mdi.renderer.rules.code_inline = function (tokens, idx) {
 export default defineComponent({
   props: ['text', 'isUser'],
   setup(props, { expose }) {
-    const mdRef = ref<ElRef>()
-    const mdTxt = ref('')
-
-    onMounted(() => {
-      nextTick(() => {
-        mdTxt.value = mdRef.value?.innerText || ''
-      })
-    })
+    const elRef = ref<ElRef>()
 
     expose({
-      mdTxt,
+      elRef,
     })
 
     // onLongPress(
-    //   mdRef,
+    //   elRef,
     //   longPressHandler,
     //   { modifiers: { prevent: true } },
     // )
@@ -86,7 +79,7 @@ export default defineComponent({
 
       return (
         <>
-          <div ref={mdRef} class={'mdbox'} innerHTML={mdTxt}></div>
+          <div ref={elRef} class={'mdbox'} innerHTML={mdTxt}></div>
         </>
       )
     }
