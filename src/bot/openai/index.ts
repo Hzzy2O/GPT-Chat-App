@@ -1,7 +1,7 @@
 import { BaseModel } from '../base'
 import { OpenAI } from './types'
 import { config, iconName, settingSchema } from './config'
-import { chatCompletion, completion, generateImage, getUsage, transcription } from './api'
+import { chatCompletion, completion, editImage, generateImage, getUsage, transcription } from './api'
 import { Bot } from '#/index'
 import { useGet } from '@/api'
 
@@ -33,9 +33,17 @@ export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
     receiveImg(urls)
   }
 
-  // TODO
-  // editImage(): void {}
-  editImage = undefined
+  async editImage(input, img, mask) {
+    const { data } = await editImage(this.config, {
+      prompt: input,
+      image: img,
+      mask,
+    })
+    if (!data.value)
+      return
+    const urls = unref(data)?.data.map((item: any) => item.url)
+    receiveImg(urls)
+  }
 
   recorder(file: File) {
     return transcription(this.config, file)

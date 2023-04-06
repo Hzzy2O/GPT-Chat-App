@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { Role } from '#/index'
-import { buildFlowStruct } from '@/composables'
-import { useRecordStore, useUIStore } from '@/store'
+import { useUIStore } from '@/store'
 
-const props = defineProps<{
+defineProps<{
   mode: string
 }>()
 
@@ -14,7 +12,6 @@ const props = defineProps<{
 //   });
 // }
 const emit = defineEmits(['send'])
-const { error } = useMessage()
 const { textarea, input } = useTextareaAutosize()
 function setVal(val: string) {
   input.value = val
@@ -22,75 +19,17 @@ function setVal(val: string) {
 
 // ui状态控制
 const UIStore = useUIStore()
-const { setGenerating, setShowTokenModal } = UIStore
 const { isGenerating } = storeToRefs(UIStore)
-
-// 聊天记录数据处理
-const recordStore = useRecordStore()
-const { prompt } = storeToRefs(recordStore)
-const { pushBlock, setFlowBlock } = recordStore
-
-const sendMsg = () => {
-  if (!bot.value.apiKey.value) {
-    error('请先设置密钥')
-    setShowTokenModal(true)
-    return
-  }
-
-  if (isBing(bot) && props.mode === 'img') {
-    const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
-    if (!reg.test(input.value)) {
-      error('只支持英文字符')
-      return
-    }
-  }
-
-  // 判断是否有输入内容和是否正在生成回复
-  if (!input.value || isGenerating.value)
-    return
-
-  setGenerating(true)
-
-  // 添加用户输入的消息
-  const addusermsg = () => {
-    let msg = input.value
-    if (prompt.value)
-      msg = prompt.value + msg
-
-    pushBlock(
-      buildFlowStruct({
-        msg,
-        type: Role.user,
-      }),
-    )
-  }
-
-  addusermsg()
-
-  // 定义监听完成的回调函数
-  const doneDeal = (done: boolean) => {
-    if (done) {
-      input.value = ''
-      setFlowBlock(null)
-      setGenerating(false)
-    }
-  }
-
-  emit('send', doneDeal)
-
-  // bot.value.chat(input.value, doneDeal);
-}
 
 function catchEnter(e: KeyboardEvent) {
   if (e.key === 'Enter' && !e.shiftKey) {
-    sendMsg()
+    emit('send')
     e.preventDefault()
   }
 }
 
 defineExpose({
   setVal,
-  sendMsg,
   input,
 })
 </script>

@@ -2,6 +2,7 @@
 import InputBox from './InputBox.vue'
 import FunctionArea from './FunctionArea.vue'
 import { useRecordStore, useUIStore } from '@/store'
+import { Role } from '#/index'
 
 const inputRef = ref<typeof InputBox | null>(null)
 const funcArea = ref<typeof FunctionArea | null>(null)
@@ -14,20 +15,74 @@ watch(curBotType, () => {
   modeValue.value = 'chat'
 })
 
-const { setFlowBlock } = useRecordStore()
-const { setGenerating } = useUIStore()
+const { error } = useMessage()
+
+const recordStore = useRecordStore()
+const { prompt } = storeToRefs(recordStore)
+const { pushBlock, setFlowBlock } = recordStore
+
+const UIStore = useUIStore()
+const { setGenerating, setShowTokenModal } = UIStore
+const { isGenerating } = storeToRefs(UIStore)
 
 function setInput(text: string) {
   inputRef.value?.setVal(text)
 }
 
-function send() {
-  inputRef.value?.sendMsg()
+// 是否能发送
+function getApproval(input: string) {
+  if (!input || isGenerating.value)
+    return
+
+  if (!bot.value.apiKey.value) {
+    error('请先设置密钥')
+    setShowTokenModal(true)
+    return
+  }
+  const mode = modeValue.value
+
+  if (isBing(bot) && mode === 'img') {
+    const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
+    if (!reg.test(input))
+      error('只支持英文字符')
+    return false
+  }
+
+  if (mode === 'editImg' && !funcArea.value?.imgInfo.img) {
+    error('请先上传图片')
+    return false
+  }
+
+  return true
 }
 
-async function patchEvent() {
-  const input = inputRef.value?.input
+function send() {
+  const input: string = inputRef.value?.input
+  if (!getApproval(input))
+    return
 
+  setGenerating(true)
+
+  // 添加用户输入的消息
+  const addusermsg = () => {
+    let msg = input
+    if (prompt.value)
+      msg = prompt.value + msg
+
+    pushBlock(
+      buildFlowStruct({
+        msg,
+        type: Role.user,
+      }),
+    )
+  }
+
+  addusermsg()
+
+  patchEvent(input)
+}
+
+async function patchEvent(input: string) {
   const end = (done: boolean) => {
     if (done) {
       setInput('')
@@ -44,7 +99,12 @@ async function patchEvent() {
       await bot.value.createImage(input)
       end(true)
       break
-      // bot.value.create;
+    case 'editImg': {
+      const { img, mask } = funcArea.value?.imgInfo
+      await bot.value.editImage?.(input, img.file, mask?.file)
+      end(true)
+      break
+    }
   }
 }
 </script>
@@ -53,7 +113,7 @@ async function patchEvent() {
   <NLayoutFooter shadow="[0px_-5px_5pxblack]" bg2 w-full h-135px pb-50px pt-15px>
     <div animate-bounce-in h-80px w-full flex justify-center>
       <div relative animate-head-shake w="80%">
-        <InputBox ref="inputRef" :mode="modeValue" @send="patchEvent" />
+        <InputBox ref="inputRef" :mode="modeValue" @send="send" />
         <FunctionArea ref="funcArea" :mode="modeValue" @change-mode="changeMode" @send="send" @set-input="setInput" />
       </div>
     </div>

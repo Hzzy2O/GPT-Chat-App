@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 import Recorder from './FunctionalParts/Recorder.vue'
 import Prompt from './FunctionalParts/Prompt.vue'
+import ImgUploader from './FunctionalParts/ImgUploader.vue'
 
 const props = defineProps<{
   mode: string
@@ -26,6 +28,20 @@ const promptRef = ref<typeof Prompt | null>(null)
 function openPrompt() {
   promptRef.value?.open()
 }
+const imgInfo = reactive({
+  img: undefined as FileInfo | undefined,
+  mask: undefined as FileInfo | undefined,
+})
+function setImgInfo(img: FileInfo | undefined, mask: FileInfo | undefined) {
+  imgInfo.img = img
+  imgInfo.mask = mask
+}
+
+// 图片弹窗
+const imgUploader = ref<typeof ImgUploader | null>(null)
+function openImgUploader() {
+  imgUploader.value?.openModal()
+}
 
 // 模式选择
 const options = computed(() =>
@@ -47,6 +63,10 @@ const options = computed(() =>
     },
   ].filter(item => !!bot.value[item.match]),
 )
+
+defineExpose({
+  imgInfo,
+})
 </script>
 
 <template>
@@ -77,8 +97,8 @@ const options = computed(() =>
           @click="toggleshowRecorder(true)"
         />
       </div>
-      <div v-if="props.mode === 'editImg'" f-icon pl-0>
-        <Icon name="uil:image-plus" :size="22" />
+      <div v-if="props.mode === 'editImg'" relative f-icon pl-0>
+        <Icon name="uil:image-plus" :size="22" @click="openImgUploader" />
       </div>
     </div>
     <div fc>
@@ -103,6 +123,7 @@ const options = computed(() =>
       />
     </Transition>
     <Prompt ref="promptRef" />
+    <ImgUploader ref="imgUploader" :img-info="imgInfo" @set-img-info="setImgInfo" />
   </div>
 </template>
 

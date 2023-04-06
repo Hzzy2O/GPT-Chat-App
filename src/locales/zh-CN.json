@@ -81,6 +81,10 @@
       "chat": "聊天",
       "img": "生成图片",
       "editImg": "编辑图片"
+    },
+    "editImg": {
+      "img": "image to edit",
+      "mask": "additonal image"
     }
   },
   "icon": {

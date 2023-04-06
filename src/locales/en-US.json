@@ -81,6 +81,10 @@
       "chat": "chat",
       "img": "generate img",
       "editImg": "edit img"
+    },
+    "editImg": {
+      "img": "image to edit",
+      "mask": "additonal image"
     }
   },
   "net": {
@@ -108,5 +112,8 @@
     "speechToTxt": "speech to text",
     "onlyEN": "only english",
     "themeColor": "theme color"
+  },
+  "floatBtn": {
+    "showTokenCost": "show token cost"
   }
 }

@@ -67,3 +67,11 @@ export const generateImage = (config: OpenAI.Config, input: string) =>
   usePost(OpenAI.Api.CreateImage, {
     params: parsePayload(OpenAI.Api.CreateImage, input, config),
   })
+
+export const editImage = (config: OpenAI.Config, params: Recordable) =>
+  usePost(OpenAI.Api.EditImage, {
+    params: parsePayload(OpenAI.Api.EditImage, params, config),
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })

@@ -5,7 +5,7 @@ import { OpenAI } from '../types'
 import { Role } from '#/index'
 import { useRecordStoreWithOut } from '@/store'
 
-type Input = Nullable<string | File>
+type Input = Nullable<string | File | Recordable>
 export function parsePayload(type: OpenAI.Api, input: Input, config: OpenAI.Config) {
   switch (type) {
     case OpenAI.Api.Completion: {
@@ -68,6 +68,24 @@ export function parsePayload(type: OpenAI.Api, input: Input, config: OpenAI.Conf
         size,
         n: img_number,
       }
+    }
+
+    case OpenAI.Api.EditImage: {
+      const { size, img_number } = config
+
+      const basePayload = {
+        response_format: 'url',
+        size,
+        n: img_number,
+        ...input,
+
+      }
+      const formData = new FormData()
+      Object.keys(basePayload).forEach((key) => {
+        basePayload[key] && formData.append(key, basePayload[key])
+      })
+
+      return formData
     }
     default:
       return {} as never

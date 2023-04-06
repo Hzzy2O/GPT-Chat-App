@@ -58,7 +58,7 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
     **/
   abstract createImage?(msg: string): void
 
-  abstract editImage?(msg: string): void
+  abstract editImage?(msg: string, img: File, mask?: File): void
 
   abstract recorder?(file: File): void
 
