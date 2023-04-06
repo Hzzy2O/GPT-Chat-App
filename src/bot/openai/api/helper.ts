@@ -78,7 +78,7 @@ export function parsePayload(type: OpenAI.Api, input: Input, config: OpenAI.Conf
         response_format: 'url',
         size,
         n: img_number,
-        ...input,
+        ...(input as Recordable),
 
       }
       const formData = new FormData()

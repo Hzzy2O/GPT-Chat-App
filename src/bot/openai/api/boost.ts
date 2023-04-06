@@ -6,7 +6,7 @@ export async function searchWeb(query: string) {
       query,
       limit: 4,
     }
-    const url = 'http://127.0.0.1:8000'
+    const url = 'https://chatdemo-1-v5858982.deta.app'
     const { data } = await useFetch(`${url}/search?${qs.stringify(param)}`).json()
     const { code, data: res } = data.value
     if (code !== 200)
