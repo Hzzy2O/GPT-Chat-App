@@ -32,5 +32,7 @@ export namespace OpenAI {
 
     size: string
     img_number: number
+    // 是否联网
+    web_access: boolean
   }
 }

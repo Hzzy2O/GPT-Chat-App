@@ -1,6 +1,6 @@
 import type { ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import { createParser } from 'eventsource-parser'
-import { isFunction } from 'lodash-es'
+import { isFunction, last } from 'lodash-es'
 import { OpenAI } from '../types'
 import { Role } from '#/index'
 import { useRecordStoreWithOut } from '@/store'
@@ -36,6 +36,7 @@ export function parsePayload(type: OpenAI.Api, input: Input, config: OpenAI.Conf
           },
         ]
       }
+      last(messages).content = input
 
       return {
         ...basePayload,

@@ -34,6 +34,7 @@ function getApproval(input: string) {
   if (!input || isGenerating.value)
     return
 
+  // 检查是否设置了密钥
   if (!bot.value.apiKey.value) {
     error('请先设置密钥')
     setShowTokenModal(true)
@@ -41,6 +42,7 @@ function getApproval(input: string) {
   }
   const mode = modeValue.value
 
+  // bing的生成图片只支持英文字符
   if (isBing(bot) && mode === 'img') {
     const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
     if (!reg.test(input))
@@ -48,6 +50,7 @@ function getApproval(input: string) {
     return false
   }
 
+  // 编辑图模式时检查是否上传了图片
   if (mode === 'editImg' && !funcArea.value?.imgInfo.img) {
     error('请先上传图片')
     return false
@@ -103,6 +106,7 @@ async function patchEvent(input: string) {
       const { img, mask } = funcArea.value?.imgInfo
       await bot.value.editImage?.(input, img.file, mask?.file)
       end(true)
+      funcArea.value?.resetImg()
       break
     }
   }

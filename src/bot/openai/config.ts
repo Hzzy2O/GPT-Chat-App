@@ -15,6 +15,7 @@ export const config: OpenAI.Config = {
   frequency_penalty: 0,
   size: '512x512',
   img_number: 1,
+  web_access: false,
 }
 
 // 编辑表单
@@ -108,18 +109,17 @@ export const settingSchema: FormConfig = [
       },
     ],
   },
-  // {
-  //   label: 'config.webaccess.title',
-  //   type: 'collapse',
-  //   items: [
-  //     {
-  //       key: 'webaccess',
-  //       label: 'config.webaccess.switch',
-  //       type: 'switch',
-
-  //     },
-  //   ],
-  // },
+  {
+    label: 'config.webaccess.title',
+    type: 'collapse',
+    items: [
+      {
+        key: 'web_access',
+        label: 'config.webaccess.switch',
+        type: 'switch',
+      },
+    ],
+  },
 ]
 
 export const iconName = 'tabler:brand-openai'

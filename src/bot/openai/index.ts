@@ -33,7 +33,7 @@ export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
     receiveImg(urls)
   }
 
-  async editImage(input, img, mask) {
+  async editImage(input: string, img: File, mask?: File) {
     const { data } = await editImage(this.config, {
       prompt: input,
       image: img,

@@ -28,6 +28,8 @@ const promptRef = ref<typeof Prompt | null>(null)
 function openPrompt() {
   promptRef.value?.open()
 }
+
+// 图片信息
 const imgInfo = reactive({
   img: undefined as FileInfo | undefined,
   mask: undefined as FileInfo | undefined,
@@ -66,6 +68,7 @@ const options = computed(() =>
 
 defineExpose({
   imgInfo,
+  resetImg: () => setImgInfo(undefined, undefined),
 })
 </script>
 
