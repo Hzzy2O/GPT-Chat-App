@@ -42,6 +42,7 @@ export const settingSchema: FormConfig = [
       {
         key: 'continuous',
         label: 'config.continuous',
+        desc: 'config.continuous_desc',
         type: 'switch',
       },
       {
@@ -107,6 +108,18 @@ export const settingSchema: FormConfig = [
       },
     ],
   },
+  // {
+  //   label: 'config.webaccess.title',
+  //   type: 'collapse',
+  //   items: [
+  //     {
+  //       key: 'webaccess',
+  //       label: 'config.webaccess.switch',
+  //       type: 'switch',
+
+  //     },
+  //   ],
+  // },
 ]
 
 export const iconName = 'tabler:brand-openai'

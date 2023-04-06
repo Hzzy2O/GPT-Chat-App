@@ -8,15 +8,7 @@ registerCopyable()
 const theme = computed(() => (isDark.value ? darkTheme : lightTheme))
 
 const providerRef = ref<HTMLElement | null>(null)
-// const themeColorVar = useCssVar('--theme-color', providerRef)
-
-// const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
-// const tokens = messages.reduce((acc, cur) => {
-//     const tokens = tokenizer.encode(cur.content).bpe.length
-//     return acc + tokens
-//     // return 0
-//   }, 0)
-// console.log(tokenizer.encode('hello world').bpe.length)
+const themeColor = computed(() => commonSettings.value.themeColor)
 </script>
 
 <template>

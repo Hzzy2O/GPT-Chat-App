@@ -1,4 +1,5 @@
 import type { ElementOf } from '@vueuse/core'
+import GPT3Tokenizer from 'gpt3-tokenizer'
 
 // 生成唯一id
 export function generateId() {
@@ -16,6 +17,12 @@ export function enumToOptions(
 ): LabelValueOptions {
   const _cb = cb || (([label, value]) => ({ label, value }))
   return Object.entries(em).map(_cb)
+}
+
+export function computeTokens(txt: string) {
+  const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
+
+  return tokenizer.encode(txt).bpe.length
 }
 
 // export function objToOptions(

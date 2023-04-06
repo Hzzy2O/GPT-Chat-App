@@ -94,6 +94,7 @@ export default defineComponent({
           {label}
           {config.desc && (
             <NPopover
+              max-w-250px
               v-slots={{
                 default: () => <span>{t(config.desc!)}</span>,
                 trigger: () => <Icon ml-4px size={14} name="majesticons:info-circle-line" />,

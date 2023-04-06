@@ -2,10 +2,13 @@ import Tiny from 'tinycolor2'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { ls } from '@/utils/cache'
 
-export const themeColor = useStorage('themeColor', '#cfb0ef', ls)
+export const commonSettings = useStorage('commonSettings', {
+  isShowTokenCost: false,
+  themeColor: '#cfb0ef',
+}, ls)
 
 export const getThemeOverrides = computed(() => {
-  const color = themeColor.value
+  const color = commonSettings.value.themeColor
   const primaryColor = Tiny(color).toHex8String()
   const hoverColor = Tiny(color)
     .lighten(7.5)

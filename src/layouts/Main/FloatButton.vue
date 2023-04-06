@@ -1,7 +1,7 @@
 <script setup lang="ts">
-function updateColor(color: string) {
-  themeColor.value = color
-}
+// function updateColor(color: string) {
+//   themeColor.value = color
+// }
 </script>
 
 <template>
@@ -26,8 +26,11 @@ function updateColor(color: string) {
       </NButton>
     </template>
     <NScrollbar max-h-60vh w-full>
-      <NFormItem :label="t('common.themeColor')">
-        <NColorPicker :value="themeColor" @update-value="updateColor" />
+      <NFormItem :label="t('common.themeColor')" mb-10px>
+        <NColorPicker v-model:value="commonSettings.themeColor" />
+      </NFormItem>
+      <NFormItem :label="t('floatBtn.showTokenCost')">
+        <NSwitch v-model:value="commonSettings.isShowTokenCost" />
       </NFormItem>
     </NScrollbar>
   </NPopover>

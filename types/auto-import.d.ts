@@ -15,6 +15,7 @@ declare global {
   const bot: typeof import('../src/bot/index')['bot']
   const botMap: typeof import('../src/bot/index')['botMap']
   const buildFlowStruct: typeof import('../src/composables/handler')['buildFlowStruct']
+  const commonSettings: typeof import('../src/composables/commonSettings')['commonSettings']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -45,7 +46,7 @@ declare global {
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
-  const getThemeOverrides: typeof import('../src/composables/theme')['getThemeOverrides']
+  const getThemeOverrides: typeof import('../src/composables/commonSettings')['getThemeOverrides']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
@@ -122,7 +123,6 @@ declare global {
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const t: typeof import('../src/locales/index')['t']
   const templateRef: typeof import('@vueuse/core')['templateRef']
-  const themeColor: typeof import('../src/composables/theme')['themeColor']
   const throttledRef: typeof import('@vueuse/core')['throttledRef']
   const throttledWatch: typeof import('@vueuse/core')['throttledWatch']
   const toRaw: typeof import('vue')['toRaw']
@@ -332,6 +332,7 @@ declare module 'vue' {
     readonly bot: UnwrapRef<typeof import('../src/bot/index')['bot']>
     readonly botMap: UnwrapRef<typeof import('../src/bot/index')['botMap']>
     readonly buildFlowStruct: UnwrapRef<typeof import('../src/composables/handler')['buildFlowStruct']>
+    readonly commonSettings: UnwrapRef<typeof import('../src/composables/commonSettings')['commonSettings']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -362,7 +363,7 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
-    readonly getThemeOverrides: UnwrapRef<typeof import('../src/composables/theme')['getThemeOverrides']>
+    readonly getThemeOverrides: UnwrapRef<typeof import('../src/composables/commonSettings')['getThemeOverrides']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -439,7 +440,6 @@ declare module 'vue' {
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly t: UnwrapRef<typeof import('../src/locales/index')['t']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
-    readonly themeColor: UnwrapRef<typeof import('../src/composables/theme')['themeColor']>
     readonly throttledRef: UnwrapRef<typeof import('@vueuse/core')['throttledRef']>
     readonly throttledWatch: UnwrapRef<typeof import('@vueuse/core')['throttledWatch']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>

@@ -27,6 +27,7 @@
     },
     "sessionParameter": "session parameter",
     "continuous": "continuous dialogue",
+    "continuous_desc": "If enabled, the context will be automatically contacted for questions, which will accelerate the consumption of tokens.",
     "temperature": {
       "title": "temperature",
       "desc": "The higher the value (such as 0.8), the more creative the generated reply, and the lower the value (such as 0.2) is more conservative."
@@ -44,6 +45,10 @@
     "img_number": {
       "title": "image number",
       "desc": "The number of images generated"
+    },
+    "webaccess": {
+      "title": "web access settings",
+      "switch": "web access switch"
     }
   },
   "main": {

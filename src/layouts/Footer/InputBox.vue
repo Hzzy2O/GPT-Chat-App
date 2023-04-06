@@ -106,7 +106,7 @@ defineExpose({
     rd-12px
     shadow="[0_0_10px_rgba(0,0,0,0.10)]"
     dark:shadow="[0_0_15px_rgba(0,0,0,0.10)]"
-    absolute
+    absolute="bottom-0"
     top-auto
     bottom-0
     overflow-hidden
@@ -134,6 +134,7 @@ defineExpose({
       ref="textarea"
       v-model="input"
       w-full
+      caret="[var(--theme-color)]"
       resize-none
       border-0
       bg-transparent

@@ -19,6 +19,8 @@ export interface Flow {
   imgs?: Array<string>
   // BING连续对话用
   token?: string
+  // 花费的token数量
+  tokenCost?: number
 }
 
 export type Language = 'zh-CN' | 'en-US'

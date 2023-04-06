@@ -2,7 +2,6 @@
 import type { FormInst } from 'naive-ui'
 import type { FormConfig } from './types'
 import FormItem from './formItem'
-import { useUIStore } from '@/store'
 
 const props = defineProps<{
   formModel: Record<string, any>
@@ -11,10 +10,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'handleChange', key: string, val: any): void
 }>()
-const UIStore = useUIStore()
-const { fixedRight } = storeToRefs(UIStore)
-
-const expandArr = computed(() => (fixedRight.value ? props.formItems.map((_, i) => i) : []))
 
 const formRef = ref<Nullable<FormInst>>(null)
 
@@ -30,7 +25,7 @@ const formModel = props.formModel
       v-for="(item, index) in formItems"
       :key="item.key"
     >
-      <NCollapse v-if="item.type === 'collapse'" :default-expanded-names="expandArr">
+      <NCollapse v-if="item.type === 'collapse'">
         <NCollapseItem :title="t(item.label)" :name="index">
           <template v-for="formItem in item.items" :key="formItem.key">
             <FormItem :value="formModel[formItem.key]" :config="formItem" @value-change="valueChange" />

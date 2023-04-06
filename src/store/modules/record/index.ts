@@ -45,6 +45,12 @@ export const useRecordStore = defineStore('record-store', {
     setFlowList(list: Flow[]) {
       this.flowList = list
     },
+    setFlowListItemByIndex(index: number, block: Partial<Flow>) {
+      this.flowList.splice(index, 1, {
+        ...this.flowList[index],
+        ...block,
+      })
+    },
     setSessionId(id: string | null) {
       this.sessionId = id
     },

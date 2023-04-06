@@ -27,6 +27,7 @@
     },
     "sessionParameter": "会话参数",
     "continuous": "连续对话",
+    "continuous_desc": "开启则会自动联系上下文进行提问，会加速token消耗。",
     "temperature": {
       "title": "温度",
       "desc": "该值越高如（0.8）则导致生成的回复越有创造性，越低的值（如0.2）则越保守。"
@@ -44,6 +45,10 @@
     "img_number": {
       "title": "图像数量",
       "desc": "生成的图像数量"
+    },
+    "webaccess": {
+      "title": "联网设置",
+      "switch": "是否联网"
     }
   },
   "main": {
@@ -106,5 +111,8 @@
     "speechToTxt": "语音转文字",
     "onlyEN": "只支持英文",
     "themeColor": "主题颜色"
+  },
+  "floatBtn": {
+    "showTokenCost": "显示token消耗"
   }
 }

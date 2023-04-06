@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Actions from '../Actions/index.vue'
 import MdBox from './MdBox'
+import UserBox from './UserBox.vue'
 import type { Flow } from '#/.'
 import { Role } from '#/.'
 
@@ -51,7 +52,8 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
         border-box
       >
         <!-- 文本展示 -->
-        <MdBox v-if="msg" ref="mdRef" :text="msg" :is-user="isUser" />
+        <UserBox v-if="isUser" :text="msg" />
+        <MdBox v-else-if="msg" ref="mdRef" :text="msg" />
         <!-- 图片展示 -->
         <NImageGroup v-if="imgs">
           <NSpace max-w-210px sm-max-w-412px>
@@ -104,7 +106,10 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
             </label>
           </div>
         </div>
-        <Actions v-if="!isUser && done" :is-play="isPlay" @play="setPlayText" @stop="stopPlay" />
+        <div text-12px animate-fade-in fic justify-between>
+          <span v-if="commonSettings.isShowTokenCost && chatData.tokenCost">token cost: {{ chatData.tokenCost }}</span>
+          <Actions v-if="!isUser && done" :is-play="isPlay" @play="setPlayText" @stop="stopPlay" />
+        </div>
       </div>
     </div>
   </div>

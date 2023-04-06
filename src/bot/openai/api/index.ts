@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { OpenAI } from '../types'
 import { parsePayload, streamParser } from './helper'
+import { setTokenCost } from './payload'
 import { useGet, usePost } from '@/api'
 
 type ReadTextStream = (text: string, done: boolean) => void
@@ -16,8 +17,9 @@ export const chatCompletion = (
   config: OpenAI.Config,
   readStream: ReadTextStream,
   input: string,
-) =>
-  usePost(OpenAI.Api.ChatCompletion, {
+) => {
+  setTokenCost(input)
+  return usePost(OpenAI.Api.ChatCompletion, {
     params: parsePayload(OpenAI.Api.ChatCompletion, input, config),
     onStream: (data, control) => {
       try {
@@ -33,6 +35,7 @@ export const chatCompletion = (
       }
     },
   })
+}
 
 export const completion = (
   config: OpenAI.Config,

@@ -11,7 +11,7 @@ function handlePlay() {
 </script>
 
 <template>
-  <div animate-fade-in fic justify-end>
+  <div animate-fade-in fic>
     <!-- <NPopover trigger="hover" class="!p-0 !rd-10px"> -->
     <!--   <template #trigger> -->
     <!--     <NButton text> -->

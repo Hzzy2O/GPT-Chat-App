@@ -1,6 +1,6 @@
 import type { Flow } from '#/index'
 import { useRecordStore } from '@/store'
-import { generateId } from '@/utils'
+import { computeTokens, generateId } from '@/utils'
 
 export function buildFlowStruct({ ...flow }: Partial<Flow>) {
   return {
@@ -33,6 +33,7 @@ export function receiveMsg(text: string | void | null, done?: boolean, ext: Part
         msg: flowBlock.value.msg + text,
         done: !!done,
       })
+
       // setFlowBlockByKey('msg', flowBlock.value.msg + text)
       // setFlowBlockByKey('done', !!done)
       // setFlowBlockByKey('urls', ext.urls)
@@ -40,6 +41,8 @@ export function receiveMsg(text: string | void | null, done?: boolean, ext: Part
   }
 
   if (done) {
+    const tokenCost = computeTokens(flowBlock.value?.msg || '')
+    setFlowBlockByKey('tokenCost', tokenCost)
     setFlowBlockByKey('done', true)
     setFlowBlock(null)
   }

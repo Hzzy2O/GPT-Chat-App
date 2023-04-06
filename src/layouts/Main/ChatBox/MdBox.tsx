@@ -49,7 +49,7 @@ mdi.renderer.rules.code_inline = function (tokens, idx) {
 }
 
 export default defineComponent({
-  props: ['text', 'isUser'],
+  props: ['text'],
   setup(props, { expose }) {
     const elRef = ref<ElRef>()
 
@@ -63,13 +63,10 @@ export default defineComponent({
     //   { modifiers: { prevent: true } },
     // )
     return () => {
-      let { text, isUser } = props
+      let { text } = props
 
       if (!text)
         return undefined
-
-      if (isUser)
-        return <div>{text}</div>
 
       const count = text.match(/```/g)?.length
       if (count >= 0 && count % 2 !== 0)
