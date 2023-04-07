@@ -45,9 +45,10 @@ function getApproval(input: string) {
   // bing的生成图片只支持英文字符
   if (isBing(bot) && mode === 'img') {
     const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
-    if (!reg.test(input))
+    if (!reg.test(input)) {
       error('只支持英文字符')
-    return false
+      return false
+    }
   }
 
   // 编辑图模式时检查是否上传了图片
