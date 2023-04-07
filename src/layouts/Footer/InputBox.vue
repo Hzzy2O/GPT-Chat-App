@@ -45,7 +45,7 @@ defineExpose({
     rd-12px
     shadow="[0_0_10px_rgba(0,0,0,0.10)]"
     dark:shadow="[0_0_15px_rgba(0,0,0,0.10)]"
-    absolute="bottom-0"
+    absolute
     top-auto
     bottom-0
     overflow-hidden

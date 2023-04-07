@@ -58,7 +58,7 @@ pnpm run build
 
 ### deta space:
 ```
-https://deta.space/discovery/r/7n9rpsefbekq3wse
+https://deta.space/discovery/@hzzy/chat/exp-G7tt
 ```
 
 

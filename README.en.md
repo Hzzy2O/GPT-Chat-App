@@ -58,7 +58,7 @@ After the build is complete, the dist folder will contain the files required for
 
 ### deta space 
 ```
-https://deta.space/discovery/r/7n9rpsefbekq3wse
+https://deta.space/discovery/@hzzy/chat/exp-G7tt
 ```
 
 ```bash
