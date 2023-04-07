@@ -1,4 +1,6 @@
 fastapi
 uvicorn
 python-multipart
-EdgeGPT >= 0.1.22
+EdgeGPT >= 0.1.22.1
+BingImageCreator >= 0.1.2
+aiohttp

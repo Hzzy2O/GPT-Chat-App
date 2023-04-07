@@ -1,13 +1,8 @@
-
-# -*- coding: utf-8 -*-
-# Author: XiaoXinYo
-
-
 from typing import Union, Any, AsyncGenerator
 from fastapi import FastAPI, Request, WebSocket, Response
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from img import ImageGen
+from BingImageCreator import ImageGen
 import uvicorn
 import asyncio
 import EdgeGPT
@@ -196,8 +191,7 @@ async def create_image(request: Request) -> Response:
             break
 
 
-    print(argU)
-    image_generator = ImageGen(argU)
+    image_generator = ImageGen(argU, None, False)
     imgs = image_generator.get_images(prompt)
 
     res = {
@@ -265,7 +259,7 @@ async def apiStream(request: Request) -> Response:
 
 @app.get("/")
 def read_root():
-    return {"Hello": "Space!"}
+    return {"Hello": "Bing!"}
 
 
 if __name__ == '__main__':

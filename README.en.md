@@ -55,12 +55,14 @@ pnpm run build
 After the build is complete, the dist folder will contain the files required for the production environment.
 
 ### bing services
-```bash
-cd ./services
-```
+
 ### deta space 
 ```
 https://deta.space/discovery/r/7n9rpsefbekq3wse
+```
+
+```bash
+cd ./services
 ```
 
 #### install

@@ -55,19 +55,22 @@ pnpm run build
 构建完成后，`dist` 文件夹内将包含生产环境所需的文件。
 
 ### bing服务
-```bash
-cd ./services
-```
 
 ### deta space:
 ```
 https://deta.space/discovery/r/7n9rpsefbekq3wse
 ```
 
+
+```bash
+cd ./services
+```
+
 #### 安装
 ```bash
 pip install -r requirements.txt
 ```
+
 #### 启动
 ```bash
 python bing_chat.py
