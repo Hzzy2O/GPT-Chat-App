@@ -13,11 +13,11 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
   chat(msg: string, doneDeal: (d: boolean) => void): void {
     const { setGenerating } = useUIStoreWithOut()
     bingChat(this.config, msg, (data) => {
-      const { answer, urls, done, token } = data
+      const { answer, urls, done, token, suggests } = data
 
       setGenerating(false)
       if (done) {
-        receiveMsg(' ', done, { urls, token })
+        receiveMsg(' ', done, { urls, token, suggests })
         doneDeal(true)
       }
       else { receiveMsg(answer, done, { urls, token }) }

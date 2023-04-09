@@ -4,12 +4,11 @@ import { usePost } from '@/api/http'
 import { useRecordStoreWithOut, useUIStoreWithOut } from '@/store'
 import type { Flow } from '#/index'
 
-interface ResData {
+type ResData = {
   answer: string
-  urls: Flow['urls']
   done: boolean
   token?: string
-}
+} & Pick<Flow, 'urls' | 'suggests'>
 
 export const bingChat = (config: Bing.Config, query: string, readStream: (o: ResData) => void) => {
   const recordStore = useRecordStoreWithOut()

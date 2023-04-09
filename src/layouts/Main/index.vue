@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { NScrollbar } from 'naive-ui'
+import { last } from 'lodash-es'
 import ChatBox from './ChatBox/index.vue'
 import FloatButton from './FloatButton.vue'
 import FloatStatus from './FloatStatus/index.vue'
@@ -16,6 +17,8 @@ const scrollToB = useThrottleFn(() =>
   }, 16),
 )
 
+const suggestions = computed(() => last(flowList.value)?.suggests)
+
 // 滚动到底部
 watch(
   [() => flowList.value],
@@ -28,7 +31,7 @@ watch(
 
 <template>
   <NLayoutContent h="[calc(100dvh-195px)]" bg1 overflow-hidden>
-    <NScrollbar ref="scrollEl" trigger="none">
+    <NScrollbar ref="scrollEl" h-full trigger="none">
       <NList bg-transparent :show-divider="false">
         <NListItem v-for="flow in flowList" :key="flow.id">
           <ChatBox
@@ -36,7 +39,13 @@ watch(
           />
         </NListItem>
       </NList>
+      <!-- <template v-if="suggestions?.length"> -->
+      <!--   <NTag v-for="sug in suggestions" :key="sug" round type="primary"> -->
+      <!--     {{ sug }} -->
+      <!--   </NTag> -->
+      <!-- </template> -->
     </NScrollbar>
+
     <FloatButton />
     <FloatStatus v-if="false" />
   </NLayoutContent>

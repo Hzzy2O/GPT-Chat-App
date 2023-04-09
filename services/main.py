@@ -82,6 +82,14 @@ def getUrl(data: dict) -> list:
             })
     return urls
 
+def getSuggest(data: dict) -> list:
+    suggestedResponses = data.get('item').get('messages')[1].get('suggestedResponses')
+    suggest = []
+    if suggestedResponses:
+        for item in suggestedResponses:
+            suggest.append(item.get('text'))
+    return suggest
+
 def needReset(data: dict, answer: str) -> bool:
     maxTimes = data.get('item').get('throttling').get('maxNumUserMessagesInConversation')
     nowTimes = data.get('item').get('throttling').get('numUserMessagesInConversation')
@@ -226,7 +234,8 @@ async def apiStream(request: Request) -> Response:
             'urls': [],
             'done': False,
             'reset': False,
-            'token': token
+            'token': token,
+            'suggests': []
         }
         async for final, data in chatBot.ask_stream(question, conversation_style=getStyleEnum(style)):
             if not final:
@@ -247,6 +256,7 @@ async def apiStream(request: Request) -> Response:
                     yield GenerateResponse().success(info, True)
                 info['done'] = True
                 info['urls'] = getUrl(data)
+                info['suggests'] = getSuggest(data)
 
                 if needReset(data, answer):
                     await chatBot.reset()
