@@ -4,7 +4,6 @@ import FunctionArea from './FunctionArea.vue'
 import { useRecordStore, useUIStore } from '@/store'
 import { Role } from '#/index'
 
-const inputRef = ref<typeof InputBox | null>(null)
 const funcArea = ref<typeof FunctionArea | null>(null)
 
 const modeValue = ref('chat')
@@ -25,13 +24,9 @@ const UIStore = useUIStore()
 const { setGenerating, setShowTokenModal } = UIStore
 const { isGenerating } = storeToRefs(UIStore)
 
-function setInput(text: string) {
-  inputRef.value?.setVal(text)
-}
-
 // 是否能发送
 function getApproval(input: string) {
-  if (!input || isGenerating.value)
+  if (isGenerating.value)
     return
 
   // 检查是否设置了密钥
@@ -61,7 +56,10 @@ function getApproval(input: string) {
 }
 
 function send() {
-  const input: string = inputRef.value?.input
+  const input = getQueryInputVal()
+  if (!input)
+    return
+
   if (!getApproval(input))
     return
 
@@ -87,9 +85,9 @@ function send() {
 }
 
 async function patchEvent(input: string) {
+  setQueryInputVal('')
   const end = (done: boolean) => {
     if (done) {
-      setInput('')
       setFlowBlock(null)
       setGenerating(false)
     }
@@ -118,8 +116,8 @@ async function patchEvent(input: string) {
   <NLayoutFooter shadow="[0px_-5px_5pxblack]" bg2 w-full h-135px pb-50px pt-15px>
     <div animate-bounce-in h-74px w-full flex justify-center>
       <div relative animate-head-shake w="80%">
-        <InputBox ref="inputRef" :mode="modeValue" @send="send" />
-        <FunctionArea ref="funcArea" :mode="modeValue" @change-mode="changeMode" @send="send" @set-input="setInput" />
+        <InputBox :mode="modeValue" @send="send" />
+        <FunctionArea ref="funcArea" :mode="modeValue" @change-mode="changeMode" @send="send" />
       </div>
     </div>
   </NLayoutFooter>

@@ -7,10 +7,10 @@ import ImgUploader from './FunctionalParts/ImgUploader.vue'
 const props = defineProps<{
   mode: string
 }>()
-const emit = defineEmits(['setInput', 'send', 'changeMode'])
+const emit = defineEmits(['send', 'changeMode'])
 
 function setInput(text: string) {
-  emit('setInput', text)
+  setQueryInputVal(text)
 }
 
 function changeMode(mode: string) {

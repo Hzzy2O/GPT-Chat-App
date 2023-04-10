@@ -16,7 +16,7 @@ const formRef = ref<Nullable<FormInst>>(null)
 function valueChange(key: string, val: any) {
   emit('handleChange', key, val)
 }
-const formModel = props.formModel
+const formModel = computed(() => props.formModel)
 </script>
 
 <template>

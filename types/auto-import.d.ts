@@ -46,9 +46,11 @@ declare global {
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getQueryInputVal: typeof import('../src/composables/input')['getQueryInputVal']
   const getThemeOverrides: typeof import('../src/composables/commonSettings')['getThemeOverrides']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const initInputRef: typeof import('../src/composables/input')['initInputRef']
   const inject: typeof import('vue')['inject']
   const isBing: typeof import('../src/bot/index')['isBing']
   const isDark: typeof import('../src/composables/index')['isDark']
@@ -113,6 +115,7 @@ declare global {
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setLocale: typeof import('../src/locales/index')['setLocale']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
+  const setQueryInputVal: typeof import('../src/composables/input')['setQueryInputVal']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -363,9 +366,11 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getQueryInputVal: UnwrapRef<typeof import('../src/composables/input')['getQueryInputVal']>
     readonly getThemeOverrides: UnwrapRef<typeof import('../src/composables/commonSettings')['getThemeOverrides']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initInputRef: UnwrapRef<typeof import('../src/composables/input')['initInputRef']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isBing: UnwrapRef<typeof import('../src/bot/index')['isBing']>
     readonly isDark: UnwrapRef<typeof import('../src/composables/index')['isDark']>
@@ -430,6 +435,7 @@ declare module 'vue' {
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setLocale: UnwrapRef<typeof import('../src/locales/index')['setLocale']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
+    readonly setQueryInputVal: UnwrapRef<typeof import('../src/composables/input')['setQueryInputVal']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

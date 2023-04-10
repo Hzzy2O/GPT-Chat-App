@@ -89,7 +89,7 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
             overflow-hidden
             rd-20px
           >
-            <label :title="item.title">
+            <label :title="item.title || item.url">
               <NTag :bordered="false" round pb-10px>
                 <div
                   hover-underline
@@ -98,9 +98,10 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
                   ws-nowrap
                   max-w-120px
                   text-ellipsis
+                  leading-15px
                   @click="toUrl(item.url)"
                 >
-                  {{ item.title }}
+                  {{ item.title || item.url }}
                 </div>
               </NTag>
             </label>

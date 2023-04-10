@@ -21,7 +21,7 @@ export interface Flow {
   token?: string
   // 花费的token数量
   tokenCost?: number
-  suggests: string[]
+  suggests?: string[]
 }
 
 export type Language = 'zh-CN' | 'en-US'

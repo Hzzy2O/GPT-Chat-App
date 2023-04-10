@@ -18,6 +18,8 @@ const scrollToB = useThrottleFn(() =>
 )
 
 const suggestions = computed(() => last(flowList.value)?.suggests)
+const suggestionRef = ref<HTMLDivElement>()
+const { height: suggestionHeight } = useElementSize(suggestionRef)
 
 // 滚动到底部
 watch(
@@ -32,18 +34,22 @@ watch(
 <template>
   <NLayoutContent h="[calc(100dvh-195px)]" bg1 overflow-hidden>
     <NScrollbar ref="scrollEl" h-full trigger="none">
-      <NList bg-transparent :show-divider="false">
+      <NList bg-transparent :style="`min-height: calc(100dvh - ${suggestionHeight + 200}px)`" :show-divider="false">
         <NListItem v-for="flow in flowList" :key="flow.id">
           <ChatBox
             :chat-data="flow"
           />
         </NListItem>
       </NList>
-      <!-- <template v-if="suggestions?.length"> -->
-      <!--   <NTag v-for="sug in suggestions" :key="sug" round type="primary"> -->
-      <!--     {{ sug }} -->
-      <!--   </NTag> -->
-      <!-- </template> -->
+      <template v-if="suggestions?.length">
+        <div ref="suggestionRef" w-full justify-end fic flex="gap-8px wrap">
+          <label v-for="sug in suggestions" :key="sug" :title="sug" @click="setQueryInputVal(sug)">
+            <NTag cursor-pointer mx-8px round type="primary" max-w-260px truncate>
+              {{ sug }}
+            </NTag>
+          </label>
+        </div>
+      </template>
     </NScrollbar>
 
     <FloatButton />

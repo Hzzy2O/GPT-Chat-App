@@ -17,6 +17,7 @@ GPT-Chat-App is a frontend project built with TypeScript, Vite, Vue 3, and UnoCS
    - Chat with GPT-3.5
    - Generate images
    - Speech-to-text
+   - web access response
 4. **Bing** integration:
    - Chat
    - Generate images

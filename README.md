@@ -17,6 +17,7 @@ GPT-Chat-App 是一个基于 TypeScript、Vite、Vue 3 和 UnoCSS 构建的前�
    - 与 GPT-3.5 进行聊天
    - 生成图片
    - 语音转文字
+   - 联网响应
 4. **Bing** 集成：
    - 聊天
    - 生成图片

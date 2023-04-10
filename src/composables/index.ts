@@ -21,3 +21,4 @@ export function isDev() {
 
 export * from './handler'
 export * from './commonSettings'
+export * from './input'

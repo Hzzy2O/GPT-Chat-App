@@ -6,3 +6,4 @@ dist-ssr
 stats.html
 
 /services/__pycache__
+/services/.space

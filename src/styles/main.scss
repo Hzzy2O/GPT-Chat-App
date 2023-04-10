@@ -45,3 +45,7 @@ textarea {
   background: none;
 }
 
+.n-tag__content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

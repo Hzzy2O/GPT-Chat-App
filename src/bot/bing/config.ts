@@ -6,7 +6,7 @@ import { enumToOptions } from '@/utils'
 
 // 配置
 export const config: Bing.Config = {
-  baseURL: 'https://bingapi-1-b8340432.deta.app',
+  baseURL: 'https://bing_services-1-o5366254.deta.app',
   promptStyle: PromptStyle.balanced,
 }
 

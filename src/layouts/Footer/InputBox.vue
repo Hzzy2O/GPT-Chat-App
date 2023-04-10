@@ -5,17 +5,7 @@ defineProps<{
   mode: string
 }>()
 
-// function clearInput() {
-//   input.value = '';
-//   nextTick(() => {
-//     triggerResize();
-//   });
-// }
 const emit = defineEmits(['send'])
-const { textarea, input } = useTextareaAutosize()
-function setVal(val: string) {
-  input.value = val
-}
 
 // ui状态控制
 const UIStore = useUIStore()
@@ -28,9 +18,10 @@ function catchEnter(e: KeyboardEvent) {
   }
 }
 
-defineExpose({
-  setVal,
-  input,
+const { textarea, input } = useTextareaAutosize()
+
+onMounted(() => {
+  initInputRef(textarea.value)
 })
 </script>
 
