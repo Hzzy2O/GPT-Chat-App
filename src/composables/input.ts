@@ -1,7 +1,9 @@
-const inputRef = ref<HTMLTextAreaElement>()
+import type { Ref } from 'vue'
 
-export function initInputRef(el: HTMLTextAreaElement) {
-  inputRef.value = el
+let inputRef: Ref<HTMLTextAreaElement>
+
+export function initInputRef(el: Ref<HTMLTextAreaElement>) {
+  inputRef = el
 }
 
 export function getQueryInputVal() {

@@ -64,6 +64,7 @@ function send() {
     return
 
   setGenerating(true)
+  setQueryInputVal('')
 
   // 添加用户输入的消息
   const addusermsg = () => {
@@ -85,7 +86,6 @@ function send() {
 }
 
 async function patchEvent(input: string) {
-  setQueryInputVal('')
   const end = (done: boolean) => {
     if (done) {
       setFlowBlock(null)

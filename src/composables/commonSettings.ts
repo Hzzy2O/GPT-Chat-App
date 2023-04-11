@@ -4,7 +4,7 @@ import { ls } from '@/utils/cache'
 
 export const commonSettings = useStorage('commonSettings', {
   isShowTokenCost: false,
-  themeColor: '#cfb0ef',
+  themeColor: '#ff1d5e',
 }, ls)
 
 export const getThemeOverrides = computed(() => {
@@ -25,7 +25,6 @@ export const getThemeOverrides = computed(() => {
     },
     Switch: {
       railColorActive: primaryColor,
-
     },
     Slider: {
       fillColor: primaryColor,
