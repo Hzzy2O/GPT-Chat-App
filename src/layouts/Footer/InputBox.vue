@@ -21,7 +21,7 @@ function catchEnter(e: KeyboardEvent) {
 const { textarea, input } = useTextareaAutosize()
 
 onMounted(() => {
-  initInputRef(textarea)
+  initInputRef(input)
 })
 </script>
 

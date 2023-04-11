@@ -1,16 +1,16 @@
 import type { Ref } from 'vue'
 
-let inputRef: Ref<HTMLTextAreaElement>
+let inputRef: Ref<string>
 
-export function initInputRef(el: Ref<HTMLTextAreaElement>) {
+export function initInputRef(el: Ref<string>) {
   inputRef = el
 }
 
 export function getQueryInputVal() {
-  return inputRef.value?.value
+  return inputRef.value
 }
 
 export function setQueryInputVal(val: string) {
-  if (inputRef.value)
-    inputRef.value.value = val
+  if (inputRef)
+    inputRef.value = val
 }
