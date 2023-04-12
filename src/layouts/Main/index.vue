@@ -4,10 +4,12 @@ import { last } from 'lodash-es'
 import ChatBox from './ChatBox/index.vue'
 import FloatButton from './FloatButton.vue'
 import FloatStatus from './FloatStatus/index.vue'
-import { useRecordStore } from '@/store'
+import { useRecordStore, useUIStore } from '@/store'
 
 const recordStore = useRecordStore()
 const { flowList } = storeToRefs(recordStore)
+const UIStore = useUIStore()
+const { isGenerating } = storeToRefs(UIStore)
 
 const scrollEl = ref<typeof NScrollbar>()
 const { y } = useScroll(scrollEl as unknown as ElRef, { behavior: 'smooth' })
@@ -40,6 +42,10 @@ watch(
             :chat-data="flow"
           />
         </NListItem>
+        <div v-if="isGenerating" fc dark:color-white>
+          <span text-18px mr-5px>{{ t('main.chat.thinking') }}</span>
+          <iconify-icon width="20" icon="svg-spinners:blocks-wave" />
+        </div>
       </NList>
       <template v-if="suggestions?.length">
         <div ref="suggestionRef" w-full justify-end fic flex="gap-8px wrap">

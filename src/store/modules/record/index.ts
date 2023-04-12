@@ -11,6 +11,7 @@ interface RecordState {
   sessionId: Nullable<string>
   historyList: HistoryList
   prompt: string
+  abortRef: AbortController | null
 }
 
 export const useRecordStore = defineStore('record-store', {
@@ -20,8 +21,18 @@ export const useRecordStore = defineStore('record-store', {
     sessionId: null,
     historyList: [],
     prompt: '',
+    abortRef: null,
   }),
   actions: {
+    setAbortRef(ref: AbortController | null) {
+      this.abortRef = ref
+    },
+    runAbortRef() {
+      if (this.abortRef) {
+        this.abortRef.abort()
+        this.abortRef = null
+      }
+    },
     setPrompt(prompt: string) {
       this.prompt = prompt
     },

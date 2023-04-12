@@ -53,7 +53,9 @@
   },
   "main": {
     "chat": {
-      "link": "references link"
+      "link": "references link",
+      "stop_generate": "stop generating",
+      "thinking": "AI is thinking"
     }
   },
   "footer": {

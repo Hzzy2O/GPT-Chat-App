@@ -41,26 +41,7 @@ onMounted(() => {
     bottom-0
     overflow-hidden
   >
-    <div
-      v-if="isGenerating"
-      bg-white
-      rd-12px
-      dark:bg="dark-3"
-      absolute
-      bg1
-      w-full
-      h-full
-      left-0
-      top-0
-      z-99
-      fc
-    >
-      <span>{{ t('footer.wait') }}</span>
-      <Icon ml-10px name="svg-spinners:blocks-wave" :size="28" cursor-default title="" />
-    </div>
-    <div v-if="isGenerating" w-full h-24px />
     <textarea
-      v-else
       ref="textarea"
       v-model="input"
       w-full

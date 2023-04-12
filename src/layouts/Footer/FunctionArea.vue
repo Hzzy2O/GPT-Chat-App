@@ -3,11 +3,28 @@ import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 import Recorder from './FunctionalParts/Recorder.vue'
 import Prompt from './FunctionalParts/Prompt.vue'
 import ImgUploader from './FunctionalParts/ImgUploader.vue'
+import { useRecordStore, useUIStore } from '@/store'
 
 const props = defineProps<{
   mode: string
 }>()
 const emit = defineEmits(['send', 'changeMode'])
+
+const UIStore = useUIStore()
+const { setGenerating } = useUIStore()
+const { isGenerating } = storeToRefs(UIStore)
+const RecordStore = useRecordStore()
+const { flowBlock } = storeToRefs(RecordStore)
+const { runAbortRef, setFlowBlockByKey, setFlowBlock } = RecordStore
+
+function stopGenerate() {
+  runAbortRef()
+  setGenerating(false)
+  if (flowBlock.value) {
+    setFlowBlockByKey('done', true)
+    setFlowBlock(null)
+  }
+}
 
 function setInput(text: string) {
   setQueryInputVal(text)
@@ -114,7 +131,8 @@ defineExpose({
         <NDivider vertical class="!mr-0" />
       </template>
       <div f-icon p-0>
-        <Icon :title="t('common.send')" :size="22" name="line-md:telegram" @click="emit('send')" />
+        <Icon v-if="isGenerating" :title="t('main.chat.stop_generate')" :size="22" name="material-symbols:stop-circle-outline-rounded" @click="stopGenerate" />
+        <Icon v-else :title="t('common.send')" :size="22" name="line-md:telegram" @click="emit('send')" />
       </div>
     </div>
     <Transition>

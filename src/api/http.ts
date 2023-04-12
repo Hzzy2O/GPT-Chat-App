@@ -2,7 +2,7 @@ import qs from 'qs'
 import type { ReadStreamFunc } from './helper'
 import { parseStream } from './helper'
 import { useToast } from '@/composables'
-import { useUIStoreWithOut } from '@/store'
+import { useRecordStoreWithOut, useUIStoreWithOut } from '@/store'
 
 export enum Method {
   GET = 'GET',
@@ -103,6 +103,7 @@ function _useFetch<T = any>(
   const controller = ref<AbortController | null>(null)
 
   const { setGenerating } = useUIStoreWithOut()
+  const { setAbortRef } = useRecordStoreWithOut()
 
   // 用于终止请求
   function abort() {
@@ -118,6 +119,7 @@ function _useFetch<T = any>(
       isFetching.value = true
 
       controller.value = new AbortController()
+      setAbortRef(controller.value)
 
       const response = await fetch(url, { ...options, signal: controller.value.signal })
 

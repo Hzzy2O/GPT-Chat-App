@@ -53,7 +53,9 @@
   },
   "main": {
     "chat": {
-      "link": "参考链接"
+      "link": "参考链接",
+      "stop_generate": "停止生成",
+      "thinking": "AI正在思考中"
     }
   },
   "footer": {
