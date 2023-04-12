@@ -54,6 +54,7 @@
   "main": {
     "chat": {
       "link": "参考链接",
+      "nodata": "你可以问我任何问题",
       "stop_generate": "停止生成",
       "thinking": "AI正在思考中"
     }

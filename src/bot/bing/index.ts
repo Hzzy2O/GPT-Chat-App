@@ -15,8 +15,8 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
     bingChat(this.config, msg, (data) => {
       const { answer, urls, done, token, suggests } = data
 
-      setGenerating(false)
       if (done) {
+        setGenerating(false)
         receiveMsg(' ', done, { urls, token, suggests })
         doneDeal(true)
       }

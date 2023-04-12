@@ -30,7 +30,14 @@ const drawWidth = computed(() => {
       <SettingsForm />
     </NDrawerContent>
   </NDrawer>
-  <NLayoutSider pt-15px display-none lg-display-block :width="320" b-l="1px solid stone-1 dark:dark-1">
+  <NLayoutSider
+    bg2
+    pt-15px
+    display-none
+    lg-display-block
+    :width="320"
+    b-l="1px solid stone-1 dark:dark-1"
+  >
     <SettingsForm />
   </NLayoutSider>
 </template>

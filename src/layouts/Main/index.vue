@@ -3,8 +3,34 @@ import { NScrollbar } from 'naive-ui'
 import { last } from 'lodash-es'
 import ChatBox from './ChatBox/index.vue'
 import FloatButton from './FloatButton.vue'
-import FloatStatus from './FloatStatus/index.vue'
 import { useRecordStore, useUIStore } from '@/store'
+
+// import { toJpeg, toBlob } from 'html-to-image'
+// import { generateId } from '@/utils'
+// // 余额展示
+
+// function exportImg() {
+//   toBlob(
+//     document.querySelector('body')!,
+//     {
+// quality: 0.95,
+// style: {
+//   transform: 'scale(0.5)',
+//   transformOrigin: 'top left',
+//   width: '1000px',
+//   height: '1000px',
+// },
+//     },
+//   ).then((url) => {
+//       console.log(url)
+//     // const a = document.createElement('a')
+//     // a.href = url
+//     // a.download = `ChatGPT-${generateId()}.jpg`
+//     // a.click()
+//   }).catch(err => {
+//       console.log(err)
+//     })
+// }
 
 const recordStore = useRecordStore()
 const { flowList } = storeToRefs(recordStore)
@@ -34,9 +60,21 @@ watch(
 </script>
 
 <template>
-  <NLayoutContent h="[calc(100dvh-195px)]" bg1 overflow-hidden>
-    <NScrollbar ref="scrollEl" h-full trigger="none">
-      <NList bg-transparent :style="`min-height: calc(100dvh - ${suggestionHeight + 200}px)`" :show-divider="false">
+  <NLayoutContent h="[calc(100dvh-195px)]" bg2 overflow-hidden>
+    <!-- <div @click="exportImg"> -->
+    <!--   xxx -->
+    <!-- </div> -->
+    <div v-if="!flowList.length" w-full h-full fc flex-col>
+      <Icon name="bi:robot" :size="100" mb-20px />
+      <span text-22px>{{ t('main.chat.nodata') }}</span>
+    </div>
+    <NScrollbar v-else ref="scrollEl" h-full trigger="none">
+      <NList
+        id="chatList"
+        bg-transparent
+        :style="`min-height: calc(100dvh - ${suggestionHeight + 200}px)`"
+        :show-divider="false"
+      >
         <NListItem v-for="flow in flowList" :key="flow.id">
           <ChatBox
             :chat-data="flow"
@@ -59,6 +97,5 @@ watch(
     </NScrollbar>
 
     <FloatButton />
-    <FloatStatus v-if="false" />
   </NLayoutContent>
 </template>

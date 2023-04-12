@@ -27,16 +27,12 @@ export function receiveMsg(text: string | void | null, done?: boolean, ext: Part
       setFlowBlock(block)
       pushBlock(flowBlock.value!)
     }
-    else {
+    else if (!flowBlock.value.done) {
       assignFlowBlock({
         ...ext,
         msg: flowBlock.value.msg + text,
         done: !!done,
       })
-
-      // setFlowBlockByKey('msg', flowBlock.value.msg + text)
-      // setFlowBlockByKey('done', !!done)
-      // setFlowBlockByKey('urls', ext.urls)
     }
   }
 

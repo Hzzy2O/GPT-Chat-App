@@ -54,6 +54,7 @@
   "main": {
     "chat": {
       "link": "references link",
+      "nodata": "you can ask me everything",
       "stop_generate": "stop generating",
       "thinking": "AI is thinking"
     }

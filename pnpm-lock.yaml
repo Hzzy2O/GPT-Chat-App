@@ -25,6 +25,7 @@ specifiers:
   eventsource-parser: ^0.1.0
   gpt3-tokenizer: ^1.1.5
   highlight.js: ^11.7.0
+  html-to-image: ^1.11.11
   iconify-icon: ^1.0.7
   idb: ^7.1.1
   lodash-es: ^4.17.21
@@ -65,6 +66,7 @@ dependencies:
   eventsource-parser: registry.npmmirror.com/eventsource-parser/0.1.0
   gpt3-tokenizer: registry.npmmirror.com/gpt3-tokenizer/1.1.5
   highlight.js: registry.npmmirror.com/highlight.js/11.7.0
+  html-to-image: registry.npmmirror.com/html-to-image/1.11.11
   iconify-icon: registry.npmmirror.com/iconify-icon/1.0.7
   idb: registry.npmmirror.com/idb/7.1.1
   lodash-es: registry.npmmirror.com/lodash-es/4.17.21
@@ -6103,6 +6105,12 @@ packages:
     version: 3.2.0
     engines: {node: '>=8'}
     dev: true
+
+  registry.npmmirror.com/html-to-image/1.11.11:
+    resolution: {integrity: sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/html-to-image/-/html-to-image-1.11.11.tgz}
+    name: html-to-image
+    version: 1.11.11
+    dev: false
 
   registry.npmmirror.com/htmlparser2/3.10.1:
     resolution: {integrity: sha512-IgieNijUMbkDovyoKObU1DUhm1iwNYE/fuifEoEHfd1oZKZDaONBSkal7Y01shxsM49R4XaMdGez3WnF9UfiCQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/htmlparser2/-/htmlparser2-3.10.1.tgz}

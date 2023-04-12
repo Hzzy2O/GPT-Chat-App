@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useUIStore } from '@/store'
-
 defineProps<{
   mode: string
 }>()
@@ -8,9 +6,6 @@ defineProps<{
 const emit = defineEmits(['send'])
 
 // ui状态控制
-const UIStore = useUIStore()
-const { isGenerating } = storeToRefs(UIStore)
-
 function catchEnter(e: KeyboardEvent) {
   if (e.key === 'Enter' && !e.shiftKey) {
     emit('send')
@@ -19,6 +14,11 @@ function catchEnter(e: KeyboardEvent) {
 }
 
 const { textarea, input } = useTextareaAutosize()
+
+watch(input, (val) => {
+  if (textarea.value && val !== textarea.value.value)
+    textarea.value.value = val
+})
 
 onMounted(() => {
   initInputRef(input)
@@ -36,10 +36,10 @@ onMounted(() => {
     rd-12px
     shadow="[0_0_10px_rgba(0,0,0,0.10)]"
     dark:shadow="[0_0_15px_rgba(0,0,0,0.10)]"
-    absolute
     top-auto
     bottom-0
     overflow-hidden
+    class="textareaBox"
   >
     <textarea
       ref="textarea"
@@ -59,3 +59,9 @@ onMounted(() => {
     />
   </div>
 </template>
+
+<style>
+.textareaBox {
+  display: absolute;
+}
+</style>
