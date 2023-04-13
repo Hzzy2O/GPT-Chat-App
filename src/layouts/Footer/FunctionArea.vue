@@ -123,11 +123,11 @@ defineExpose({
     </div>
     <div fc>
       <template v-if="options.length">
-        <n-popselect :value="props.mode" :options="options" trigger="click" @update-value="changeMode">
+        <NPopselect :value="props.mode" :options="options" trigger="click" @update-value="changeMode">
           <div f-icon p-0 fc>
             <span cursor-pointer>{{ t(`footer.mode.${props.mode}`) }}</span>
           </div>
-        </n-popselect>
+        </NPopselect>
         <NDivider vertical class="!mr-0" />
       </template>
       <div f-icon p-0>

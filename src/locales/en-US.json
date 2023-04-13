@@ -7,7 +7,9 @@
     "clearConfirm": "Are you sure to clear all chat history?",
     "total": "Total",
     "used": "Used",
-    "available": "Available"
+    "available": "Available",
+    "exportCurrent": "export current chat",
+    "exportImg": "export Image"
   },
   "config": {
     "title": "config",

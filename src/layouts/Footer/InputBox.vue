@@ -28,14 +28,9 @@ onMounted(() => {
 <template>
   <div
     bg-white
-    dark:bg="dark-3"
     transition-all
     w-full
-    p="l-14px t-12px b-38px"
-    lg:p="t-13px l-14px"
     rd-12px
-    shadow="[0_0_10px_rgba(0,0,0,0.10)]"
-    dark:shadow="[0_0_15px_rgba(0,0,0,0.10)]"
     top-auto
     bottom-0
     overflow-hidden
@@ -60,8 +55,10 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .textareaBox {
-  display: absolute;
+  --at-apply: absolute dark:bg-dark-3 lg:pt-13px lg:pl-14px dark:shadow-[0_0_15px_rgba(0,0,0,0.10)];
+  padding: 12px 14px 38px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 </style>

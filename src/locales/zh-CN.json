@@ -7,7 +7,9 @@
     "clearConfirm": "确定删除所有会话?",
     "total": "总额",
     "used": "已用",
-    "available": "可用"
+    "available": "可用",
+    "exportCurrent": "导出当前会话",
+    "exportImg": "导出图片"
   },
   "config": {
     "title": "配置",

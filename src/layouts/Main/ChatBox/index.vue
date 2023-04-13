@@ -14,9 +14,9 @@ const isUser = type?.value === Role.user
 const containerCls = isUser ? 'justify-end' : 'justify-start'
 
 const toUrl = (url: string) => window.open(url, '_blank')
-const boxCls = isUser
+const boxCls = `dark:border-color-transparent ${isUser
   ? 'bg-[var(--theme-color)] text-white animate-bounce-in-right'
-  : 'bg2 dark:bg-dark-1 animate-bounce-in-left'
+  : 'bg2 dark:bg-dark-1 animate-bounce-in-left'}`
 
 const mdRef = ref<typeof MdBox>()
 function setPlayText() {
@@ -44,7 +44,6 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
       <div
         shadow
         border="1px solid gray-2"
-        dark:border-color-transparent
         px-15px
         py-10px
         :class="boxCls"
