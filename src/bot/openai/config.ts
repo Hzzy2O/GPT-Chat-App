@@ -47,6 +47,11 @@ export const settingSchema: FormConfig = [
         type: 'switch',
       },
       {
+        key: 'web_access',
+        label: 'config.webaccess.switch',
+        type: 'switch',
+      },
+      {
         key: 'temperature',
         label: 'config.temperature.title',
         desc: 'config.temperature.desc',
@@ -106,17 +111,6 @@ export const settingSchema: FormConfig = [
         max: 10,
         min: 1,
         step: 1,
-      },
-    ],
-  },
-  {
-    label: 'config.webaccess.title',
-    type: 'collapse',
-    items: [
-      {
-        key: 'web_access',
-        label: 'config.webaccess.switch',
-        type: 'switch',
       },
     ],
   },

@@ -45,21 +45,31 @@ function delHistory(id: string) {
 
 <template>
   <div overflow-hidden relative animate-fade-in>
-    <div px-10px mt-10px w-full cursor-pointer fic>
+    <div px-10px mb-10px w-full cursor-pointer fic>
       <div p="x-10px y-4px" w-full rd-12px fic>
         <NInput v-model:value="filterKey" rd-8px :autofocus="false" clearable placeholder="" size="small" />
-        <NButton rd-8px type="primary" ml-8px p-8px fc size="small">
-          <Icon name="ion:chatbox-outline" :title="t('siderbar.newchat')" :size="18" @click="newChat" />
+        <NButton rd-8px ml-8px p-8px fc size="small">
+          <Icon name="akar-icons:chat-add" :title="t('siderbar.newchat')" :size="18" @click="newChat" />
         </NButton>
       </div>
     </div>
-    <NScrollbar ref="scrollEl" h="[calc(100dvh-250px)]" trigger="none">
-      <NList bg-transparent hoverable mt-10px :show-divider="false">
-        <NListItem v-for="history in currentList" :key="history.id" relative mt-8px>
-          <div text-16px fic justify-between w-full @click="changeSession(history)">
+    <NScrollbar ref="scrollEl" bg1 h="[calc(100dvh-250px)]" trigger="none">
+      <NList bg-transparent :show-divider="false">
+        <NListItem v-for="history in currentList" :key="history.id" relative class="!px-12px !py-4px">
+          <div
+            text-16px
+            fic
+            justify-between
+            hbg1
+            rd-10px
+            p-8px
+            w-full
+            cursor-pointer
+            @click="changeSession(history)"
+          >
             <div overflow-hidden fic w-full>
               <Icon name="ci:chat-dots" :size="18" />
-              <span cursor-pointer mx-8px truncate>{{ history.title }}</span>
+              <span mx-8px truncate>{{ history.title }}</span>
             </div>
 
             <div w-25px fc cursor-pointer @click.stop>

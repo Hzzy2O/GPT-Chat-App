@@ -5,9 +5,10 @@
   <a href="./README.en.md">English</a>
 </div>
 
-[online demo](https://gpt-chat-app-six.vercel.app)
-
 GPT-Chat-App 是一个基于 TypeScript、Vite、Vue 3 和 UnoCSS 构建的前端项目，允许用户与 OpenAI 和 Bing 的 GPT 模型进行交互。
+
+[online demo](https://gpt-chat-app-six.vercel.app)
+bing services on space: `https://deta.space/discovery/r/sgzhrcavxfxaahhr`
 
 ## ✨ 功能介绍
 
@@ -56,12 +57,6 @@ pnpm run build
 构建完成后，`dist` 文件夹内将包含生产环境所需的文件。
 
 ### bing服务
-
-### deta space:
-```
-https://deta.space/discovery/@hzzy/chat/exp-G7tt
-```
-
 
 ```bash
 cd ./services

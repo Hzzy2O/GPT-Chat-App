@@ -19,9 +19,9 @@ async function getBalanceMsg() {
   try {
     const balance = await bot.value.getBalance?.()
     if (balance) {
-      balanceInfo.total = balance.total
-      balanceInfo.used = balance.used
-      balanceInfo.available = balance.available
+      balanceInfo.total = +balance.total
+      balanceInfo.used = +balance.used
+      balanceInfo.available = +balance.available
     }
   }
   catch (error) {
