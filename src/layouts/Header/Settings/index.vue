@@ -3,8 +3,11 @@ import MainForm from './MainForm.vue'
 </script>
 
 <template>
-  <n-popover
+  <NPopover
     w-285px
+    class="!rd-8px"
+    overflow-hidden
+    relative
     placement="bottom"
     transition-width
     style="padding: 0"
@@ -14,5 +17,5 @@ import MainForm from './MainForm.vue'
       <slot />
     </template>
     <MainForm />
-  </n-popover>
+  </NPopover>
 </template>

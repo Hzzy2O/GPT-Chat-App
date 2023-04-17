@@ -60,6 +60,9 @@ const drawWidth = computed(() => {
 </template>
 
 <style lang="scss">
+  .n-drawer-header {
+    border: none !important;
+  }
   .n-drawer-header__main {
     width: 100%;
   }

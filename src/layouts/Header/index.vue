@@ -107,7 +107,17 @@
 
         const leftItems = [ControlMenu, BotSelect]
         return (
-          <NLayoutHeader bg2 w-full h-60px flex justify-between px-15px bordered>
+          <NLayoutHeader
+            relative
+            z-20
+            shadow-head
+            bg2
+            w-full
+            h-60px
+            flex
+            justify-between
+            px-15px
+            bordered>
             <div fic>
               {leftItems.map(item => (
                 <div h-full flex items-center pr-15px>

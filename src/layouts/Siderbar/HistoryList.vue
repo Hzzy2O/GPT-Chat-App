@@ -53,14 +53,15 @@ function delHistory(id: string) {
         </NButton>
       </div>
     </div>
-    <NScrollbar ref="scrollEl" bg1 h="[calc(100dvh-250px)]" trigger="none">
+    <NScrollbar ref="scrollEl" h="[calc(100dvh-250px)]" trigger="none">
       <NList bg-transparent :show-divider="false">
         <NListItem v-for="history in currentList" :key="history.id" relative class="!px-12px !py-4px">
           <div
             text-16px
             fic
             justify-between
-            hbg1
+            hover:bg-zinc-2
+            dark="hover-bg-zinc-8"
             rd-10px
             p-8px
             w-full

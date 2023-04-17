@@ -34,7 +34,8 @@ function exportImg() {
     trigger="click"
     bg-transparent
     class="!p-0 !rd-8px"
-    placement="top-end"
+    placement="top"
+    @clickoutside="showPopover = false"
   >
     <template #trigger>
       <div pl-2px fic>
@@ -42,7 +43,7 @@ function exportImg() {
         <span cursor-pointer @click="showPopover = !showPopover">{{ t('siderbar.exportCurrent') }}</span>
       </div>
     </template>
-    <NButtonGroup vertical bg-white rd-8px>
+    <NButtonGroup vertical bg1 rd-8px>
       <NButton rd-8px @click="exportImg">
         {{ t('siderbar.exportImg') }}
       </NButton>

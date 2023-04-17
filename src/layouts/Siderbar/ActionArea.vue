@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ExportModal from './ExportModal.vue'
 import { useRecordStore } from '@/store'
-// const balanceMsg = computed(() => balance.value?.().balanceMsg)
 
 const recordStore = useRecordStore()
 const { flowList } = storeToRefs(recordStore)
