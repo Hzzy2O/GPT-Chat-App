@@ -44,7 +44,7 @@ function delHistory(id: string) {
 </script>
 
 <template>
-  <div overflow-hidden relative animate-fade-in>
+  <div overflow-hidden relative>
     <div px-10px mb-10px w-full cursor-pointer fic>
       <div p="x-10px y-4px" w-full rd-12px fic>
         <NInput v-model:value="filterKey" rd-8px :autofocus="false" clearable placeholder="" size="small" />

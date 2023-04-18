@@ -34,7 +34,7 @@ watch(
 
 <template>
   <NLayoutContent h="[calc(100dvh-195px)]" bg2 overflow-hidden>
-    <div v-if="!flowList.length" w-full h-full fc flex-col>
+    <div v-if="!flowList.length" animate-fade-in w-full h-full fc flex-col>
       <Icon name="bi:robot" :size="90" mb-20px />
       <span text-20px>{{ t('main.chat.nodata') }}</span>
     </div>

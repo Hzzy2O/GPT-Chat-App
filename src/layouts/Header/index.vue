@@ -24,6 +24,7 @@
           <Icon
             cursor-pointer
             color-orange-4
+            zoomin
             dark:color-amber-3
             size={25}
             onClick={(e: Event) => {
@@ -70,7 +71,7 @@
               size="medium"
               scrollable
             >
-              <div text-18px fc cursor-pointer>
+              <div zoomin animate-duration-200 text-18px fc cursor-pointer>
                 <Icon size={28} name={iconName} />
               </div>
             </NPopselect>
@@ -84,7 +85,7 @@
           const setValue = () => {
             setLocale(locale.value === 'zh-CN' ? 'en-US' : 'zh-CN')
           }
-          return <Icon size={25} name={icon} onClick={() => setValue()} />
+          return <Icon zoomin size={25} name={icon} onClick={() => setValue()} />
         }
 
         const rightItems = [LanguageButton, DarkToggle, SettingBtn]
@@ -96,6 +97,7 @@
             : 'line-md:close-to-menu-alt-transition'
           return (
             <Icon
+              zoomin
               lg-display-none
               size={25}
               name={name}

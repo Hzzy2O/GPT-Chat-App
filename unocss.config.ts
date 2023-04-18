@@ -25,6 +25,7 @@ export default defineConfig({
       'f-icon': 'ml-10px h-38px fjc items-center transition-opacity',
       'scroll-t': 'scrollbar scrollbar-rounded scrollbar-track-transparent',
       'card-modal': 'lg-w-80vw lg-bottom-36px w-90vw max-w-600px rd-12px',
+      'zoomin': 'animate-zoom-in animate-duration-200',
     },
   ],
   presets: [
