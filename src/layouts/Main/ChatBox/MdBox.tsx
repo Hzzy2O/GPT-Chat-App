@@ -76,7 +76,7 @@ export default defineComponent({
 
       return (
         <>
-          <div ref={elRef} class={'mdbox'} innerHTML={mdTxt}></div>
+          <div overflow-x-scroll ref={elRef} class={'mdbox'} innerHTML={mdTxt}></div>
         </>
       )
     }

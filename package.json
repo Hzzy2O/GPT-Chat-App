@@ -1,6 +1,6 @@
 {
-  "name": "prompts",
-  "version": "0.0.0",
+  "name": "gpt-chat-app",
+  "version": "0.0.1",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
