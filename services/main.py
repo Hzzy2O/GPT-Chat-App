@@ -9,12 +9,9 @@ from typing import Any, AsyncGenerator, Union
 import EdgeGPT
 import uvicorn
 from BingImageCreator import ImageGen
-from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Response, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
-
-load_dotenv()
 
 app = FastAPI()
 
@@ -214,6 +211,42 @@ async def create_image(request: Request) -> Response:
     }
     return GenerateResponse().success(res)
  
+@app.post('/api')
+async def api(request: Request) -> Response:
+    parameters = await getrequestParameter(request)
+    token = parameters.get('token')
+    style = parameters.get('style')
+    question = parameters.get('question')
+    if not question:
+        return GenerateResponse().error(110, '参数不能为空')
+    elif not style or  style not in STYLES:
+        style = 'balanced'
+    
+    token, chatBot = getChatBot(token)
+    if not chatBot:
+        return GenerateResponse().error(120, 'token不存在')
+    data = await chatBot.ask(question, conversation_style=getStyleEnum(style))
+    
+    if data.get('item').get('result').get('value') == 'Throttled':
+        return GenerateResponse().error(120, '已上限,24小时后尝试')
+
+    info = {
+        'answer': '',
+        'urls': [],
+        'reset': False,
+        'token': token
+    }
+    answer = getAnswer(data)
+    answer = filterAnswer(answer)
+    info['answer'] = answer
+    info['urls'] = getUrl(data)
+    
+    if needReset(data, answer):
+        await chatBot.reset()
+        info['reset'] = True
+    
+    return GenerateResponse().success(info)
+
 
 @app.post('/api_stream')
 async def apiStream(request: Request) -> Response:

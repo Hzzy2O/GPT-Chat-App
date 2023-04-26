@@ -24,13 +24,16 @@ function onConfirm() {
         throw new Error('Invalid JSON')
       bot.value.apiKey.value = JSON.stringify(json, null, 0)
     }
-    success(t('config.set_success'))
-    input.value = ''
-    setShowTokenModal(false)
   }
   catch (err) {
-    error(t('config.invalid_input'))
+    bot.value.apiKey.value = JSON.stringify([{
+      name: '_U',
+      value: input.value
+    }], null, 0)
   }
+  success(t('config.set_success'))
+  input.value = ''
+  setShowTokenModal(false)
 }
 </script>
 
