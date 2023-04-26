@@ -1,15 +1,20 @@
-from typing import Union, Any, AsyncGenerator
-from fastapi import FastAPI, Request, WebSocket, Response
-from fastapi.responses import StreamingResponse
-from fastapi.middleware.cors import CORSMiddleware
-from BingImageCreator import ImageGen
-import uvicorn
 import asyncio
-import EdgeGPT
-import uuid
-import time
 import json
+import os
 import re
+import time
+import uuid
+from typing import Any, AsyncGenerator, Union
+
+import EdgeGPT
+import uvicorn
+from BingImageCreator import ImageGen
+from dotenv import load_dotenv
+from fastapi import FastAPI, Request, Response, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -181,22 +186,24 @@ async def create_image(request: Request) -> Response:
     if not tk:
         return GenerateResponse().error(110, 'token不能为空')  
 
-    cookies = json.loads(tk)
+    argU = ''
+    if isinstance(tk, str):
+        argU = tk
+    else:
+        cookies = json.loads(tk)
+        if not cookies:
+            return GenerateResponse().error(111, 'token错误')
 
-    if not cookies:
-        return GenerateResponse().error(111, 'token错误')
+        for cookie in cookies:
+            if cookie.get("name") == "_U":
+                argU = cookie.get("value")
+                break
 
     parameters = await getrequestParameter(request)
     prompt = parameters.get('prompt')
 
     if not prompt:
         return GenerateResponse().error(110, 'prompt不能为空')
-
-    argU = ''
-    for cookie in cookies:
-        if cookie.get("name") == "_U":
-            argU = cookie.get("value")
-            break
 
 
     image_generator = ImageGen(argU, None, False)
