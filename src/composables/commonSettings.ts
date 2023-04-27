@@ -3,7 +3,6 @@ import type { GlobalThemeOverrides } from 'naive-ui'
 import { ls } from '@/utils/cache'
 
 export const commonSettings = useStorage('commonSettings', {
-  isShowTokenCost: false,
   themeColor: '#ff1d5e',
 }, ls)
 

@@ -15,8 +15,8 @@
     "title": "配置",
     "setApiKey": "设置API密钥",
     "set_success": "设置成功",
-    "openai_key_placeholder": "请输入openai密钥",
-    "bing_key_placeholder": "请输入bing密钥",
+    "placeholder": "请输入",
+    "showTokenCost": "显示token消耗",
     "invalid_input": "无效输入",
     "styleChoose": "对话风格",
     "modelChoose": "模型选择",
@@ -121,7 +121,8 @@
     "onlyEN": "只支持英文",
     "themeColor": "主题颜色"
   },
-  "floatBtn": {
-    "showTokenCost": "显示token消耗"
+  "autogpt": {
+    "nodata": "等待执行命令",
+    "create": "创建一个机器人"
   }
 }

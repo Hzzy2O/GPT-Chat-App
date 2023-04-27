@@ -29,9 +29,6 @@
       <NFormItem :label="t('common.themeColor')" mb-10px>
         <NColorPicker v-model:value="commonSettings.themeColor" />
       </NFormItem>
-      <NFormItem :label="t('floatBtn.showTokenCost')">
-        <NSwitch v-model:value="commonSettings.isShowTokenCost" />
-      </NFormItem>
     </NScrollbar>
   </NPopover>
 </template>

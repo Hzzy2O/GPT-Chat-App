@@ -15,8 +15,8 @@
     "title": "config",
     "setApiKey": "set api key",
     "set_success": "setup successful",
-    "openai_key_placeholder": "please enter openai api key",
-    "bing_key_placeholder": "please paste bing cookie json",
+    "placeholder": "please enter ",
+    "showTokenCost": "show token cost",
     "invalid_input": "invalid input",
     "styleChoose": "prompt style",
     "modelChoose": "choose model",
@@ -118,7 +118,8 @@
     "onlyEN": "only english",
     "themeColor": "theme color"
   },
-  "floatBtn": {
-    "showTokenCost": "show token cost"
+  "autogpt": {
+    "nodata": "waiting for command",
+    "create": "create a robot"
   }
 }

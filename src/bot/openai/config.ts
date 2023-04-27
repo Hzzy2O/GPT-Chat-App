@@ -16,6 +16,7 @@ export const config: OpenAI.Config = {
   size: '512x512',
   img_number: 1,
   web_access: false,
+  show_token_cost: false,
 }
 
 // 编辑表单
@@ -49,6 +50,11 @@ export const settingSchema: FormConfig = [
       {
         key: 'web_access',
         label: 'config.webaccess.switch',
+        type: 'switch',
+      },
+      {
+        key: 'show_token_cost',
+        label: 'config.showTokenCost',
         type: 'switch',
       },
       {

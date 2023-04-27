@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import HistoryList from './HistoryList.vue'
 import { useUIStore } from '@/store'
+import { Bot } from '#/index'
+import { isBot } from '@/bot'
+import { AutoGPTSider } from '@/bot/autogpt/view'
 
 const UIstore = useUIStore()
 const { setShowDrawerSidebar } = UIstore
@@ -29,7 +32,7 @@ const drawWidth = computed(() => {
     <NDrawerContent body-content-style="padding: 0" :native-scrollbar="false">
       <template #header>
         <div w-full fic my-2px justify-between>
-          <h2>{{ t('siderbar.title') }}</h2>
+          <h2 />
           <Icon
             cursor-pointer
             name="line-md:menu-to-close-alt-transition"
@@ -38,7 +41,12 @@ const drawWidth = computed(() => {
           />
         </div>
       </template>
-      <HistoryList @close="closeDrawer" />
+      <template v-if="isBot(bot, Bot.autogpt)">
+        <AutoGPTSider />
+      </template>
+      <template v-else>
+        <HistoryList @close="closeDrawer" />
+      </template>
     </NDrawerContent>
   </NDrawer>
   <NLayoutSider
@@ -52,10 +60,13 @@ const drawWidth = computed(() => {
     show-trigger="bar"
     bordered
   >
-    <div text-18px pt-20px px-18px pb-10px>
-      {{ t('siderbar.title') }}
-    </div>
-    <HistoryList />
+    <div h-20px />
+    <template v-if="isBot(bot, Bot.autogpt)">
+      <AutoGPTSider />
+    </template>
+    <template v-else>
+      <HistoryList @close="closeDrawer" />
+    </template>
   </NLayoutSider>
 </template>
 

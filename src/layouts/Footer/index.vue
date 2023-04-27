@@ -2,7 +2,8 @@
 import InputBox from './InputBox.vue'
 import FunctionArea from './FunctionArea.vue'
 import { useRecordStore, useUIStore } from '@/store'
-import { Role } from '#/index'
+import { Bot, Role } from '#/index'
+import { isBot } from '@/bot'
 
 const funcArea = ref<typeof FunctionArea | null>(null)
 
@@ -38,7 +39,7 @@ function getApproval(input: string) {
   const mode = modeValue.value
 
   // bing的生成图片只支持英文字符
-  if (isBing(bot) && mode === 'img') {
+  if (isBot(bot.value, Bot.bing) && mode === 'img') {
     const reg = /^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/
     if (!reg.test(input)) {
       error('只支持英文字符')
@@ -94,11 +95,11 @@ async function patchEvent(input: string) {
   }
   switch (modeValue.value) {
     case 'chat':
-      bot.value.chat(input, end)
+      bot.value.chat?.(input, end)
       break
 
     case 'img':
-      await bot.value.createImage(input)
+      await bot.value.createImage?.(input)
       end(true)
       break
     case 'editImg': {

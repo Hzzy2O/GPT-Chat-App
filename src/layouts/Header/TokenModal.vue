@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { Bot } from '#/index'
+import { isBot } from '@/bot'
 import { useUIStore } from '@/store'
 
-const { error, success } = useMessage()
+const { success } = useMessage()
 
 const UIStore = useUIStore()
 const { showTokenModal } = storeToRefs(UIStore)
@@ -9,26 +11,25 @@ const { setShowTokenModal } = UIStore
 
 const input = ref('')
 
-const placeholder = computed(() => isOpenai(bot.value) ? 'config.openai_key_placeholder' : 'config.bing_key_placeholder')
+const placeholder = computed(() => `${t('config.placeholder') + bot.value.name} api key`)
 
 function onConfirm() {
   try {
     if (!input.value)
       throw new Error('invalid input')
-    if (isOpenai(bot.value)) {
+    if (isBot(bot.value, Bot.openai)) {
       bot.value.apiKey.value = input.value
     }
     else {
       const json = JSON.parse(input.value)
-      if (!Array.isArray(json))
-        throw new Error('Invalid JSON')
+
       bot.value.apiKey.value = JSON.stringify(json, null, 0)
     }
   }
   catch (err) {
     bot.value.apiKey.value = JSON.stringify([{
       name: '_U',
-      value: input.value
+      value: input.value,
     }], null, 0)
   }
   success(t('config.set_success'))

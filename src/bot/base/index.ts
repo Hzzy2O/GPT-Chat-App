@@ -50,7 +50,7 @@ export abstract class BaseModel<T extends BaseConfig, U extends Bot> {
    * @param doneDeal 完成回调
    * @return: void
    * */
-  abstract chat(msg: string, doneDeal?: (done: boolean) => void): void
+  abstract chat?(msg: string, doneDeal?: (done: boolean) => void): void
 
   /** @description: 创建图片
     * @param msg 提示文本

@@ -44,4 +44,4 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
   getBalance = undefined
 }
 
-export default BingModel
+export default new BingModel()

@@ -1,6 +1,7 @@
 export enum Bot {
   bing = 'bing',
   openai = 'openai',
+  autogpt = 'autogpt',
 }
 export enum Role {
   user = 'user',

@@ -5,7 +5,7 @@ import { chatCompletion, completion, editImage, generateImage, getUsage, transcr
 import { Bot } from '#/index'
 import { useGet } from '@/api'
 
-export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
+class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   constructor() {
     super(Bot.openai, iconName, config, settingSchema)
   }
@@ -71,3 +71,5 @@ export default class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
     }
   }
 }
+
+export default new OpenAIModel()

@@ -17,7 +17,12 @@
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
-    "types": ["vite/client", "vite-plugin-pages/client", "naive-ui/volar", "unplugin-fonts/client"],
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client",
+      "naive-ui/volar",
+      "unplugin-fonts/client"
+    ],
     "typeRoots": ["./node_modules/@types/", "./types"],
     "paths": {
       "@/*": ["src/*"],

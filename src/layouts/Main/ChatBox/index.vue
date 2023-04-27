@@ -3,7 +3,9 @@ import Actions from '../Actions/index.vue'
 import MdBox from './MdBox'
 import UserBox from './UserBox.vue'
 import type { Flow } from '#/.'
-import { Role } from '#/.'
+import { Bot, Role } from '#/.'
+
+import { isBot } from '@/bot'
 
 const { chatData } = defineProps<{
   chatData: Flow
@@ -30,6 +32,8 @@ function stopPlay() {
   speechInstance.stop()
 }
 const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.value === chatData.id)
+
+const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value.config.show_token_cost)
 </script>
 
 <template>
@@ -107,7 +111,7 @@ const isPlay = computed(() => speechInstance.isPlaying.value && currentSpeechId.
           </div>
         </div>
         <div text-12px animate-fade-in fic justify-between>
-          <span v-if="commonSettings.isShowTokenCost && chatData.tokenCost">token cost: {{ chatData.tokenCost }}</span>
+          <span v-if="isShowTokenCost && chatData.tokenCost">token cost: {{ chatData.tokenCost }}</span>
           <Actions v-if="!isUser && done" :is-play="isPlay" @play="setPlayText" @stop="stopPlay" />
         </div>
       </div>
