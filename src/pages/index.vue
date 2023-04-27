@@ -22,7 +22,6 @@ registerHLDB()
         <AutoGPTMain />
         <AutoGPTFooter />
       </NLayout>
-      <RightSider v-if="fixedRight" />
     </template>
     <template v-else>
       <Siderbar />
@@ -32,5 +31,6 @@ registerHLDB()
         <Footer />
       </NLayout>
     </template>
+    <RightSider v-if="fixedRight" />
   </NLayout>
 </template>

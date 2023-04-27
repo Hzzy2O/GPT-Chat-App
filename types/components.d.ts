@@ -9,7 +9,6 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Form: typeof import('./../src/components/Form/index.vue')['default']
     Icon: typeof import('./../src/components/Icon.vue')['default']
-    Layout: typeof import('./../src/components/Layout/index.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NButtonGroup: typeof import('naive-ui')['NButtonGroup']
     NCollapse: typeof import('naive-ui')['NCollapse']
@@ -44,6 +43,6 @@ declare module '@vue/runtime-core' {
     NUpload: typeof import('naive-ui')['NUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Siderbar: typeof import('./../src/components/Layout/siderbar.vue')['default']
+    Siderbar: typeof import('./../src/components/Siderbar.vue')['default']
   }
 }

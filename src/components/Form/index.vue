@@ -6,6 +6,7 @@ import FormItem from './formItem'
 const props = defineProps<{
   formModel: Record<string, any>
   formItems: FormConfig
+  noDivider?: boolean
 }>()
 const emit = defineEmits<{
   (event: 'handleChange', key: string, val: any): void
@@ -20,7 +21,7 @@ const formModel = computed(() => props.formModel)
 </script>
 
 <template>
-  <NForm ref="formRef" :model="formModel" :show-require-mark="false">
+  <NForm v-bind="$attrs" ref="formRef" :model="formModel" :show-require-mark="false">
     <template
       v-for="(item, index) in formItems"
       :key="item.key"
@@ -28,11 +29,22 @@ const formModel = computed(() => props.formModel)
       <NCollapse v-if="item.type === 'collapse'">
         <NCollapseItem :title="t(item.label)" :name="index">
           <template v-for="formItem in item.items" :key="formItem.key">
-            <FormItem :value="formModel[formItem.key]" :config="formItem" @value-change="valueChange" />
+            <FormItem
+              :value="formModel[formItem.key]"
+              :no-divider="props.noDivider"
+              :config="formItem"
+              @value-change="valueChange"
+            />
           </template>
         </NCollapseItem>
       </NCollapse>
-      <FormItem v-else :value="formModel[item.key]" :config="item" @value-change="valueChange" />
+      <FormItem
+        v-else
+        :value="formModel[item.key]"
+        :no-divider="props.noDivider"
+        :config="item"
+        @value-change="valueChange"
+      />
     </template>
   </NForm>
 </template>
@@ -43,6 +55,9 @@ const formModel = computed(() => props.formModel)
   }
   .n-button {
     --n-button-border-radius: 10px;
+  }
+  .n-input {
+    border-radius: 10px!important;
   }
 
   .n-base-selection,

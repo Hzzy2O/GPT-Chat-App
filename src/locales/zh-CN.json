@@ -123,6 +123,10 @@
   },
   "autogpt": {
     "nodata": "等待执行命令",
-    "create": "创建一个机器人"
+    "create": "创建一个机器人",
+    "bot_name": "机器人名称",
+    "bot_name_placeholder": "例如: 画画机器人",
+    "bot_role": "机器人作用",
+    "bot_goals": "机器人目标"
   }
 }

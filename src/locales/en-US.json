@@ -120,6 +120,9 @@
   },
   "autogpt": {
     "nodata": "waiting for command",
-    "create": "create a robot"
+    "create": "create a robot",
+    "bot_name": "bot name",
+    "bot_role": "bot role",
+    "bot_goals": "bot goals"
   }
 }

@@ -1,5 +1,6 @@
 import {
   NDivider,
+  NDynamicInput,
   NFormItem,
   NInput,
   NInputGroup,
@@ -16,16 +17,17 @@ import Icon from '@/components/Icon.vue'
 export default defineComponent({
   props: {
     config: Object as PropType<FormItem>,
-    value: [String, Number, Boolean] as any,
+    value: [String, Number, Boolean, Array] as any,
+    noDivider: Boolean as PropType<boolean>,
   },
   emits: ['valueChange'],
   setup(props, { emit }) {
-    const handleValueChange = (value: string | number | boolean) => {
+    function handleValueChange<T>(value: T) {
       emit('valueChange', props.config?.key, value)
     }
 
     return () => {
-      const { config, value } = props
+      const { config, value, noDivider } = props
       if (!config)
         return undefined
 
@@ -38,10 +40,39 @@ export default defineComponent({
             const val = ref(value)
             return (
               <NInputGroup>
-                <NInput autofocus={false} rd-10px value={val.value} onUpdateValue={v => val.value = v} onBlur={() => {
-                  handleValueChange(val.value)
-                }} rule="itemrules" />
+                <NInput
+                  autofocus={false}
+                  rd-10px
+                  placeholder={t(config.placeholder || 'config.placeholder')}
+                  value={val.value}
+                  onUpdateValue={v => val.value = v}
+                  onBlur={() => {
+                    handleValueChange(val.value)
+                  }} rule="itemrules" />
               </NInputGroup>
+            )
+          }
+
+          case 'dynamicInput': {
+            const val = ref(toRaw(value))
+            const update = (v: string, idx: number) => Reflect.set(val.value, idx, v)
+            return (
+              <NDynamicInput
+                value={val.value}
+                placeholder="请输入"
+                onCreate={() => val.value.push('')}
+                onRemove={index => val.value.splice(index, 1)}
+                max={config.max}
+                min={config.min}
+                v-slots={{
+                  default: ({ value, index }) =>
+                  <NInput
+                    onUpdateValue={v => update(v, index)}
+                    value={value}
+                    onBlur={() => handleValueChange(val.value)}
+                    />,
+                }}
+              />
             )
           }
 
@@ -113,7 +144,7 @@ export default defineComponent({
             }}
             rule={rule}
           ></NFormItem>
-          <NDivider class="my-8px!" />
+          {!noDivider ? <NDivider class="my-8px!" /> : <div h-16px />}
         </>
       )
     }

@@ -11,6 +11,7 @@ export interface BaseItem {
 export interface InputItem extends BaseItem {
   type: 'input'
   prefix?: string
+  placeholder?: string
 }
 
 export interface RadioItem extends BaseItem {
@@ -35,12 +36,18 @@ export interface SliderItem extends BaseItem {
   step?: number
 }
 
+export interface DynamicInputItem extends BaseItem {
+  type: 'dynamicInput'
+  min?: number
+  max?: number
+}
+
 export interface CollapseItem {
   label: string
   type: 'collapse'
   items: FormItem[]
 }
 
-export type FormItem = InputItem | RadioItem | SelectItem | SwitchItem | SliderItem
+export type FormItem = InputItem | RadioItem | SelectItem | SwitchItem | SliderItem | DynamicInputItem
 
 export type FormConfig = Array<FormItem | CollapseItem>
