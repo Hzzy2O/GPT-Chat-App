@@ -205,9 +205,12 @@ async def create_image(request: Request) -> Response:
     if not prompt:
         return GenerateResponse().error(110, 'prompt不能为空')
 
-
-    image_generator = ImageGen(argU, None, False)
-    imgs = image_generator.get_images(prompt)
+    imgs = []
+    try:
+        image_generator = ImageGen(argU, None, False)
+        imgs = image_generator.get_images(prompt)
+    except Exception as e:
+        return GenerateResponse().error(500, e.__str__())
 
     res = {
       'imgs': imgs

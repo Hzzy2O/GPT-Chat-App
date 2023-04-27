@@ -1,6 +1,6 @@
 import qs from 'qs'
 import type { ReadStreamFunc } from './helper'
-import { parseStream } from './helper'
+import { parseStream } from './helper';
 import { useToast } from '@/composables'
 import { useRecordStoreWithOut, useUIStoreWithOut } from '@/store'
 

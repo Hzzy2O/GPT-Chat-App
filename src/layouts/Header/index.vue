@@ -13,6 +13,7 @@
       const UIstore = useUIStore()
       const { setShowDrawerSidebar, setShowRightDrawer } = UIstore
       const { showDrawerSidebar, fixedRight } = storeToRefs(UIstore)
+      const router = useRouter()
 
       return () => {
         if (!bot.value)
@@ -78,6 +79,12 @@
           )
         }
 
+        const AutoGptNV = () =>
+          <Icon
+            onClick={() => router.push('/autogpt')}
+            size={25}
+            name="carbon:machine-learning-model" />
+
         // 语言选择
         const LanguageButton = () => {
           const icon
@@ -107,7 +114,7 @@
           )
         }
 
-        const leftItems = [ControlMenu, BotSelect]
+        const leftItems = [ControlMenu, BotSelect, AutoGptNV]
         return (
           <NLayoutHeader
             relative
