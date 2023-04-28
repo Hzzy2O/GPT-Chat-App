@@ -1,3 +1,4 @@
+import type { FormItemProps } from 'naive-ui'
 import {
   NDivider,
   NDynamicInput,
@@ -19,6 +20,7 @@ export default defineComponent({
     config: Object as PropType<FormItem>,
     value: [String, Number, Boolean, Array] as any,
     noDivider: Boolean as PropType<boolean>,
+    decorator: Object as PropType<FormItemProps>,
   },
   emits: ['valueChange'],
   setup(props, { emit }) {
@@ -59,7 +61,6 @@ export default defineComponent({
             return (
               <NDynamicInput
                 value={val.value}
-                placeholder="请输入"
                 onCreate={() => val.value.push('')}
                 onRemove={index => val.value.splice(index, 1)}
                 max={config.max}
@@ -67,6 +68,7 @@ export default defineComponent({
                 v-slots={{
                   default: ({ value, index }) =>
                   <NInput
+                    placeholder={t('config.placeholder')}
                     onUpdateValue={v => update(v, index)}
                     value={value}
                     onBlur={() => handleValueChange(val.value)}
@@ -138,6 +140,8 @@ export default defineComponent({
       return (
         <>
           <NFormItem
+            {...props.decorator}
+            path={props.config?.key}
             v-slots={{
               label: () => labelRender(label),
               default: () => <DynamicComponent />,

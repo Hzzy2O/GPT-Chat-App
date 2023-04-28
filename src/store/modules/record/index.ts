@@ -74,7 +74,3 @@ export const useRecordStore = defineStore('record-store', {
 export function useRecordStoreWithOut() {
   return useRecordStore(store)
 }
-
-window.addEventListener('beforeunload', () => {
-  window.open('www.baidu.com', '_blank')
-})

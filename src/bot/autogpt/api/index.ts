@@ -1,12 +1,13 @@
-import { last } from 'lodash-es'
 import { AutoGPT } from '../types'
-import { usePost } from '@/api/http'
-import { useRecordStoreWithOut, useUIStoreWithOut } from '@/store'
-import type { Flow } from '#/index'
+import { useGet, usePost } from '@/api'
 
-type ResData = {
-//   answer: string
-//   done: boolean
-//   token?: string
-// } & Pick<Flow, 'urls' | 'suggests'>
+export const getAll = () => useGet<{ list: AutoGPT.GPTInfo[] }>(AutoGPT.Api.GetAll)
 
+interface CreateInput {
+  ai_name: string
+  ai_role: string
+  ai_goals: string[]
+}
+export const create = (params: CreateInput) => usePost(AutoGPT.Api.Create, { params })
+
+export const runTask = (params: { gpt_id: string }) => usePost(AutoGPT.Api.Run, { params })

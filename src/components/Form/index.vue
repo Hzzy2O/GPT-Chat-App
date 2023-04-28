@@ -40,6 +40,7 @@ const formModel = computed(() => props.formModel)
       </NCollapse>
       <FormItem
         v-else
+        :decorator="item.decorator || {}"
         :value="formModel[item.key]"
         :no-divider="props.noDivider"
         :config="item"

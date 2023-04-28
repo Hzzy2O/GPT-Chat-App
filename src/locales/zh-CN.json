@@ -97,7 +97,7 @@
   },
   "net": {
     "error": {
-      "401": "401 未授权",
+      "401": "api key 无效",
       "403": "403 禁止访问",
       "404": "404 未找到",
       "500": "500 服务器错误",
@@ -124,9 +124,17 @@
   "autogpt": {
     "nodata": "等待执行命令",
     "create": "创建一个机器人",
+    "create_new": "创建新的机器人",
     "bot_name": "机器人名称",
-    "bot_name_placeholder": "例如: 画画机器人",
+    "bot_name_placeholder": "例如: 画图机器人",
     "bot_role": "机器人作用",
-    "bot_goals": "机器人目标"
+    "bot_role_placeholder": "例如: 按照用户的需求生成对应的图片",
+    "bot_goals": "机器人目标",
+    "autorun": "自动运行",
+    "autorun_desc": "开启后, 机器人会自动运行, 不需要用户确认",
+    "running_err": "正在运行中, 请先停止",
+    "run": "运行",
+    "stop": "停止",
+    "cur_goals": "当前目标"
   }
 }

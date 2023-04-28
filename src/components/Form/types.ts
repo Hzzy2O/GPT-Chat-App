@@ -1,11 +1,12 @@
 import type { Ref } from 'vue'
-import type { FormItemRule, SelectRenderLabel } from 'naive-ui'
+import type { FormItemProps, FormItemRule, SelectRenderLabel } from 'naive-ui'
 
 export interface BaseItem {
   key: string
   label: string
   rule?: FormItemRule
   desc?: string
+  decorator?: FormItemProps
 }
 
 export interface InputItem extends BaseItem {

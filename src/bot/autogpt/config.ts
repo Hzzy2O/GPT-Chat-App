@@ -4,6 +4,7 @@ import type { FormConfig } from '@/components/Form/types'
 // 配置
 export const config: AutoGPT.Config = {
   baseURL: 'https://bing_services-1-o5366254.deta.app',
+  autorun: true,
 }
 
 // 编辑表单
@@ -16,6 +17,12 @@ export const settingSchema: FormConfig = [
     rule: {
       required: true,
     },
+  },
+  {
+    key: 'autorun',
+    label: 'autogpt.autorun',
+    desc: 'autogpt.autorun_desc',
+    type: 'switch',
   },
 ]
 

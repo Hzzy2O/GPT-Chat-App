@@ -1,39 +1,34 @@
 <script lang="ts" setup>
+import StatusBtn from './StatusBtn.vue'
+import { useAutoGPTStore } from '@/store'
 
+const autogptStore = useAutoGPTStore()
+const { curBotId, messageList, running } = storeToRefs(autogptStore)
 </script>
 
 <template>
   <NLayoutContent h="[calc(100dvh-195px)]" bg2 overflow-hidden>
-    <div animate-fade-in w-full h-full fc flex-col>
+    <div v-if="!curBotId" animate-fade-in w-full h-full fic pt-100px flex-col>
       <Icon name="bi:robot" :size="90" mb-20px />
       <span text-20px>{{ t('autogpt.nodata') }}</span>
     </div>
+    <NScrollbar v-else ref="scrollEl" h-full trigger="none">
+      <NList
+        bg-transparent
+        :show-divider="false"
+      >
+        <NListItem v-for="msg in messageList" :key="msg">
+          {{ msg }}
+          <ChatBox
+            :chat-data="msg"
+          />
+        </NListItem>
+      </NList>
+      <div v-if="running" fc dark:color-white>
+        <span text-18px mr-5px>{{ t('main.chat.thinking') }}</span>
+        <iconify-icon width="20" icon="svg-spinners:blocks-wave" />
+      </div>
+      <StatusBtn />
+    </NScrollbar>
   </NLayoutContent>
-  <!-- <NScrollbar v-else ref="scrollEl" h-full trigger="none"> -->
-  <!--   <NList -->
-  <!--     id="chatList" -->
-  <!--     bg-transparent -->
-  <!--     :style="`min-height: calc(100dvh - ${suggestionHeight + 200}px)`" -->
-  <!--     :show-divider="false" -->
-  <!--   > -->
-  <!--     <NListItem v-for="flow in flowList" :key="flow.id"> -->
-  <!--       <ChatBox -->
-  <!--         :chat-data="flow" -->
-  <!--       /> -->
-  <!--     </NListItem> -->
-  <!--     <div v-if="isGenerating" fc dark:color-white> -->
-  <!--       <span text-18px mr-5px>{{ t('main.chat.thinking') }}</span> -->
-  <!--       <iconify-icon width="20" icon="svg-spinners:blocks-wave" /> -->
-  <!--     </div> -->
-  <!--   </NList> -->
-  <!-- <template v-if="suggestions?.length"> -->
-  <!--   <div ref="suggestionRef" w-full justify-end fic flex="gap-8px wrap"> -->
-  <!--     <label v-for="sug in suggestions" :key="sug" :title="sug" @click="setQueryInputVal(sug)"> -->
-  <!--       <NTag cursor-pointer mx-8px round type="primary" max-w-260px truncate> -->
-  <!--         {{ sug }} -->
-  <!--       </NTag> -->
-  <!--     </label> -->
-  <!--   </div> -->
-  <!-- </template> -->
-  <!-- </NScrollbar> -->
 </template>

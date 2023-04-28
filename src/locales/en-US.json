@@ -94,7 +94,7 @@
   },
   "net": {
     "error": {
-      "401": "401 unauthorized",
+      "401": "api key is invalid",
       "403": "403 forbidden",
       "404": "404 not found",
       "500": "500 server error",
@@ -121,8 +121,18 @@
   "autogpt": {
     "nodata": "waiting for command",
     "create": "create a robot",
+    "create_new": "create a new robot",
     "bot_name": "bot name",
+    "bot_name_placeholder": "e.g. draw bot",
     "bot_role": "bot role",
-    "bot_goals": "bot goals"
+    "bot_role_placeholder": "e.g. generate images according to user's needs",
+    "bot_goals": "bot goals",
+    "autorun": "autorun",
+    "autorun_desc": "if enabled, the robot will run automatically without user confirmation",
+    "running_err_en": "running, please stop first",
+    "run": "run",
+    "stop": "stop",
+    "cur_goals": "current goals"
+
   }
 }

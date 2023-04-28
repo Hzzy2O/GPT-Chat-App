@@ -1,10 +1,11 @@
 import { BaseModel } from '../base'
 import type { AutoGPT } from './types'
 import { config, iconName, settingSchema } from './config'
-import { } from './api'
+import { getAll, runTask } from './api'
 import { Bot } from '#/index'
+import { useAutoGPTStoreWithOut } from '@/store'
 
-class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
+export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
   constructor() {
     super(Bot.autogpt, iconName, config, settingSchema)
   }
@@ -14,6 +15,58 @@ class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
   editImage = undefined
   recorder = undefined
   getBalance = undefined
+
+  async getAllBot() {
+    const { setBotList } = useAutoGPTStoreWithOut()
+    const { data } = await getAll()
+    setBotList(data.value!.list)
+  }
+
+  setRunBot(id: string) {
+    const { setCurBotId, running, curBotId } = useAutoGPTStoreWithOut()
+    if (id === curBotId)
+      return
+
+    if (running)
+      return useToast().error(t('autogpt.running_err'))
+
+    setCurBotId(id)
+    if (this.config.autorun)
+      this.startRun()
+  }
+
+  resetBot() {
+    const { setRunning, setCurBotId } = useAutoGPTStoreWithOut()
+    setRunning(false)
+    setCurBotId('')
+  }
+
+  stopRun() {
+    const { setRunning } = useAutoGPTStoreWithOut()
+    setRunning(false)
+  }
+
+  async startRun() {
+    const autogptStore = useAutoGPTStoreWithOut()
+    const { setRunning, addMessage } = autogptStore
+    const { running, curBotId } = storeToRefs(autogptStore)
+    setRunning(true)
+    let runFlag = true
+
+    while (runFlag) {
+      const { data, error } = await runTask({ gpt_id: curBotId.value })
+      if (error.value) {
+        useToast().error(error.value!)
+        setRunning(false)
+        return
+      }
+      console.log(data.value)
+      if (data.value)
+        addMessage(data.value)
+
+      runFlag = running.value && this.config.autorun
+    }
+  }
 }
 
 export default new AutoGPTModel()
