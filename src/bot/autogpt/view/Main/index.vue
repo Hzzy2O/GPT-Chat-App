@@ -32,7 +32,7 @@ watch(
 
 async function download() {
   const response = await fetch('http://127.0.0.1:4000/autogpt/download', {
-    method: 'get',
+    method: 'post',
   })
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)
@@ -86,7 +86,9 @@ async function download() {
                     <div
                       v-for="(goal, goalNo) in getCurrentBot?.ai_goals"
                       :key="goal"
-                    >{{ goalNo + 1 }}. {{ goal }}</div>
+                    >
+                      {{ goalNo + 1 }}. {{ goal }}
+                    </div>
                   </template>
                 </NThing>
               </NListItem>
@@ -107,7 +109,7 @@ async function download() {
         <CreateForm v-else />
       </div>
       <StatusBtn v-if="!isFinish" />
-      <button v-else @click="download">
+      <button @click="download">
         download
       </button>
     </div>

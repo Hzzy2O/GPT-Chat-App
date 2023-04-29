@@ -23,7 +23,14 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
   }
 
   setRunBot(id: string) {
-    const { setCurBotId, running, curBotId, botList, messageList, setMessages } = useAutoGPTStoreWithOut()
+    const {
+      setCurBotId,
+      running,
+      curBotId,
+      botList,
+      messageList,
+      setMessages,
+    } = useAutoGPTStoreWithOut()
     if (id === curBotId)
       return
 
@@ -50,8 +57,12 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
 
   async startRun() {
     const autogptStore = useAutoGPTStoreWithOut()
-    const { setRunning, addMessage } = autogptStore
-    const { running, curBotId } = storeToRefs(autogptStore)
+    const { setRunning, addMessage, setBotById } = autogptStore
+    const { running, curBotId, getCurrentBot } = storeToRefs(autogptStore)
+
+    if (getCurrentBot.value?.finish)
+      return
+
     setRunning(true)
     let runFlag = true
 
@@ -62,9 +73,18 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
         setRunning(false)
         return
       }
-      console.log(data.value)
-      if (data.value)
+
+      if (data.value) {
+        if (data.value.reply_json.name === 'Error'
+          || data.value.reply_json.name === 'finish') {
+          setRunning(false)
+          setBotById(curBotId.value, {
+            finish: true,
+          })
+        }
+
         addMessage(data.value)
+      }
 
       runFlag = running.value && this.config.autorun
     }

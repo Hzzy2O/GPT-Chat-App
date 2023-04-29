@@ -40,6 +40,10 @@ export const useAutoGPTStore = defineStore('autogpt-store', {
     setCurBotId(id: string) {
       this.curBotId = id
     },
+    setBotById(id: string, value: Partial<AutoGPT.GPTInfo>) {
+      const bot = this.botList.find(bot => bot.id === id) as AutoGPT.GPTInfo
+      Object.assign(bot, value)
+    },
 
   },
   getters: {
