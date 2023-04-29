@@ -68,15 +68,21 @@ async function submit() {
 </script>
 
 <template>
-  <Form
-    :form-model="config"
-    :form-items="settingSchema"
-    :no-divider="true"
-    @handle-change="handleChange"
-  />
-  <div fc>
-    <NButton :loading="loading" rd-10px type="primary" float-right @click="submit">
-      {{ $t('autogpt.create') }}
-    </nbutton>
+  <div p="20px 25px">
+    <div animate-fade-in w-full h-full fic flex-col>
+      <Icon name="bi:robot" :size="60" mb-10px />
+      <span text-15px>{{ t('autogpt.nodata') }}</span>
+    </div>
+    <Form
+      :form-model="config"
+      :form-items="settingSchema"
+      :no-divider="true"
+      @handle-change="handleChange"
+    />
+    <div fc>
+      <NButton :loading="loading" rd-10px type="primary" float-right @click="submit">
+        {{ $t('autogpt.create') }}
+      </nbutton>
+    </div>
   </div>
 </template>

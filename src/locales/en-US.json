@@ -132,7 +132,7 @@
     "running_err_en": "running, please stop first",
     "run": "run",
     "stop": "stop",
-    "cur_goals": "current goals"
+    "cur_goals": "goals"
 
   }
 }

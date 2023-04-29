@@ -22,6 +22,7 @@ export default defineConfig({
       'shadow-1': 'shadow-[0px_-5px_5px_0px_black] dark:shadow-[0px_-5px_5px_0px_white]',
       'shadow-2': 'shadow-[0px_5px_5px_0px_black]',
       'shadow-3': 'shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_10px_rgba(255,255,255,0.1)]',
+      'shadow-4': 'shadow-[0_0_2px_2px_rgba(0,0,0,0.1)] dark:shadow-[0_0_2px_2px_rgba(255,255,255,0.1)]',
       'shadow-head': 'shadow-[0px_0px_8px_rgba(0,0,0,0.1)]',
       'f-icon': 'ml-10px h-38px fjc items-center transition-opacity',
       'scroll-t': 'scrollbar scrollbar-rounded scrollbar-track-transparent',

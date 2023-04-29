@@ -71,11 +71,11 @@ function newBot() {
       <NScrollbar ref="scrollEl" h="[calc(100dvh-150px)]" trigger="none">
         <NList bg-transparent :show-divider="false">
           <NListItem v-for="botInfo in botList" :key="botInfo.id" relative class="!px-18px !py-6px">
-            <div
+            <NTag
               text-16px
               fic
               transition-all
-              type="primary"
+              :type="curBotId === botInfo.id ? 'primary' : 'default'"
               secondary
               justify-between
               hover-scale-103
@@ -83,7 +83,8 @@ function newBot() {
               p-8px
               w-full
               cursor-pointer
-              :class="curBotId === botInfo.id ? 'shadow-[0_0_4px_var(--theme-color)]' : 'shadow-3'"
+              h-auto
+              class="shadow-[0_0_4px_var(--theme-color)]"
               @click="changeBot(botInfo)"
             >
               <NThing :title="botInfo.ai_name" content-style="margin-top: 10px;">
@@ -108,7 +109,7 @@ function newBot() {
                   <!-- </NSpace> -->
                 </template>
               </NThing>
-            </div>
+            </NTag>
           </NListItem>
         </NList>
       </NScrollbar>

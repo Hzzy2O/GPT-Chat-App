@@ -4,7 +4,7 @@ import { getAll } from '@/bot/autogpt/api'
 
 interface AutoGPTState {
   running: boolean
-  messageList: string[]
+  messageList: AutoGPT.GPTAction[]
   botList: AutoGPT.GPTInfo []
   curBotId: string
 }
@@ -20,13 +20,13 @@ export const useAutoGPTStore = defineStore('autogpt-store', {
     setRunning(running: boolean) {
       this.running = running
     },
-    addMessage(message: string) {
+    addMessage(message: AutoGPT.GPTAction) {
       this.messageList.push(message)
     },
     clearMessage() {
       this.messageList = []
     },
-    setMessages(messageList: string[]) {
+    setMessages(messageList: AutoGPT.GPTAction[]) {
       this.messageList = messageList
     },
     setBotList(botList: AutoGPT.GPTInfo []) {

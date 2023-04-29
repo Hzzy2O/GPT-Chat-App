@@ -3,7 +3,7 @@ import type { FormConfig } from '@/components/Form/types'
 
 // 配置
 export const config: AutoGPT.Config = {
-  baseURL: 'https://bing_services-1-o5366254.deta.app',
+  baseURL: 'http://127.0.0.1:4000',
   autorun: true,
 }
 

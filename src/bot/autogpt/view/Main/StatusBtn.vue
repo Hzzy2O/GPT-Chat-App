@@ -16,13 +16,11 @@ function stopOrRun() {
 
 <template>
   <div
-    absolute
     border="1px solid [var(--theme-color)]"
     shadow="[0_0_4px_var(--theme-color)]"
     dark:shadow="[0_0_4px_inset_var(--theme-color)]"
     color="[var(--theme-color)]"
     bg-transparent
-    bottom-110px
     left="[calc(50%-110px)]"
     w-150px
     bg2

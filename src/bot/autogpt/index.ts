@@ -23,7 +23,7 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
   }
 
   setRunBot(id: string) {
-    const { setCurBotId, running, curBotId } = useAutoGPTStoreWithOut()
+    const { setCurBotId, running, curBotId, botList, messageList, setMessages } = useAutoGPTStoreWithOut()
     if (id === curBotId)
       return
 
@@ -31,6 +31,8 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
       return useToast().error(t('autogpt.running_err'))
 
     setCurBotId(id)
+    const bot = botList.find(bot => bot.id === id)
+    setMessages(bot?.messages || [])
     if (this.config.autorun)
       this.startRun()
   }
@@ -66,6 +68,7 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
 
       runFlag = running.value && this.config.autorun
     }
+    setRunning(false)
   }
 }
 

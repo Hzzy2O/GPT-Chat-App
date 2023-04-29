@@ -135,6 +135,6 @@
     "running_err": "正在运行中, 请先停止",
     "run": "运行",
     "stop": "停止",
-    "cur_goals": "当前目标"
+    "cur_goals": "目标"
   }
 }

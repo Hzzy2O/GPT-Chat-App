@@ -20,7 +20,7 @@ registerHLDB()
       <NLayout>
         <Header />
         <AutoGPTMain />
-        <AutoGPTFooter />
+        <!-- <AutoGPTFooter /> -->
       </NLayout>
     </template>
     <template v-else>
