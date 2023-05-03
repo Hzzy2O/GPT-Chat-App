@@ -135,6 +135,13 @@
     "running_err": "正在运行中, 请先停止",
     "run": "运行",
     "stop": "停止",
-    "cur_goals": "目标"
+    "cur_goals": "目标",
+    "thoughts": "想法",
+    "reason": "原因",
+    "plan": "计划",
+    "criticism": "批评",
+    "utils": "工具",
+    "arguments": "参数",
+    "result": "结果"
   }
 }

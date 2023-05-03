@@ -3,6 +3,7 @@ export namespace AutoGPT {
     GetAll = '/autogpt',
     Create = '/autogpt/create',
     Run = '/autogpt/run',
+    Download = '/autogpt/download',
   }
 
   export interface Config {
@@ -17,6 +18,7 @@ export namespace AutoGPT {
     ai_goals: string[]
     created_at: string
     finish: boolean
+    has_file: boolean
     messages?: GPTAction[]
   }
 
@@ -37,6 +39,7 @@ export namespace AutoGPT {
   export interface GPTAction {
     reply_json: Reply
     finish: boolean
+    has_file: boolean
     tool_result: {
       name: string
       result: string

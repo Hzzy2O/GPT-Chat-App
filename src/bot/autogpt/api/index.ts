@@ -11,3 +11,11 @@ interface CreateInput {
 export const create = (params: CreateInput) => usePost(AutoGPT.Api.Create, { params })
 
 export const runTask = (params: { gpt_id: string }) => usePost(AutoGPT.Api.Run, { params })
+
+export const downloadFile = (params: { gpt_id: string }) =>
+  usePost(AutoGPT.Api.Download, {
+    params,
+    transformResponse(r) {
+      return r.blob()
+    },
+  })

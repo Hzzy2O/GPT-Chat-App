@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { NScrollbar } from 'naive-ui'
+import { last } from 'lodash-es'
 import CreateForm from '../components/createForm.vue'
+import type { AutoGPTModel } from '../..'
 import StatusBtn from './StatusBtn.vue'
 import MsgBox from './MsgBox.vue'
 import { useAutoGPTStore } from '@/store'
@@ -11,7 +13,11 @@ const { curBotId, messageList, running, getCurrentBot } = storeToRefs(autogptSto
 
 const isFinish = computed(() => {
   const last = messageList.value[messageList.value.length - 1]
-  return last?.finish
+  return last?.finish || getCurrentBot.value?.finish
+})
+const hasFile = computed(() => {
+  const lastMsg = last(messageList.value)
+  return lastMsg?.has_file || getCurrentBot.value?.has_file
 })
 const scrollEl = ref<typeof NScrollbar>()
 const { y } = useScroll(scrollEl as unknown as ElRef, { behavior: 'smooth' })
@@ -31,16 +37,8 @@ watch(
 )
 
 async function download() {
-  const response = await fetch('http://127.0.0.1:4000/autogpt/download', {
-    method: 'post',
-  })
-  const blob = await response.blob()
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = 'compressed-files.zip'
-  a.click()
-  URL.revokeObjectURL(url)
+  const autogpt = bot.value as AutoGPTModel
+  await autogpt.download()
 }
 </script>
 
@@ -48,8 +46,8 @@ async function download() {
   <NLayoutContent h="[calc(100dvh-60px)]" bg2 overflow-hidden>
     <div animate-bounce-in w-full h-full fc flex-col>
       <div
-        w="80%"
-        lg-w="60%"
+        w="85%"
+        lg-w="80%"
         bg-white
         transition-all
         w-full
@@ -57,12 +55,11 @@ async function download() {
         overflow-hidden
         shadow-3
         dark:bg-dark-3
-        translate-y--50px
       >
         <template v-if="curBotId">
           <NScrollbar
             ref="scrollEl"
-            h-480px
+            h-520px
             trigger="none"
             relative
           >
@@ -108,10 +105,20 @@ async function download() {
         </template>
         <CreateForm v-else />
       </div>
-      <StatusBtn v-if="!isFinish" />
-      <button @click="download">
-        download
-      </button>
+      <div
+        v-if="hasFile"
+        mt-10px
+        fic
+        w="85%"
+        lg-w="80%"
+        px-20px
+        justify-end
+      >
+        <NButton text @click="download">
+          <Icon title="download" name="fa6-solid:download" :size="22" />
+        </NButton>
+      </div>
+      <StatusBtn v-if="!isFinish" mt-10px />
     </div>
   </NLayoutContent>
 </template>

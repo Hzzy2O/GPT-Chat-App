@@ -132,7 +132,14 @@
     "running_err_en": "running, please stop first",
     "run": "run",
     "stop": "stop",
-    "cur_goals": "goals"
+    "cur_goals": "goals",
+    "thoughts": "thoughts",
+    "reason": "reason",
+    "plan": "plan",
+    "criticism": "criticism",
+    "utils": "utils",
+    "arguments": "arguments",
+    "result": "result"
 
   }
 }

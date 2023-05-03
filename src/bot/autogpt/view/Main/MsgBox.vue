@@ -1,52 +1,93 @@
-<script lang="ts" setup>
+<script lang="tsx">
+import { NSpace } from 'naive-ui'
+import { get } from 'lodash-es'
 import type { AutoGPT } from '@/bot/autogpt/types'
-defineProps<{
-  message: AutoGPT.GPTAction
-}>()
-</script>
+import Icon from '@/components/Icon.vue'
 
-<template>
-  <NThing text-16px>
-    <template #avatar>
-      <Icon name="bi:robot" :size="18" />
-    </template>
-    <template #header>
-      <div>运行工具: {{ message.tool_result.name }}</div>
-      <div>执行结果: {{ message.tool_result.result }}</div>
-    </template>
-    <template #description>
-      <div v-if="message.reply_json.thoughts">
-        <div>
-          想法: {{ message.reply_json.thoughts.text }}
+export default defineComponent({
+  props: {
+    message: Object as PropType<AutoGPT.GPTAction>,
+  },
+  setup(props) {
+    const config = [
+      {
+        icon: 'fluent-emoji:thinking-face',
+        content: 'reply_json.thoughts.text',
+        title: 'thoughts',
+      },
+      {
+        icon: 'fluent-emoji:ledger',
+        content: 'reply_json.thoughts.reasoning',
+        title: 'reason',
+      },
+      {
+        icon: 'fluent-emoji:triangular-flag',
+        content: 'reply_json.thoughts.plan',
+        title: 'plan',
+      },
+      {
+        icon: 'fluent-emoji:hammer-and-wrench',
+        content: 'reply_json.thoughts.criticism',
+        title: 'criticism',
+      },
+      {
+        icon: 'fluent-emoji:hammer-and-wrench',
+        content: 'reply_json.command.name',
+        title: 'utils',
+      },
+      {
+        icon: 'fluent-emoji:memo',
+        content: 'tool_result.result',
+        title: 'result',
+      },
+
+    ]
+    return () => {
+      const row = (title: string, content: string, icon: string) => {
+        const contentVal = get(props.message, content)
+        return <div >
+          <span inline-flex fic justify-start>
+            <Icon name={icon} size={16} mr-4px />
+            {t(`autogpt.${title}`)}:
+          </span>
+          <div ml-18px>{contentVal}</div>
         </div>
-        <div>
-          原因: {{ message.reply_json.thoughts.reasoning }}
-        </div>
-        <div>
-          计划: {{ message.reply_json.thoughts.plan }}
-        </div>
-        <div>
-          批判: {{ message.reply_json.thoughts.criticism }}
-        </div>
-        <div />
-      </div>
-      <div>
-        <div>
-          使用工具: {{ message.reply_json.command.name }}
-        </div>
-        <div>
-          参数:
-          <NSpace>
-            <span
-              v-for="[argName, argVal] in Object.entries(message.reply_json.command.args)"
-              :key="argName"
-            >
-              {{ argName }}: {{ argVal }}
+      }
+
+      const RenderArg = () => {
+        const args = get(props.message, 'reply_json.command.args')
+        if (!args)
+          return <div></div>
+
+        return <div >
+            <span inline-flex fic justify-start>
+              <Icon name="fluent-emoji:package" size={16} />
+              {t('autogpt.arguments')}:
             </span>
-          </NSpace>
-        </div>
+            <NSpace ml-18px>
+              {
+                Object.entries(args)
+                  .map(([argName, argVal]) => {
+                    return <span>
+                    {argName}: {argVal}
+                  </span>
+                  })
+              }
+
+           </NSpace>
+          </div>
+      }
+
+      return <div text-16px max-w-full break-all>
+          <Icon class="!fc" name="bi:robot" size={22} />
+          {
+            config.map(item =>
+              row(item.title, item.content, item.icon))
+          }
+          <RenderArg />
       </div>
-      <!-- <span>{{ goal }}</span> -->
-    </template>
-  </NThing>
-</template>
+    }
+  },
+
+})
+</script>

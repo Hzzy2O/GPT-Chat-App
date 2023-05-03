@@ -1,7 +1,8 @@
+import { lowerCase } from 'lodash-es'
 import { BaseModel } from '../base'
 import type { AutoGPT } from './types'
 import { config, iconName, settingSchema } from './config'
-import { getAll, runTask } from './api'
+import { downloadFile, getAll, runTask } from './api'
 import { Bot } from '#/index'
 import { useAutoGPTStoreWithOut } from '@/store'
 
@@ -75,8 +76,10 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
       }
 
       if (data.value) {
-        if (data.value.reply_json.name === 'Error'
-          || data.value.reply_json.name === 'finish') {
+        const { reply_json } = data.value
+
+        if (reply_json.name === 'Error'
+          || lowerCase(reply_json.command?.name) === 'finish') {
           setRunning(false)
           setBotById(curBotId.value, {
             finish: true,
@@ -89,6 +92,21 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
       runFlag = running.value && this.config.autorun
     }
     setRunning(false)
+  }
+
+  async download() {
+    const { curBotId } = useAutoGPTStoreWithOut()
+
+    const res = await downloadFile({
+      gpt_id: curBotId,
+    })
+    const blob = res.data.value
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'compressed-files.zip'
+    a.click()
+    URL.revokeObjectURL(url)
   }
 }
 
