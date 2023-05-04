@@ -41,6 +41,12 @@ watch(
   },
   { immediate: true, deep: true },
 )
+
+const scroller = ref<any>()
+
+function toBottom() {
+  scroller.value?.scrollToBottom()
+}
 </script>
 
 <template>
@@ -59,92 +65,100 @@ watch(
         dark:bg-dark-3
       >
         <template v-if="curBotId">
-          <!-- <DynamicScroller -->
-          <!--   :items="datal" -->
-          <!--   key-field="reply_json" -->
-          <!--   :min-item-size="54" -->
-          <!--   p="15px 5px" -->
-          <!-- > -->
-          <!--   <NListItem -->
-          <!--     class="list-item-card" -->
-          <!--   > -->
-          <!--     <NThing> -->
-          <!--       <template #avatar> -->
-          <!--         <Icon name="mdi:goal" :size="18" /> -->
-          <!--       </template> -->
-          <!--       <template #header> -->
-          <!--         <span mr-5px>{{ t('autogpt.cur_goals') }}:</span> -->
-          <!--       </template> -->
-          <!--       <template #description> -->
-          <!--         <div -->
-          <!--           v-for="(goal, goalNo) in getCurrentBot?.ai_goals" -->
-          <!--           :key="goal" -->
-          <!--         > -->
-          <!--           {{ goalNo + 1 }}. {{ goal }} -->
-          <!--         </div> -->
-          <!--       </template> -->
-          <!--     </NThing> -->
-          <!--   </NListItem> -->
-          <!--   <template #default="{ item, index, active }"> -->
-          <!--     <DynamicScrollerItem -->
-          <!--       :item="item" -->
-          <!--       :active="active" -->
-          <!--       :size-dependencies="[ -->
-          <!--         item.reply_json?.text, -->
-          <!--       ]" -->
-          <!--       :data-index="index" -->
-          <!--       class="list-item-card" -->
-          <!--       m-10px -->
-          <!--     > -->
-          <!--       <MsgBox :message="item" /> -->
-          <!--     </DynamicScrollerItem> -->
-          <!--   </template> -->
-          <!-- </DynamicScroller> -->
-          <NScrollbar
-            ref="scrollEl"
+          <DynamicScroller
+            ref="scroller"
+            :items="datal"
+            :min-item-size="54"
+            :emit-update="true"
+            p="15px 5px"
             h-520px
-            trigger="none"
-            relative
+            overflow-y-scroll
+            overflow-x-hidden
           >
-            <NList
-              bg-transparent
-              :show-divider="false"
-              p="15px 5px"
-              mt-10px
-            >
-              <NListItem
-                class="list-item-card"
+            <template #before>
+              <NThing class="list-item-card" m-10px>
+                <template #avatar>
+                  <Icon name="mdi:goal" :size="18" />
+                </template>
+                <template #header>
+                  <span mr-5px>{{ t('autogpt.cur_goals') }}:</span>
+                </template>
+                <template #description>
+                  <div
+                    v-for="(goal, goalNo) in getCurrentBot?.ai_goals"
+                    :key="goal"
+                  >
+                    {{ goalNo + 1 }}. {{ goal }}
+                  </div>
+                </template>
+              </NThing>
+            </template>
+            <template #after>
+              <div v-if="running" fc dark:color-white>
+                <span text-18px mr-5px>{{ t('main.chat.thinking') }}</span>
+                <iconify-icon width="20" icon="svg-spinners:blocks-wave" />
+              </div>
+            </template>
+            <template #default="{ item, index, active }">
+              <DynamicScrollerItem
+                :item="item"
+                :active="active"
+                :size-dependencies="[
+                  item.reply_json.thoughts.text,
+                ]"
+                :data-index="index"
+                :data-active="active"
+                p-10px
               >
-                <NThing>
-                  <template #avatar>
-                    <Icon name="mdi:goal" :size="18" />
-                  </template>
-                  <template #header>
-                    <span mr-5px>{{ t('autogpt.cur_goals') }}:</span>
-                  </template>
-                  <template #description>
-                    <div
-                      v-for="(goal, goalNo) in getCurrentBot?.ai_goals"
-                      :key="goal"
-                    >
-                      {{ goalNo + 1 }}. {{ goal }}
-                    </div>
-                  </template>
-                </NThing>
-              </NListItem>
-              <NListItem
-                v-for="(msg, idx) in messageList"
-                :key="idx"
-                class="list-item-card"
-              >
-                <MsgBox :message="msg" />
-              </NListItem>
-            </NList>
-            <div v-if="running" fc dark:color-white>
-              <span text-18px mr-5px>{{ t('main.chat.thinking') }}</span>
-              <iconify-icon width="20" icon="svg-spinners:blocks-wave" />
-            </div>
-          </NScrollbar>
+                <MsgBox
+                  class="list-item-card"
+                  :message="item"
+                />
+              </DynamicScrollerItem>
+            </template>
+          </DynamicScroller>
+          <!-- <NScrollbar -->
+          <!--   ref="scrollEl" -->
+          <!--   h-520px -->
+          <!--   trigger="none" -->
+          <!--   relative -->
+          <!-- > -->
+          <!--   <NList -->
+          <!--     bg-transparent -->
+          <!--     :show-divider="false" -->
+          <!--     p="15px 5px" -->
+          <!--     mt-10px -->
+          <!--   > -->
+          <!--     <NListItem -->
+          <!--       class="list-item-card" -->
+          <!--     > -->
+          <!--       <NThing> -->
+          <!--         <template #avatar> -->
+          <!--           <Icon name="mdi:goal" :size="18" /> -->
+          <!--         </template> -->
+          <!--         <template #header> -->
+          <!--           <span mr-5px>{{ t('autogpt.cur_goals') }}:</span> -->
+          <!--         </template> -->
+          <!--         <template #description> -->
+          <!--           <div -->
+          <!--             v-for="(goal, goalNo) in getCurrentBot?.ai_goals" -->
+          <!--             :key="goal" -->
+          <!--           > -->
+          <!--             {{ goalNo + 1 }}. {{ goal }} -->
+          <!--           </div> -->
+          <!--         </template> -->
+          <!--       </NThing> -->
+          <!--     </NListItem> -->
+          <!--     <NListItem -->
+          <!--       v-for="(msg, idx) in messageList" -->
+          <!--       :key="idx" -->
+          <!--       class="list-item-card" -->
+          <!--     > -->
+          <!--       <MsgBox :message="msg" /> -->
+          <!--     </NListItem> -->
+          <!--   </NList> -->
+
+          <!-- </NScrollbar> -->
         </template>
         <CreateForm v-else />
       </div>
@@ -153,7 +167,7 @@ watch(
         mt-10px
         fic
         w="85%"
-        lg-w="80%"
+        max-w-660px
         px-20px
         justify-end
       >

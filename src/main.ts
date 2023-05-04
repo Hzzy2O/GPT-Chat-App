@@ -1,6 +1,7 @@
 import '@unocss/reset/normalize.css'
 import '@unocss/reset/eric-meyer.css'
 import '@unocss/reset/tailwind.css'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import './styles/main.scss'
 import './styles/hljs_dark.scss'
 import 'uno.css'

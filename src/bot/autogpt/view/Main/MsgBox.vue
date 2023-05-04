@@ -45,6 +45,8 @@ export default defineComponent({
     return () => {
       const row = (title: string, content: string, icon: string) => {
         const contentVal = get(props.message, content)
+        if (!contentVal)
+          return <div></div>
         return <div >
           <span inline-flex fic justify-start>
             <Icon name={icon} size={16} mr-4px />
