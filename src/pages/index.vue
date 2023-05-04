@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Footer, Header, Main, RightSider, Siderbar } from '@/layouts'
-import { AutoGPTFooter, AutoGPTMain, AutoGPTSider } from '@/bot/autogpt/view'
+import { AutoGPTMain, AutoGPTSider } from '@/bot/autogpt/view'
 import { registerHLDB } from '@/utils/IDB'
 import { useUIStore } from '@/store'
 import { isBot } from '@/bot'
@@ -20,7 +20,6 @@ registerHLDB()
       <NLayout>
         <Header />
         <AutoGPTMain />
-        <!-- <AutoGPTFooter /> -->
       </NLayout>
     </template>
     <template v-else>

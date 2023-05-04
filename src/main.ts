@@ -9,6 +9,7 @@ import 'virtual:svg-icons-register'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from 'virtual:generated-pages'
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 import App from './App.vue'
 import store from '@/store'
 import i18n from '@/locales'
@@ -22,6 +23,8 @@ const router = createRouter({
   routes,
 })
 
+app.component('DynamicScroller', DynamicScroller)
+app.component('DynamicScrollerItem', DynamicScrollerItem)
 app.use(router)
 app.use(store)
 app.use(i18n)

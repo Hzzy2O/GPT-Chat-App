@@ -1,24 +1,19 @@
 <script lang="ts" setup>
-import { NScrollbar } from 'naive-ui'
-import { last } from 'lodash-es'
+import type { NScrollbar } from 'naive-ui'
 import CreateForm from '../components/createForm.vue'
-import type { AutoGPTModel } from '../..'
 import StatusBtn from './StatusBtn.vue'
+import FileModal from './FileModal.vue'
 import MsgBox from './MsgBox.vue'
 import { useAutoGPTStore } from '@/store'
 
 const autogptStore = useAutoGPTStore()
-const { setCurBotId } = autogptStore
 const { curBotId, messageList, running, getCurrentBot } = storeToRefs(autogptStore)
 
 const isFinish = computed(() => {
   const last = messageList.value[messageList.value.length - 1]
   return last?.finish || getCurrentBot.value?.finish
 })
-const hasFile = computed(() => {
-  const lastMsg = last(messageList.value)
-  return lastMsg?.has_file || getCurrentBot.value?.has_file
-})
+
 const scrollEl = ref<typeof NScrollbar>()
 const { y } = useScroll(scrollEl as unknown as ElRef, { behavior: 'smooth' })
 const scrollToB = useThrottleFn(() =>
@@ -26,6 +21,17 @@ const scrollToB = useThrottleFn(() =>
     y.value = scrollEl.value?.scrollbarInstRef.contentRef.scrollHeight
   }, 16),
 )
+
+const fileModal = ref<typeof FileModal | null>(null)
+function openFileModal() {
+  fileModal.value?.open()
+}
+const datal = computed(() => messageList.value.map((item, index) => {
+  return {
+    ...item,
+    id: index,
+  }
+}))
 
 // 滚动到底部
 watch(
@@ -35,19 +41,15 @@ watch(
   },
   { immediate: true, deep: true },
 )
-
-async function download() {
-  const autogpt = bot.value as AutoGPTModel
-  await autogpt.download()
-}
 </script>
 
 <template>
-  <NLayoutContent h="[calc(100dvh-60px)]" bg2 overflow-hidden>
-    <div animate-bounce-in w-full h-full fc flex-col>
+  <NLayoutContent h="[calc(100dvh-60px)]" bg2>
+    <div w-full h-full relative overflow-hidden fc flex-col>
       <div
+        animate-bounce-in
         w="85%"
-        lg-w="80%"
+        max-w-660px
         bg-white
         transition-all
         w-full
@@ -57,6 +59,47 @@ async function download() {
         dark:bg-dark-3
       >
         <template v-if="curBotId">
+          <!-- <DynamicScroller -->
+          <!--   :items="datal" -->
+          <!--   key-field="reply_json" -->
+          <!--   :min-item-size="54" -->
+          <!--   p="15px 5px" -->
+          <!-- > -->
+          <!--   <NListItem -->
+          <!--     class="list-item-card" -->
+          <!--   > -->
+          <!--     <NThing> -->
+          <!--       <template #avatar> -->
+          <!--         <Icon name="mdi:goal" :size="18" /> -->
+          <!--       </template> -->
+          <!--       <template #header> -->
+          <!--         <span mr-5px>{{ t('autogpt.cur_goals') }}:</span> -->
+          <!--       </template> -->
+          <!--       <template #description> -->
+          <!--         <div -->
+          <!--           v-for="(goal, goalNo) in getCurrentBot?.ai_goals" -->
+          <!--           :key="goal" -->
+          <!--         > -->
+          <!--           {{ goalNo + 1 }}. {{ goal }} -->
+          <!--         </div> -->
+          <!--       </template> -->
+          <!--     </NThing> -->
+          <!--   </NListItem> -->
+          <!--   <template #default="{ item, index, active }"> -->
+          <!--     <DynamicScrollerItem -->
+          <!--       :item="item" -->
+          <!--       :active="active" -->
+          <!--       :size-dependencies="[ -->
+          <!--         item.reply_json?.text, -->
+          <!--       ]" -->
+          <!--       :data-index="index" -->
+          <!--       class="list-item-card" -->
+          <!--       m-10px -->
+          <!--     > -->
+          <!--       <MsgBox :message="item" /> -->
+          <!--     </DynamicScrollerItem> -->
+          <!--   </template> -->
+          <!-- </DynamicScroller> -->
           <NScrollbar
             ref="scrollEl"
             h-520px
@@ -106,7 +149,7 @@ async function download() {
         <CreateForm v-else />
       </div>
       <div
-        v-if="hasFile"
+        v-if="curBotId"
         mt-10px
         fic
         w="85%"
@@ -114,12 +157,13 @@ async function download() {
         px-20px
         justify-end
       >
-        <NButton text @click="download">
-          <Icon title="download" name="fa6-solid:download" :size="22" />
+        <NButton text @click="openFileModal">
+          <Icon title="file" name="clarity:directory-solid" :size="22" />
         </NButton>
       </div>
-      <StatusBtn v-if="!isFinish" mt-10px />
+      <StatusBtn v-if="curBotId && !isFinish" mt-20px />
     </div>
+    <FileModal ref="fileModal" />
   </NLayoutContent>
 </template>
 

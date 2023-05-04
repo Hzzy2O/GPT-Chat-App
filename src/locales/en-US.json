@@ -139,7 +139,10 @@
     "criticism": "criticism",
     "utils": "utils",
     "arguments": "arguments",
-    "result": "result"
+    "result": "result",
+    "file_manage": "file manage",
+    "download": "download",
+    "download_all": "download all"
 
   }
 }

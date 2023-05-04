@@ -12,10 +12,12 @@ export const create = (params: CreateInput) => usePost(AutoGPT.Api.Create, { par
 
 export const runTask = (params: { gpt_id: string }) => usePost(AutoGPT.Api.Run, { params })
 
-export const downloadFile = (params: { gpt_id: string }) =>
+export const downloadFile = (params: { gpt_id: string; path: string }) =>
   usePost(AutoGPT.Api.Download, {
     params,
     transformResponse(r) {
       return r.blob()
     },
   })
+
+export const getFileInfo = (params: { gpt_id: string }) => usePost(AutoGPT.Api.FileInfo, { params })

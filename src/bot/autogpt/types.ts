@@ -4,6 +4,7 @@ export namespace AutoGPT {
     Create = '/autogpt/create',
     Run = '/autogpt/run',
     Download = '/autogpt/download',
+    FileInfo = '/autogpt/file',
   }
 
   export interface Config {

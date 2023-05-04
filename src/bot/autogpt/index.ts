@@ -94,17 +94,19 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
     setRunning(false)
   }
 
-  async download() {
+  async download(path: string, downloadName: string) {
     const { curBotId } = useAutoGPTStoreWithOut()
 
     const res = await downloadFile({
       gpt_id: curBotId,
+      path,
     })
     const blob = res.data.value
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'compressed-files.zip'
+    a.download = downloadName
+
     a.click()
     URL.revokeObjectURL(url)
   }

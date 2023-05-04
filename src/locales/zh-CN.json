@@ -142,6 +142,9 @@
     "criticism": "批评",
     "utils": "工具",
     "arguments": "参数",
-    "result": "结果"
+    "result": "结果",
+    "file_manage": "文件管理",
+    "download": "下载",
+    "download_all": "全部下载"
   }
 }
