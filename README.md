@@ -21,11 +21,15 @@ bing services on space: `https://deta.space/discovery/r/sgzhrcavxfxaahhr`
    - 联网响应
 4. **Bing** 集成：
    - 聊天
+   - 对话中生成图片
    - 生成图片
 5. **PWA 应用**，响应式布局，适配移动端访问。
 6. 使用 [Bing-Chat](https://github.com/XiaoXinYo/Bing-Chat) 项目实现的 Bing 服务。
 7. 会话记录 **本地存储**。
 8. 提供 **自定义 prompt** 选择和编辑功能。
+9. **autogpt** 集成：
+   - 使用 [Auto-Chain-Api](https://github.com/Hzzy2O/Auto-Chain-Api.git) 自动运行任务
+   - 文件下载
 
 ## 🚀 开始使用
 

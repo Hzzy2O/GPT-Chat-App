@@ -59,10 +59,10 @@ const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value
         <UserBox v-if="isUser" :text="msg" />
         <MdBox v-else-if="msg" ref="mdRef" :text="msg" />
         <!-- 图片展示 -->
-        <NImageGroup v-if="imgs">
+        <NImageGroup v-if="chatData.imgs">
           <NSpace max-w-210px sm-max-w-412px>
             <NImage
-              v-for="img in imgs"
+              v-for="img in chatData.imgs"
               :key="img"
               rd-8px
               shadow

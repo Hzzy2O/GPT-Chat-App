@@ -12,22 +12,25 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
 
   chat(msg: string, doneDeal: (d: boolean) => void): void {
     const { setGenerating } = useUIStoreWithOut()
-    bingChat(this.config, msg, (data) => {
+    bingChat(this.config, msg, async (data) => {
       const { answer, urls, done, token, suggests, frame_url, img_prompt } = data
 
       if (done) {
-        setGenerating(false)
-        // if (img_prompt)
-        //   this.createImage(img_prompt)
+        let imgs: string[] = []
 
-        receiveMsg(' ', done, { urls, token, suggests, frame_url })
+        if (img_prompt)
+          imgs = await this.createImage(img_prompt, false)
+
+        setGenerating(false)
+        receiveMsg(' ', done, { urls, token, suggests, frame_url, imgs })
+
         doneDeal(true)
       }
       else { receiveMsg(answer, done, { urls, token }) }
     })
   }
 
-  async createImage(msg: string) {
+  async createImage(msg: string, push = true) {
     const { error } = useToast()
 
     const { data } = await createImage(msg)
@@ -39,7 +42,7 @@ class BingModel extends BaseModel<Bing.Config, Bot.bing> {
     if (code !== 200)
       return error(message)
 
-    return receiveImg(res.imgs)
+    return push ? receiveImg(res.imgs) : toRaw(res.imgs)
   }
 
   editImage = undefined

@@ -21,11 +21,16 @@ bing services on space: `https://deta.space/discovery/r/sgzhrcavxfxaahhr`
    - web access response
 4. **Bing** integration:
    - Chat
+   - Generate images during conversation
    - Generate images
 5. **PWA application** with responsive design, optimized for mobile access.
 6. Bing service implemented using the [Bing-Chat](https://github.com/XiaoXinYo/Bing-Chat) project.
 7. **Local storage** of conversation history.
 8. Provides **custom prompt** selection and editing features.
+9. **autogpt** Integration: 
+   - use [Auto-Chain-Api](https://github.com/Hzzy2O/Auto-Chain-Api.git) auto run task
+   - download file
+
 
 ## 🚀 Getting Started
 

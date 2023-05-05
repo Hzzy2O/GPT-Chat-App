@@ -183,14 +183,9 @@ async def create_image(request: Request) -> Response:
     if not tk:
         return GenerateResponse().error(110, 'token不能为空')  
 
-    argU = ''
-    if isinstance(tk, str):
-        argU = tk
-    else:
-        cookies = json.loads(tk)
-        if not cookies:
-            return GenerateResponse().error(111, 'token错误')
-
+    argU = tk
+    cookies = json.loads(tk)
+    if cookies:
         for cookie in cookies:
             if cookie.get("name") == "_U":
                 argU = cookie.get("value")
@@ -216,6 +211,12 @@ async def create_image(request: Request) -> Response:
  
 @app.post('/api')
 async def api(request: Request) -> Response:
+    headers_json = getToken(request)
+    if not headers_json:
+        return GenerateResponse().error(110, 'token不能为空')
+    
+    cookies = json.loads(headers_json)
+
     parameters = await getrequestParameter(request)
     token = parameters.get('token')
     style = parameters.get('style')
@@ -225,7 +226,8 @@ async def api(request: Request) -> Response:
     elif not style or  style not in STYLES:
         style = 'balanced'
     
-    token, chatBot = getChatBot(token)
+    token, chatBot = getChatBot(token, cookies)
+
     if not chatBot:
         return GenerateResponse().error(120, 'token不存在')
     data = await chatBot.ask(question, conversation_style=getStyleEnum(style))
@@ -279,7 +281,7 @@ async def apiStream(request: Request) -> Response:
             'token': token,
             'suggests': []
         }
-        async for final, data in chatBot.ask_stream(question, conversation_style=getStyleEnum(style), search_result=True):
+        async for final, data in chatBot.ask_stream(question, conversation_style=getStyleEnum(style)):
             if not final:
                 answer = data[index:]
                 index = len(data)
@@ -291,14 +293,12 @@ async def apiStream(request: Request) -> Response:
                 if data.get('item').get('result').get('value') == 'Throttled':
                     yield GenerateResponse().error(120, '已上限,24小时后尝试', True)
                     break
-                # const url = `https://www.bing.com/search?showselans=1&IG=7BDF7D00DB844AC6982A637DF3A58E43&IID=SERP.5027&cw=1902&ch=900&kseed=16000&SFX=19&q=haaland+%E6%96%B0%E9%97%BB&iframeid=fc7286ba-435c-4ce0-80b2-8a9b1b431319&cc=us&setlang=en`
                 
                 messages = data.get('item').get('messages')
                 last = messages[-1]
                 if last.get('contentType') == 'IMAGE':
                     info['img_prompt'] = last.get('text')
 
-                print(data)
                 info['answer'] = getStreamAnswer(data)
                 if 'text' not in messages[1]:
                     yield GenerateResponse().success(info, True)
