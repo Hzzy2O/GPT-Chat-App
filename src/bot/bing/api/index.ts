@@ -8,7 +8,7 @@ type ResData = {
   answer: string
   done: boolean
   token?: string
-} & Pick<Flow, 'urls' | 'suggests'>
+} & Pick<Flow, 'urls' | 'suggests' | 'frame_url' | 'img_prompt'>
 
 export const bingChat = (config: Bing.Config, query: string, readStream: (o: ResData) => void) => {
   const recordStore = useRecordStoreWithOut()

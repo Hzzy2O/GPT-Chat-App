@@ -2,6 +2,7 @@
 import Actions from '../Actions/index.vue'
 import MdBox from './MdBox'
 import UserBox from './UserBox.vue'
+import AdaptiveCard from './AdaptiveCard.vue'
 import type { Flow } from '#/.'
 import { Bot, Role } from '#/.'
 
@@ -11,7 +12,7 @@ const { chatData } = defineProps<{
   chatData: Flow
 }>()
 
-const { msg, urls, type, imgs, done } = toRefs(chatData)
+const { msg, urls, type, imgs, done, frame_url } = toRefs(chatData)
 const isUser = type?.value === Role.user
 const containerCls = isUser ? 'justify-end' : 'justify-start'
 
@@ -109,6 +110,9 @@ const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value
               </NTag>
             </label>
           </div>
+        </div>
+        <div v-if="frame_url">
+          <AdaptiveCard :url="frame_url" />
         </div>
         <div text-12px animate-fade-in fic justify-between>
           <span v-if="isShowTokenCost && chatData.tokenCost">token cost: {{ chatData.tokenCost }}</span>

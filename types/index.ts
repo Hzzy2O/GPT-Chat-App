@@ -23,6 +23,8 @@ export interface Flow {
   // 花费的token数量
   tokenCost?: number
   suggests?: string[]
+  frame_url?: string
+  img_prompt?: string
 }
 
 export type Language = 'zh-CN' | 'en-US'
