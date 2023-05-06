@@ -75,7 +75,6 @@ function newBot() {
               text-16px
               fic
               transition-all
-              :type="curBotId === botInfo.id ? 'primary' : 'default'"
               secondary
               justify-between
               hover-scale-103
@@ -84,7 +83,7 @@ function newBot() {
               w-full
               cursor-pointer
               h-auto
-              class="shadow-[0_0_4px_var(--theme-color)]"
+              class="!bg1 shadow-[0_0_4px_var(--theme-color)]"
               @click="changeBot(botInfo)"
             >
               <NThing :title="botInfo.ai_name" content-style="margin-top: 10px;">

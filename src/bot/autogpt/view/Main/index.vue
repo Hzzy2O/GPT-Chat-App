@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { NScrollbar } from 'naive-ui'
 import CreateForm from '../components/createForm.vue'
 import StatusBtn from './StatusBtn.vue'
 import FileModal from './FileModal.vue'
@@ -14,14 +13,6 @@ const isFinish = computed(() => {
   return last?.finish || getCurrentBot.value?.finish
 })
 
-const scrollEl = ref<typeof NScrollbar>()
-const { y } = useScroll(scrollEl as unknown as ElRef, { behavior: 'smooth' })
-const scrollToB = useThrottleFn(() =>
-  setTimeout(() => {
-    y.value = scrollEl.value?.scrollbarInstRef.contentRef.scrollHeight
-  }, 16),
-)
-
 const fileModal = ref<typeof FileModal | null>(null)
 function openFileModal() {
   fileModal.value?.open()
@@ -33,20 +24,19 @@ const datal = computed(() => messageList.value.map((item, index) => {
   }
 }))
 
-// 滚动到底部
-watch(
-  [() => messageList.value],
-  () => {
-    scrollToB()
-  },
-  { immediate: true, deep: true },
-)
-
 const scroller = ref<any>()
 
 function toBottom() {
   scroller.value?.scrollToBottom()
 }
+// 滚动到底部
+watch(
+  [() => messageList.value],
+  () => {
+    toBottom()
+  },
+  { immediate: true, deep: true },
+)
 </script>
 
 <template>
@@ -73,7 +63,9 @@ function toBottom() {
             p="15px 5px"
             h-520px
             overflow-y-scroll
+            class="!scroll-t"
             overflow-x-hidden
+            @resize="toBottom"
           >
             <template #before>
               <NThing class="list-item-card" m-10px>
@@ -104,7 +96,7 @@ function toBottom() {
                 :item="item"
                 :active="active"
                 :size-dependencies="[
-                  item.reply_json.thoughts.text,
+                  item.reply_json.thoughts,
                 ]"
                 :data-index="index"
                 :data-active="active"
@@ -117,48 +109,6 @@ function toBottom() {
               </DynamicScrollerItem>
             </template>
           </DynamicScroller>
-          <!-- <NScrollbar -->
-          <!--   ref="scrollEl" -->
-          <!--   h-520px -->
-          <!--   trigger="none" -->
-          <!--   relative -->
-          <!-- > -->
-          <!--   <NList -->
-          <!--     bg-transparent -->
-          <!--     :show-divider="false" -->
-          <!--     p="15px 5px" -->
-          <!--     mt-10px -->
-          <!--   > -->
-          <!--     <NListItem -->
-          <!--       class="list-item-card" -->
-          <!--     > -->
-          <!--       <NThing> -->
-          <!--         <template #avatar> -->
-          <!--           <Icon name="mdi:goal" :size="18" /> -->
-          <!--         </template> -->
-          <!--         <template #header> -->
-          <!--           <span mr-5px>{{ t('autogpt.cur_goals') }}:</span> -->
-          <!--         </template> -->
-          <!--         <template #description> -->
-          <!--           <div -->
-          <!--             v-for="(goal, goalNo) in getCurrentBot?.ai_goals" -->
-          <!--             :key="goal" -->
-          <!--           > -->
-          <!--             {{ goalNo + 1 }}. {{ goal }} -->
-          <!--           </div> -->
-          <!--         </template> -->
-          <!--       </NThing> -->
-          <!--     </NListItem> -->
-          <!--     <NListItem -->
-          <!--       v-for="(msg, idx) in messageList" -->
-          <!--       :key="idx" -->
-          <!--       class="list-item-card" -->
-          <!--     > -->
-          <!--       <MsgBox :message="msg" /> -->
-          <!--     </NListItem> -->
-          <!--   </NList> -->
-
-          <!-- </NScrollbar> -->
         </template>
         <CreateForm v-else />
       </div>

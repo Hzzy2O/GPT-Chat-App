@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, startOfMonth } from 'date-fns'
 import { OpenAI } from '../types'
 import { parsePayload, streamParser } from './helper'
 import { setTokenCost } from './payload'
@@ -9,7 +9,7 @@ type ReadTextStream = (text: string, done: boolean) => void
 
 export const getUsage = () => useGet(OpenAI.Api.Usage, {
   params: {
-    start_date: format(Date.now() - 90 * 24 * 60 * 60 * 1000, 'yyyy-MM-dd'),
+    start_date: format(startOfMonth(new Date()), 'yyyy-MM-dd'),
     end_date: format(Date.now() + 24 * 60 * 60 * 1000, 'yyyy-MM-dd'),
   },
 })

@@ -34,7 +34,8 @@ export const useAutoGPTStore = defineStore('autogpt-store', {
     },
     fetchBotList() {
       getAll().then((res) => {
-        this.setBotList(res.data.value!.list)
+        if (res.data.value)
+          this.setBotList(res.data.value!.list)
       })
     },
     setCurBotId(id: string) {

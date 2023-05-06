@@ -135,7 +135,9 @@ function _useFetch<T = any>(
         }
       }
       else {
-        throw new Error(response.statusText)
+        const { error, message } = await response.json()
+        console.log(message)
+        throw new Error(error.message || message || response.statusText)
       }
     }
     catch (err: any) {
@@ -147,21 +149,26 @@ function _useFetch<T = any>(
         error.value = err.message
         // assign the error to the error ref
         const toast = useToast()
-        switch (statusCode.value) {
-          case 401:
-            toast.error(t('net.error.401'))
-            break
-          case 403:
-            toast.error(t('net.error.403'))
-            break
-          case 404:
-            toast.error(t('net.error.404'))
-            break
-          case 500:
-            toast.error(t('net.error.500'))
-            break
-          default:
-            toast.error(t('net.error.unknown') + err.message)
+        if (err.message) {
+          toast.error(err.message)
+        }
+        else {
+          switch (statusCode.value) {
+            case 401:
+              toast.error(t('net.error.401'))
+              break
+            case 403:
+              toast.error(t('net.error.403'))
+              break
+            case 404:
+              toast.error(t('net.error.404'))
+              break
+            case 500:
+              toast.error(t('net.error.500'))
+              break
+            default:
+              toast.error(t('net.error.unknown'))
+          }
         }
       }
     }

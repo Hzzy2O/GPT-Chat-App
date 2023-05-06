@@ -2,7 +2,7 @@ import { lowerCase } from 'lodash-es'
 import { BaseModel } from '../base'
 import type { AutoGPT } from './types'
 import { config, iconName, settingSchema } from './config'
-import { downloadFile, getAll, runTask } from './api'
+import { downloadFile, runTask } from './api'
 import { Bot } from '#/index'
 import { useAutoGPTStoreWithOut } from '@/store'
 
@@ -18,9 +18,8 @@ export class AutoGPTModel extends BaseModel<AutoGPT.Config, Bot.autogpt> {
   getBalance = undefined
 
   async getAllBot() {
-    const { setBotList } = useAutoGPTStoreWithOut()
-    const { data } = await getAll()
-    setBotList(data.value!.list)
+    const { fetchBotList } = useAutoGPTStoreWithOut()
+    fetchBotList()
   }
 
   setRunBot(id: string) {

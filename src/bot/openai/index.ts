@@ -18,7 +18,7 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
       doneDeal(done)
     }
 
-    if (modelType.startsWith('gpt-3.5'))
+    if (modelType.startsWith('gpt-3.5') || modelType.startsWith('gpt-4'))
       chatCompletion(this.config, callback, input)
     else
       completion(this.config, callback, input)
