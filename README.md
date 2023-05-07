@@ -8,7 +8,7 @@
 GPT-Chat-App 是一个基于 TypeScript、Vite、Vue 3 和 UnoCSS 构建的前端项目，允许用户与 OpenAI 和 Bing 的 GPT 模型进行交互。
 
 [online demo](https://gpt-chat-app-six.vercel.app)
-bing services on space: `https://deta.space/discovery/r/sgzhrcavxfxaahhr`
+bing services on space: `https://deta.space/discovery/@hzzy/bing_services`
 
 ## ✨ 功能介绍
 

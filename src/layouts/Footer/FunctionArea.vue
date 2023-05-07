@@ -3,6 +3,7 @@ import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 import Recorder from './FunctionalParts/Recorder.vue'
 import Prompt from './FunctionalParts/Prompt.vue'
 import ImgUploader from './FunctionalParts/ImgUploader.vue'
+import PluginStore from './FunctionalParts/PluginStore.vue'
 import { useRecordStore, useUIStore } from '@/store'
 
 const props = defineProps<{
@@ -62,6 +63,12 @@ function openImgUploader() {
   imgUploader.value?.openModal()
 }
 
+// 图片弹窗
+const pluginModal = ref<typeof PluginStore | null>(null)
+function openPluginModal() {
+  pluginModal.value?.openModal()
+}
+
 // 模式选择
 const options = computed(() =>
   [
@@ -117,6 +124,14 @@ defineExpose({
           @click="toggleshowRecorder(true)"
         />
       </div>
+      <!-- <div f-icon> -->
+      <!--   <Icon -->
+      <!--     :title="t('common.speechToTxt')" -->
+      <!--     name="raphael:plugin" -->
+      <!--     :size="22" -->
+      <!--     @click="openPluginModal" -->
+      <!--   /> -->
+      <!-- </div> -->
       <div v-if="props.mode === 'editImg'" relative f-icon pl-0>
         <Icon name="uil:image-plus" :size="22" @click="openImgUploader" />
       </div>
@@ -145,6 +160,7 @@ defineExpose({
     </Transition>
     <Prompt ref="promptRef" />
     <ImgUploader ref="imgUploader" :img-info="imgInfo" @set-img-info="setImgInfo" />
+    <PluginStore ref="pluginModal" />
   </div>
 </template>
 
