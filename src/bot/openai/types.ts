@@ -13,7 +13,8 @@ export namespace OpenAI {
     EditImage = '/v1/images/edits',
     Subscriptions = '/v1/dashboard/billing/subscription',
     Usage = '/v1/dashboard/billing/usage',
-
+    CreateChat = '/v1/chat/create',
+    Plugins = '/v1/plugins',
   }
 
   export interface Config {
@@ -36,5 +37,16 @@ export namespace OpenAI {
     web_access: boolean
 
     show_token_cost: boolean
+
+    enableLangchain: boolean
+    langchainApi: string
+  }
+
+  export interface Plugin {
+    name: string
+    description: string
+    url: string
+    icon?: string
+    logo?: string
   }
 }

@@ -51,7 +51,10 @@
     "webaccess": {
       "title": "联网设置",
       "switch": "是否联网"
-    }
+    },
+    "enableLangchain": "启用langchain增强",
+    "langchainApi": "langchain api地址"
+
   },
   "main": {
     "chat": {
@@ -59,6 +62,12 @@
       "nodata": "你可以问我任何问题",
       "stop_generate": "停止生成",
       "thinking": "AI正在思考中"
+    },
+    "plugin": {
+      "store": "插件商店",
+      "manage": "插件管理",
+      "use": "使用",
+      "disable": "禁用"
     }
   },
   "footer": {

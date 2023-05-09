@@ -1,27 +1,54 @@
 import { BaseModel } from '../base'
 import { OpenAI } from './types'
 import { config, iconName, settingSchema } from './config'
-import { chatCompletion, completion, editImage, generateImage, getUsage, transcription } from './api'
+import type { ReadTextStream } from './api'
+import {
+  chatCompletion,
+  chatLangchain,
+  completion,
+  editImage,
+  generateImage,
+  getPlugins,
+  getUsage,
+  transcription,
+} from './api'
+
 import { Bot } from '#/index'
 import { useGet } from '@/api'
 
 class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
+  langchain_chat = false
+  usePlugins = useStorage<OpenAI.Plugin[]>('plugins', [])
+
   constructor() {
     super(Bot.openai, iconName, config, settingSchema)
   }
 
   chat(input: string, doneDeal: (d: boolean) => void) {
-    const { modelType } = this.config
+    const { modelType, enableLangchain, langchainApi } = this.config
 
-    const callback = (txt: string, done: boolean) => {
+    const callback: ReadTextStream = (txt, done) => {
       receiveMsg(txt, done)
       doneDeal(done)
     }
 
-    if (modelType.startsWith('gpt-3.5') || modelType.startsWith('gpt-4'))
-      chatCompletion(this.config, callback, input)
-    else
-      completion(this.config, callback, input)
+    if (modelType.startsWith('gpt-3.5') || modelType.startsWith('gpt-4')) {
+      if (langchainApi && enableLangchain)
+        this.langchianChat(input, callback)
+      else
+        chatCompletion(this.config, callback, input)
+    }
+    else { completion(this.config, callback, input) }
+  }
+
+  langchianChat(input: string, cb: ReadTextStream) {
+    const { langchainApi } = this.config
+
+    const plugins = this.usePlugins.value
+
+    langchainApi && chatLangchain(this.config, cb, input, {
+      plugins,
+    })
   }
 
   async createImage(input: string) {
@@ -65,6 +92,16 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
         used: used.toFixed(2),
         available: available.toFixed(2),
       }
+    }
+    catch (error) {
+      return null
+    }
+  }
+
+  async getPlugins() {
+    try {
+      const { data } = await getPlugins(this.config)
+      return toRaw(data.value?.tools)
     }
     catch (error) {
       return null

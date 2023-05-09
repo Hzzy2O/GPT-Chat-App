@@ -25,7 +25,7 @@ export default defineConfig({
       'shadow-4': 'shadow-[0_0_2px_2px_rgba(0,0,0,0.1)] dark:shadow-[0_0_2px_2px_rgba(255,255,255,0.1)]',
       'shadow-head': 'shadow-[0px_0px_8px_rgba(0,0,0,0.1)]',
       'f-icon': 'ml-10px h-38px fjc items-center transition-opacity',
-      'scroll-t': 'scrollbar scrollbar-rounded scrollbar-track-transparent',
+      'scroll-t': 'scrollbar scrollbar-rounded ',
       'card-modal': 'lg-w-80vw lg-bottom-36px w-90vw max-w-600px rd-12px',
       'zoomin': 'animate-zoom-in animate-duration-200',
     },

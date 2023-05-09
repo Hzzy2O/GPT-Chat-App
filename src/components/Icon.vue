@@ -16,7 +16,7 @@ withDefaults(
 <template>
   <label :title="title ? t(title) : ''" fc display-inherit cursor-pointer>
     <NIcon :size="size" :color="color">
-      <iconify-icon v-if="!name.startsWith('#svg-')" :width="size" :icon="name" />
+      <iconify-icon v-if="!name.startsWith('#svg-')" :width="size" :height="size" :icon="name" />
       <svg
         v-else
         class="svg-icon-spin" :class="[$attrs.class]"

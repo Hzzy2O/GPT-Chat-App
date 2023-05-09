@@ -5,7 +5,7 @@ import { setTokenCost } from './payload'
 import { searchWeb } from './boost'
 import { useGet, usePost } from '@/api'
 
-type ReadTextStream = (text: string, done: boolean) => void
+export type ReadTextStream = (text: string, done: boolean) => void
 
 export const getUsage = () => useGet(OpenAI.Api.Usage, {
   params: {
@@ -41,6 +41,35 @@ export const chatCompletion = async (
   })
 }
 
+export const chatLangchain = async (
+  config: OpenAI.Config,
+  readStream: ReadTextStream,
+  input: string,
+  ext: Recordable = {},
+) => {
+  setTokenCost(input)
+  return usePost(OpenAI.Api.ChatCompletion, {
+    params: Object.assign(parsePayload(OpenAI.Api.ChatCompletion, input, config), ext),
+    onStream: (data, control) => {
+      try {
+        const reader = (res: any, done: boolean) => {
+          readStream(res, done)
+        }
+        const parse = streamParser(reader, control)
+        parse(data)
+      }
+      catch (err) {
+        readStream('', true)
+      }
+    },
+    baseURL: config.langchainApi,
+  })
+}
+
+export const getPlugins = (config: OpenAI.Config) => useGet(OpenAI.Api.Plugins, {
+  baseURL: config.enableLangchain ? config.langchainApi : undefined,
+})
+
 export const completion = (
   config: OpenAI.Config,
   readStream: ReadTextStream,
@@ -56,6 +85,11 @@ export const completion = (
       const parse = streamParser(reader, control)
       parse(data)
     },
+  })
+
+export const createChat = (config: OpenAI.Config, input: string) =>
+  usePost(OpenAI.Api.CreateChat, {
+    params: parsePayload(OpenAI.Api.CreateChat, input, config),
   })
 
 // 音频转文字

@@ -17,6 +17,8 @@ export const config: OpenAI.Config = {
   img_number: 1,
   web_access: false,
   show_token_cost: false,
+  enableLangchain: false,
+  langchainApi: '',
 }
 
 // 编辑表单
@@ -36,6 +38,17 @@ export const settingSchema: FormConfig = [
     type: 'select',
     options: modelList,
     renderLabel: modelSelectLabel,
+  },
+  {
+    key: 'enableLangchain',
+    label: 'config.enableLangchain',
+    type: 'switch',
+  },
+  {
+    key: 'langchainApi',
+    label: 'config.langchainApi',
+    type: 'input',
+    ifShow: data => data.enableLangchain,
   },
   {
     label: 'config.sessionParameter',

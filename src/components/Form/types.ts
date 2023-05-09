@@ -7,6 +7,7 @@ export interface BaseItem {
   rule?: FormItemRule
   desc?: string
   decorator?: FormItemProps
+  ifShow?: ((form: Record<string, any>) => boolean)
 }
 
 export interface InputItem extends BaseItem {

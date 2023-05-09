@@ -38,14 +38,16 @@ const formModel = computed(() => props.formModel)
           </template>
         </NCollapseItem>
       </NCollapse>
-      <FormItem
-        v-else
-        :decorator="item.decorator || {}"
-        :value="formModel[item.key]"
-        :no-divider="props.noDivider"
-        :config="item"
-        @value-change="valueChange"
-      />
+      <template v-else>
+        <FormItem
+          v-if="typeof item.ifShow === 'function' ? item.ifShow(formModel) : true"
+          :decorator="item.decorator || {}"
+          :value="formModel[item.key]"
+          :no-divider="props.noDivider"
+          :config="item"
+          @value-change="valueChange"
+        />
+      </template>
     </template>
   </NForm>
 </template>

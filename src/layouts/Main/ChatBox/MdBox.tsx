@@ -76,7 +76,7 @@ export default defineComponent({
 
       return (
         <>
-          <div overflow-x-auto ref={elRef} class={'mdbox'} innerHTML={mdTxt}></div>
+          <div overflow-x-auto scrollbar-t ref={elRef} class={'mdbox'} innerHTML={mdTxt}></div>
         </>
       )
     }

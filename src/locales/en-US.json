@@ -51,7 +51,9 @@
     "webaccess": {
       "title": "web access settings",
       "switch": "web access switch"
-    }
+    },
+    "enableLangchain": "enable langchain",
+    "langchainApi": "langchain api url"
   },
   "main": {
     "chat": {
@@ -59,6 +61,12 @@
       "nodata": "you can ask me everything",
       "stop_generate": "stop generating",
       "thinking": "AI is thinking"
+    },
+    "plugin": {
+      "store": "plugin store",
+      "manage": "plugin manage",
+      "use": "use",
+      "disable": "disable"
     }
   },
   "footer": {
