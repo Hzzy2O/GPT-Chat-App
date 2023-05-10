@@ -70,6 +70,11 @@ export const getPlugins = (config: OpenAI.Config) => useGet(OpenAI.Api.Plugins, 
   baseURL: config.enableLangchain ? config.langchainApi : undefined,
 })
 
+export const addPlugin = (config: OpenAI.Config, url: string) => usePost(OpenAI.Api.AddPlugin, {
+  params: { url },
+  baseURL: config.langchainApi,
+})
+
 export const completion = (
   config: OpenAI.Config,
   readStream: ReadTextStream,

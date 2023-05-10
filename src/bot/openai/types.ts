@@ -15,6 +15,7 @@ export namespace OpenAI {
     Usage = '/v1/dashboard/billing/usage',
     CreateChat = '/v1/chat/create',
     Plugins = '/v1/plugins',
+    AddPlugin = '/v1/plugins/add',
   }
 
   export interface Config {

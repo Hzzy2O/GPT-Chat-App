@@ -21,8 +21,10 @@ const themeColor = computed(() => commonSettings.value.themeColor)
     :theme="theme"
     :theme-overrides="getThemeOverrides"
   >
-    <NMessageProvider :container-style="{ top: '66px' }">
-      <RouterView />
-    </NMessageProvider>
+    <NDialogProvider>
+      <NMessageProvider :container-style="{ top: '66px' }">
+        <RouterView />
+      </NMessageProvider>
+    </NDialogProvider>
   </NConfigProvider>
 </template>

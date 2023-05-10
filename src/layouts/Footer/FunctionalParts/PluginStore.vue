@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { NInput } from 'naive-ui'
 import { Bot } from '#/index'
 import openai from '@/bot/openai'
 import type { OpenAI } from '@/bot/openai/types'
 
-const pluginSet = computed(() => new Set(openai.usePlugins.value.map(p => p.name)))
-
-const showIcon = ref(false)
+const isShow = computed(() => openai.config.enableLangchain && openai.config.langchainApi)
 const showModal = ref(false)
-const toggleModal = (show: boolean) => {
+const toggleModal = async (show: boolean) => {
+  if (show)
+    await getPluginList()
   showModal.value = show
 }
 
@@ -15,33 +16,57 @@ const pluginList = ref<OpenAI.Plugin[]>([])
 
 async function getPluginList() {
   const { enableLangchain, langchainApi } = openai.config
-  if (enableLangchain && langchainApi)
-    showIcon.value = true
-  else return
+  if (enableLangchain && langchainApi) {
+    try {
+      const list = await openai.getPlugins()
+      pluginList.value = list
+    }
+    catch (error) {
 
-  try {
-    const list = await openai.getPlugins()
-    pluginList.value = list
-  }
-  catch (error) {
-
+    }
   }
 }
 
-function useOrDisable(plugin: OpenAI.Plugin) {
-  const { usePlugins } = openai
-  const index = usePlugins.value.findIndex(p => p.name === plugin.name)
-  if (index > -1)
-    usePlugins.value.splice(index, 1)
-
-  else usePlugins.value.push(plugin)
+function usePlugin(plugin: OpenAI.Plugin) {
+  openai.usePlugin.value = plugin
 }
 
-getPluginList()
+const pluginUrl = ref('')
+
+const dialog = useDialog()
+function openUrlLoader() {
+  dialog.create({
+    title: t('main.plugin.load'),
+    showIcon: false,
+    class: 'card-modal',
+    content: () => h(NInput,
+      {
+        placeholder: `please enter${t('main.plugin.url')}`,
+        value: pluginUrl.value,
+        onUpdateValue: (v: string) => pluginUrl.value = v,
+      },
+    ),
+    positiveText: t('common.confirm'),
+    positiveButtonProps: {
+      round: true,
+      secondary: true,
+    },
+    onPositiveClick: async () => {
+      if (!pluginUrl.value)
+        return
+      await openai.loadPlugin(pluginUrl.value)
+      await getPluginList()
+      dialog.destroyAll()
+      pluginUrl.value = ''
+    },
+  })
+}
+
+onMounted(() => getPluginList())
 </script>
 
 <template>
-  <div v-if="isBot(bot, Bot.openai) && showIcon" f-icon>
+  <div v-if="isBot(bot, Bot.openai) && isShow" f-icon>
     <Icon
       :title="t('common.speechToTxt')"
       name="raphael:plugin"
@@ -58,38 +83,70 @@ getPluginList()
       :title="t('main.plugin.store')"
       @update-show="toggleModal"
     >
-      <div fic justify-start flex-gap-40px flex-wrap>
-        <NCard
-          v-for="plugin in pluginList"
-          :key="plugin.name"
-          max-h-200px
-          bg2
-          rd-12px
-          w="80%"
-          md-w="28%"
-        >
-          <div rd-8px shadow-3 p-20px w-30px h-30px fc>
-            <Icon v-if="plugin.icon" :name="plugin.icon" :size="30" />
-          </div>
-          <div drop-shadow text-16px>
-            {{ plugin.name }}
-          </div>
-          <div w-full text-14px line-clamp-3 mb-10px>
-            {{ plugin.description }}
-          </div>
-          <NButton
-            size="small"
-            w-65px
-            secondary
+      <NButton rd-10px @click="openUrlLoader">
+        {{ t('main.plugin.load') }}
+      </NButton>
+      <NScrollbar
+        max-h-470px
+        mt-10px
+      >
+        <div fc md-justify-start flex-gap-40px flex-wrap>
+          <NCard
+            v-for="plugin in pluginList"
+            :key="plugin.name"
+            max-h-210px
+            bg2
             rd-12px
-            text-center
-            float-right
-            @click="useOrDisable(plugin)"
+            w="80%"
+            md-w="28%"
+            shadow-3
           >
-            {{ pluginSet.has(plugin.name) ? t('main.plugin.disable') : t('main.plugin.use') }}
-          </NButton>
-        </NCard>
-      </div>
+            <div
+              v-if="plugin.icon"
+              rd-8px
+              shadow-3
+              p-20px
+              w-30px
+              h-30px
+              fc
+            >
+              <Icon :name="plugin.icon" :size="30" />
+            </div>
+            <div
+              v-else-if="plugin.logo"
+              h-40px
+            >
+              <NImage
+                rd-8px
+                shadow-3
+                :width="40"
+                :height="40"
+                :preview-disabled="true"
+                :src="plugin.logo"
+              />
+            </div>
+            <label :title="plugin.name" truncate drop-shadow text-16px>
+              {{ plugin.name }}
+            </label>
+            <div w-full text-14px line-clamp-3 mb-10px>
+              {{ plugin.description }}
+            </div>
+            <NButton
+              size="small"
+              w-65px
+              secondary
+              rd-12px
+              text-center
+              float-right
+              mb-5px
+              type="primary"
+              @click="usePlugin(plugin)"
+            >
+              {{ t('main.plugin.use') }}
+            </NButton>
+          </NCard>
+        </div>
+      </NScrollbar>
     </NModal>
   </div>
 </template>

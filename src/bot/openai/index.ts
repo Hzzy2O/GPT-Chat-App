@@ -3,6 +3,7 @@ import { OpenAI } from './types'
 import { config, iconName, settingSchema } from './config'
 import type { ReadTextStream } from './api'
 import {
+  addPlugin,
   chatCompletion,
   chatLangchain,
   completion,
@@ -18,7 +19,7 @@ import { useGet } from '@/api'
 
 class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   langchain_chat = false
-  usePlugins = useStorage<OpenAI.Plugin[]>('plugins', [])
+  usePlugin = useStorage<OpenAI.Plugin>('plugins', null)
 
   constructor() {
     super(Bot.openai, iconName, config, settingSchema)
@@ -44,10 +45,10 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   langchianChat(input: string, cb: ReadTextStream) {
     const { langchainApi } = this.config
 
-    const plugins = this.usePlugins.value
+    const plugin = this.usePlugin.value
 
     langchainApi && chatLangchain(this.config, cb, input, {
-      plugins,
+      plugin,
     })
   }
 
@@ -105,6 +106,14 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
     }
     catch (error) {
       return null
+    }
+  }
+
+  async loadPlugin(url: string) {
+    try {
+      return await addPlugin(this.config, url)
+    }
+    catch (error) {
     }
   }
 }
