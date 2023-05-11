@@ -45,6 +45,7 @@ const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value
       max-w="95%"
       lg-max-w="60%"
       px-25px
+      relative
     >
       <div
         shadow
@@ -55,6 +56,40 @@ const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value
         rd-25px
         border-box
       >
+        <NCollapse
+          v-if="chatData.plugin"
+          w-full
+          arrow-placement="right"
+        >
+          <template #header-extra>
+            <n-icon><cash-icon /></n-icon>
+          </template>
+          <NCollapseItem
+            truncate
+          >
+            <template #header>
+              <div p-10px border-1 rd-12px fc truncate relative max-w="100%">
+                <div>{{ t('main.plugin.inuse') }}:</div>
+                <div w="100%" truncate ml-5px>
+                  {{ chatData.plugin.name }}
+                </div>
+              </div>
+            </template>
+            <div
+              v-for="(item, index) in chatData.plugin.log"
+              :key="index"
+              ws-pre
+              break-words
+              overflow-x-auto
+              bg1
+              p-15px
+              rd-12px
+              shadow-3
+            >
+              {{ item }}
+            </div>
+          </NCollapseItem>
+        </NCollapse>
         <!-- 文本展示 -->
         <UserBox v-if="isUser" :text="msg" />
         <MdBox v-else-if="msg" ref="mdRef" :text="msg" />

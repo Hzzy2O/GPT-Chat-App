@@ -64,12 +64,14 @@
       "thinking": "AI正在思考中"
     },
     "plugin": {
+      "title": "插件",
       "store": "插件商店",
       "manage": "插件管理",
       "use": "使用",
       "disable": "禁用",
       "load": "加载插件",
-      "url": "插件地址"
+      "url": "插件地址",
+      "inuse": "正在使用"
     }
   },
   "footer": {

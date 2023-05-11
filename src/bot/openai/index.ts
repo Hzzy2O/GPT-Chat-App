@@ -19,10 +19,12 @@ import { useGet } from '@/api'
 
 class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
   langchain_chat = false
-  usePlugin = useStorage<OpenAI.Plugin>('plugins', null)
+  usePlugin = useStorage('plugins', {} as OpenAI.Plugin)
 
   constructor() {
     super(Bot.openai, iconName, config, settingSchema)
+    if (!this.usePlugin.value?.name)
+      this.usePlugin.value = null
   }
 
   chat(input: string, doneDeal: (d: boolean) => void) {
@@ -47,9 +49,27 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
 
     const plugin = this.usePlugin.value
 
-    langchainApi && chatLangchain(this.config, cb, input, {
-      plugin,
-    })
+    if (langchainApi) {
+      receiveMsg('', false, {
+        plugin: {
+          name: this.usePlugin.value.name,
+          log: [],
+        },
+      })
+
+      chatLangchain(this.config, (val, done) => {
+        receiveMsg(val.content, done, {
+          plugin: {
+            log: val.log,
+          },
+
+        })
+        console.log(val)
+        // cb(val.content, done)
+      }, input, {
+        plugin,
+      })
+    }
   }
 
   async createImage(input: string) {

@@ -29,6 +29,7 @@ async function getPluginList() {
 
 function usePlugin(plugin: OpenAI.Plugin) {
   openai.usePlugin.value = plugin
+  toggleModal(false)
 }
 
 const pluginUrl = ref('')
@@ -67,10 +68,38 @@ onMounted(() => getPluginList())
 
 <template>
   <div v-if="isBot(bot, Bot.openai) && isShow" f-icon>
+    <div
+      v-if="openai.usePlugin.value"
+      fc
+      flex-gap-5px
+      @click="toggleModal(true)"
+    >
+      {{t('main.plugin.title')}}:
+      <div
+        v-if="openai.usePlugin.value.logo"
+        h-20px
+      >
+        <NImage
+          rd-8px
+          shadow-3
+          :width="20"
+          :height="20"
+          :preview-disabled="true"
+          :src="openai.usePlugin.value.logo"
+          @click="toggleModal(true)"
+        />
+      </div>
+      <Icon
+        v-else
+        :name="openai.usePlugin.value.icon || 'iconoir:app-notification'"
+        :size="20"
+        @click="toggleModal(true)"
+      />
+    </div>
     <Icon
-      :title="t('common.speechToTxt')"
+      v-else
       name="raphael:plugin"
-      :size="22"
+      :size="20"
       @click="toggleModal(true)"
     />
     <NModal
@@ -133,16 +162,16 @@ onMounted(() => getPluginList())
             </div>
             <NButton
               size="small"
-              w-65px
+              max-w-75px
               secondary
               rd-12px
               text-center
               float-right
               mb-5px
-              type="primary"
+              :type="openai.usePlugin.value?.name === plugin.name ? 'primary' : 'default'"
               @click="usePlugin(plugin)"
             >
-              {{ t('main.plugin.use') }}
+              {{ t(`main.plugin.${openai.usePlugin.value?.name === plugin.name ? 'inuse' : 'use'}`) }}
             </NButton>
           </NCard>
         </div>

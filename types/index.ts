@@ -7,6 +7,11 @@ export enum Role {
   user = 'user',
 }
 
+interface Plugin {
+  name?: string
+  log?: string[]
+}
+
 export interface Flow {
   id: string
   time: number
@@ -25,6 +30,7 @@ export interface Flow {
   suggests?: string[]
   frame_url?: string
   img_prompt?: string
+  plugin?: Plugin
 }
 
 export type Language = 'zh-CN' | 'en-US'

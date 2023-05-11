@@ -63,12 +63,14 @@
       "thinking": "AI is thinking"
     },
     "plugin": {
+      "title": "plugin",
       "store": "plugin store",
       "manage": "plugin manage",
       "use": "use",
       "disable": "disable",
       "load": "load plugin",
-      "url": "plugin url"
+      "url": "plugin url",
+      "inuse": "in use"
     }
   },
   "footer": {

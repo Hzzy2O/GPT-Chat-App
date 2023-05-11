@@ -5,7 +5,7 @@ import { setTokenCost } from './payload'
 import { searchWeb } from './boost'
 import { useGet, usePost } from '@/api'
 
-export type ReadTextStream = (text: string, done: boolean) => void
+export type ReadTextStream<T = string> = (val: T, done: boolean) => void
 
 export const getUsage = () => useGet(OpenAI.Api.Usage, {
   params: {
@@ -43,7 +43,7 @@ export const chatCompletion = async (
 
 export const chatLangchain = async (
   config: OpenAI.Config,
-  readStream: ReadTextStream,
+  readStream: ReadTextStream<any>,
   input: string,
   ext: Recordable = {},
 ) => {

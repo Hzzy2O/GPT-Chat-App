@@ -16,18 +16,30 @@ export function receiveMsg(text: string | void | null, done?: boolean, ext: Part
   const { setFlowBlock, pushBlock, assignFlowBlock, setFlowBlockByKey } = recordStore
   const { flowBlock } = storeToRefs(recordStore)
 
-  if (text) {
+  if (text !== null && text !== undefined) {
     if (!flowBlock.value) {
       const block = buildFlowStruct({
         msg: text,
         type: curBotType.value,
         done: !!done,
         urls: ext.urls,
+        plugin: ext.plugin,
       })
       setFlowBlock(block)
       pushBlock(flowBlock.value!)
     }
     else if (!flowBlock.value.done) {
+      if (ext.plugin) {
+        console.log(JSON.stringify(ext.plugin))
+        const { plugin } = flowBlock.value
+        if (plugin) {
+          const { log } = plugin
+          if (log)
+            log.push(ext.plugin.log)
+
+          console.log(log)
+        }
+      }
       assignFlowBlock({
         ...ext,
         msg: flowBlock.value.msg + text,
