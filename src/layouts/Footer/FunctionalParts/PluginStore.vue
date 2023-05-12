@@ -78,6 +78,7 @@ onMounted(() => getPluginList())
       <div
         v-if="openai.usePlugin.value.logo"
         h-20px
+        cursor-pointer
       >
         <NImage
           rd-8px

@@ -3,6 +3,7 @@ import Actions from '../Actions/index.vue'
 import MdBox from './MdBox'
 import UserBox from './UserBox.vue'
 import AdaptiveCard from './AdaptiveCard.vue'
+import PluginMsg from './PluginMsg.vue'
 import type { Flow } from '#/.'
 import { Bot, Role } from '#/.'
 
@@ -56,40 +57,7 @@ const isShowTokenCost = computed(() => isBot(bot.value, Bot.openai) && bot.value
         rd-25px
         border-box
       >
-        <NCollapse
-          v-if="chatData.plugin"
-          w-full
-          arrow-placement="right"
-        >
-          <template #header-extra>
-            <n-icon><cash-icon /></n-icon>
-          </template>
-          <NCollapseItem
-            truncate
-          >
-            <template #header>
-              <div p-10px border-1 rd-12px fc truncate relative max-w="100%">
-                <div>{{ t('main.plugin.inuse') }}:</div>
-                <div w="100%" truncate ml-5px>
-                  {{ chatData.plugin.name }}
-                </div>
-              </div>
-            </template>
-            <div
-              v-for="(item, index) in chatData.plugin.log"
-              :key="index"
-              ws-pre
-              break-words
-              overflow-x-auto
-              bg1
-              p-15px
-              rd-12px
-              shadow-3
-            >
-              {{ item }}
-            </div>
-          </NCollapseItem>
-        </NCollapse>
+        <PluginMsg v-if="chatData.plugin" :plugin="chatData.plugin" />
         <!-- 文本展示 -->
         <UserBox v-if="isUser" :text="msg" />
         <MdBox v-else-if="msg" ref="mdRef" :text="msg" />

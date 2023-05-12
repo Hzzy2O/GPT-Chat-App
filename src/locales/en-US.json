@@ -70,7 +70,9 @@
       "disable": "disable",
       "load": "load plugin",
       "url": "plugin url",
-      "inuse": "in use"
+      "inuse": "in use",
+      "request": "request",
+      "response": "response"
     }
   },
   "footer": {

@@ -28,6 +28,7 @@ export default defineConfig({
       'scroll-t': 'scrollbar scrollbar-rounded ',
       'card-modal': 'lg-w-80vw lg-bottom-36px w-90vw max-w-600px rd-12px',
       'zoomin': 'animate-zoom-in animate-duration-200',
+      'border1': 'border-1 border-light-9 dark:border-true-gray-9',
     },
   ],
   presets: [

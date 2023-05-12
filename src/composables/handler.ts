@@ -30,15 +30,8 @@ export function receiveMsg(text: string | void | null, done?: boolean, ext: Part
     }
     else if (!flowBlock.value.done) {
       if (ext.plugin) {
-        console.log(JSON.stringify(ext.plugin))
-        const { plugin } = flowBlock.value
-        if (plugin) {
-          const { log } = plugin
-          if (log)
-            log.push(ext.plugin.log)
-
-          console.log(log)
-        }
+        const plugin = flowBlock.value.plugin || {}
+        Object.assign(ext.plugin, plugin)
       }
       assignFlowBlock({
         ...ext,

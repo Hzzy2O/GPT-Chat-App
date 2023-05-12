@@ -7,9 +7,10 @@ export enum Role {
   user = 'user',
 }
 
-interface Plugin {
+export interface Plugin {
   name?: string
-  log?: string[]
+  request?: string
+  response?: string
 }
 
 export interface Flow {

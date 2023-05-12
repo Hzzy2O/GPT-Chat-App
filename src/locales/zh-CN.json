@@ -71,7 +71,9 @@
       "disable": "禁用",
       "load": "加载插件",
       "url": "插件地址",
-      "inuse": "正在使用"
+      "inuse": "正在使用",
+      "request": "请求",
+      "response": "响应"
     }
   },
   "footer": {

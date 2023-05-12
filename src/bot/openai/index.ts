@@ -37,35 +37,35 @@ class OpenAIModel extends BaseModel<OpenAI.Config, Bot.openai> {
 
     if (modelType.startsWith('gpt-3.5') || modelType.startsWith('gpt-4')) {
       if (langchainApi && enableLangchain)
-        this.langchianChat(input, callback)
+        this.langchianChat(input, doneDeal)
       else
         chatCompletion(this.config, callback, input)
     }
     else { completion(this.config, callback, input) }
   }
 
-  langchianChat(input: string, cb: ReadTextStream) {
+  langchianChat(input: string, doneDeal: (d: boolean) => void) {
     const { langchainApi } = this.config
 
     const plugin = this.usePlugin.value
 
     if (langchainApi) {
-      receiveMsg('', false, {
-        plugin: {
-          name: this.usePlugin.value.name,
-          log: [],
-        },
-      })
+      // receiveMsg('', false, {
+      //   plugin: {
+      //     name: this.usePlugin.value.name,
+      //     log: [],
+      //   },
+      // })
 
       chatLangchain(this.config, (val, done) => {
+        console.log(val)
         receiveMsg(val.content, done, {
           plugin: {
-            log: val.log,
+            name: this.usePlugin.value.name,
+            ...val.plugin,
           },
-
         })
-        console.log(val)
-        // cb(val.content, done)
+        doneDeal(done)
       }, input, {
         plugin,
       })
